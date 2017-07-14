@@ -14,12 +14,12 @@ public class UsuarioService extends BaseService<Usuario> {
 		super(Usuario.class);
 	}
 
-	public Usuario getByLogin(String nome, String senha) {
+	public Usuario getByLogin(String login, String senha) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("nome", nome);
+		params.put("login", login);
 		params.put("senha", senha);
 		List<Usuario> usuarios = super.list(params);
-		if (usuarios.size() == 0)
+		if (usuarios.isEmpty())
 			return null;
 		return usuarios.get(0);
 	}
@@ -28,7 +28,7 @@ public class UsuarioService extends BaseService<Usuario> {
 		Map<String, Object> params = new HashMap<>();
 		params.put("email", email);
 		List<Usuario> usuarios = super.list(params);
-		if (usuarios.size() == 0)
+		if (usuarios.isEmpty())
 			return null;
 		return usuarios.get(0);
 	}

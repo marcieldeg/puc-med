@@ -1,4 +1,4 @@
-package br.pucminas.pucmed.ui;
+package br.pucminas.pucmed.ui.utils;
 
 import com.vaadin.shared.Registration;
 import com.vaadin.ui.Button;

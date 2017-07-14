@@ -1,32 +1,19 @@
 package br.pucminas.pucmed.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
+import javax.persistence.PrimaryKeyJoinColumn;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
-public class Atendente implements BaseModel {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+@PrimaryKeyJoinColumn(name="id")
+public class Atendente extends Usuario {
 
-	@NotNull
-	private String nome;
-
-	@OneToOne
-	@JoinColumn(name = "id_usuario")
-	private Usuario usuario;
 }

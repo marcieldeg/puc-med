@@ -3,14 +3,18 @@ package br.pucminas.pucmed.authentication;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.server.WrappedSession;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import br.pucminas.pucmed.model.Usuario;
 
-@Getter
-@AllArgsConstructor
 public class UserSession {
-	private String name;
-	private String role;
+	private Usuario usuario;
+
+	public UserSession(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
 
 	public static final String CURRENT_USER = "user";
 

@@ -9,6 +9,8 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
+import br.pucminas.pucmed.ui.utils.InternalButton;
+
 public abstract class BodyEdit extends VerticalLayout {
 	private static final long serialVersionUID = -8080953914658823870L;
 

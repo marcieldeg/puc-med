@@ -39,19 +39,19 @@ public abstract class BaseService<T extends BaseModel> {
 		return hibernateTemplate.get(entityClass, id);
 	}
 
-	//@Transactional(rollbackFor = Exception.class)
+	@Transactional(rollbackFor = Exception.class)
 	public T insert(T entity) {
 		hibernateTemplate.save(entity);
 		return entity;
 	}
 
-	//@Transactional(rollbackFor = Exception.class)
+	@Transactional(rollbackFor = Exception.class)
 	public T update(T entity) {
 		hibernateTemplate.update(entity);
 		return entity;
 	}
 
-	//@Transactional(rollbackFor = Exception.class)
+	@Transactional(rollbackFor = Exception.class)
 	public void delete(T entity) {
 		hibernateTemplate.delete(entity);
 	}

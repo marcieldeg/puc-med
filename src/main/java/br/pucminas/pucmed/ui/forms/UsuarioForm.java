@@ -1,6 +1,5 @@
 package br.pucminas.pucmed.ui.forms;
 
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,6 @@ import com.vaadin.data.ValueContext;
 import com.vaadin.data.converter.StringToLongConverter;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.data.validator.StringLengthValidator;
-import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
@@ -21,7 +19,6 @@ import com.vaadin.ui.TextField;
 import br.pucminas.pucmed.bean.BeanGetter;
 import br.pucminas.pucmed.enums.Status;
 import br.pucminas.pucmed.model.Usuario;
-import br.pucminas.pucmed.model.Usuario.TipoUsuario;
 import br.pucminas.pucmed.service.UsuarioService;
 import br.pucminas.pucmed.ui.BaseForm;
 import br.pucminas.pucmed.ui.BodyEdit;
@@ -44,10 +41,8 @@ public class UsuarioForm extends BaseForm {
 	private PasswordField senha = new PasswordField("Senha");
 	private PasswordField confSenha = new PasswordField("Confirmar senha");
 	private TextField email = new TextField("E-Mail");
-	private ComboBox<TipoUsuario> tipoUsuario = new ComboBox<>("Tipo");
-
+	
 	private TextField fNome = new TextField("Nome");
-	private ComboBox<TipoUsuario> fTipoUsuario = new ComboBox<>("Tipo");
 
 	public UsuarioForm() {
 		super("Cadastro de Usuários");
@@ -61,11 +56,8 @@ public class UsuarioForm extends BaseForm {
 
 		grid.addSelectionListener(e -> {
 			Optional<Usuario> usuario = e.getFirstSelectedItem();
-			boolean enabled = false;
-			if (usuario.isPresent())
-				enabled = !TipoUsuario.ADMINISTRADOR.equals(usuario.get().getTipoUsuario());
-			getBodyView().getToolbarArea().setEditarEnabled(enabled);
-			getBodyView().getToolbarArea().setExcluirEnabled(enabled);
+			getBodyView().getToolbarArea().setEditarEnabled(usuario.isPresent());
+			getBodyView().getToolbarArea().setExcluirEnabled(usuario.isPresent());
 		});
 
 		grid.setSizeFull();
@@ -87,9 +79,6 @@ public class UsuarioForm extends BaseForm {
 				.withValidator(new EmailValidator("E-mail inválido"))//
 				.asRequired("O campo é obrigatório")//
 				.bind("email");
-		binder.forField(tipoUsuario)//
-				.asRequired("O campo é obrigatório")//
-				.bind("tipoUsuario");
 
 		binder.withValidator(new Validator<Usuario>() {
 			private static final long serialVersionUID = 6277993876834752213L;
@@ -104,11 +93,6 @@ public class UsuarioForm extends BaseForm {
 			}
 		});
 
-		tipoUsuario.setEmptySelectionAllowed(false);
-		tipoUsuario.setItems(TipoUsuario.ATENDENTE, TipoUsuario.MEDICO);
-		fTipoUsuario.setEmptySelectionAllowed(false);
-		fTipoUsuario.setItems(EnumSet.allOf(TipoUsuario.class));
-
 		BodyView bodyView = new BodyView() {
 			private static final long serialVersionUID = -4336915723509556999L;
 
@@ -119,7 +103,7 @@ public class UsuarioForm extends BaseForm {
 				getToolbarArea().setEditarListener(e -> editar());
 				getToolbarArea().setExcluirListener(e -> excluir());
 
-				getFilterArea().addFilters(fNome, fTipoUsuario);
+				getFilterArea().addFilters(fNome);
 				getFilterArea().setPesquisarListener(e -> pesquisar());
 				getFilterArea().setLimparListener(e -> limpar());
 			}
@@ -131,7 +115,7 @@ public class UsuarioForm extends BaseForm {
 			private static final long serialVersionUID = 6951503876938584530L;
 
 			{
-				addFields(id, nome, senha, confSenha, email, tipoUsuario);
+				addFields(id, nome, senha, confSenha, email);
 
 				setSalvarListener(e -> salvar());
 				setCancelarListener(e -> view());
@@ -196,14 +180,11 @@ public class UsuarioForm extends BaseForm {
 		Map<String, Object> params = new HashMap<>();
 		if (!fNome.isEmpty())
 			params.put("nome#like", fNome.getValue());
-		if (!fTipoUsuario.isEmpty())
-			params.put("tipoUsuario", fTipoUsuario.getValue());
 		updateGrid(params);
 	}
 
 	private void limpar() {
 		fNome.clear();
-		fTipoUsuario.clear();
 		updateGrid();
 	}
 }

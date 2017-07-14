@@ -80,7 +80,7 @@ public class LoginView extends VerticalLayout implements View {
 		usuario.focus();
 	}
 
-	private UsuarioService usuarioService = BeanGetter.getService(UsuarioService.class);;
+	private UsuarioService usuarioService = BeanGetter.getService(UsuarioService.class);
 
 	private void entrarClick(ClickEvent event) {
 		String usuario = this.usuario.getValue();
@@ -96,7 +96,7 @@ public class LoginView extends VerticalLayout implements View {
 			entrar.setEnabled(true);
 			this.usuario.focus();
 		} else {
-			UserSession.set(new UserSession(u.getNome(), u.getTipoUsuario().toString()));
+			UserSession.set(new UserSession(u));
 
 			getUI().getNavigator().navigateTo(MainView.NAME);
 		}

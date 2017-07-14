@@ -1,5 +1,6 @@
 package br.pucminas.pucmed.ui.forms;
 
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,15 +10,13 @@ import com.vaadin.data.Binder;
 import com.vaadin.data.converter.StringToLongConverter;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Grid;
+import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 
 import br.pucminas.pucmed.bean.BeanGetter;
 import br.pucminas.pucmed.enums.Status;
 import br.pucminas.pucmed.model.Atendente;
-import br.pucminas.pucmed.model.Usuario;
-import br.pucminas.pucmed.model.Usuario.TipoUsuario;
 import br.pucminas.pucmed.service.AtendenteService;
-import br.pucminas.pucmed.service.UsuarioService;
 import br.pucminas.pucmed.ui.BaseForm;
 import br.pucminas.pucmed.ui.BodyEdit;
 import br.pucminas.pucmed.ui.BodyView;
@@ -28,16 +27,19 @@ public class AtendenteForm extends BaseForm {
 	private static final long serialVersionUID = 3796349348214384355L;
 
 	private AtendenteService service = BeanGetter.getService(AtendenteService.class);
-	private UsuarioService usuarioService = BeanGetter.getService(UsuarioService.class);
 
 	private Binder<Atendente> binder = new Binder<>(Atendente.class);
 
 	private Grid<Atendente> grid = new Grid<>(Atendente.class);
 	private TextField id = new TextField("Código");
 	private TextField nome = new TextField("Nome");
-	private ComboBox<Usuario> usuario = new ComboBox<>("Usuário");
+	private TextField email = new TextField("E-mail");
+	private TextField login = new TextField("Login");
+	private PasswordField senha = new PasswordField("Senha");
+	private ComboBox<Status> status = new ComboBox<>("Status");
 
 	private TextField fNome = new TextField("Nome");
+	private TextField fLogin = new TextField("Login");
 
 	public AtendenteForm() {
 		super("Cadastro de Atendentes");
@@ -46,9 +48,9 @@ public class AtendenteForm extends BaseForm {
 		grid.removeAllColumns();
 		grid.addColumn("id").setWidth(Constants.SMALL_FIELD);
 		grid.addColumn("nome").setWidth(Constants.LARGE_FIELD);
-		grid.addColumn(o -> o.getUsuario() == null ? null : o.getUsuario().getNome())//
-				.setWidth(Constants.LARGE_FIELD)//
-				.setCaption("Usuário");
+		grid.addColumn("email").setWidth(Constants.LARGE_FIELD).setCaption("E-mail");
+		grid.addColumn("login").setWidth(Constants.MEDIUM_FIELD);
+		grid.addColumn("senha").setWidth(Constants.MEDIUM_FIELD);
 
 		grid.addSelectionListener(e -> {
 			Optional<Atendente> atendente = e.getFirstSelectedItem();
@@ -64,9 +66,18 @@ public class AtendenteForm extends BaseForm {
 		binder.forField(nome)//
 				.asRequired("O campo é obrigatório")//
 				.bind("nome");
-		binder.forField(usuario)//
+		binder.forField(email)//
 				.asRequired("O campo é obrigatório")//
-				.bind("usuario");
+				.bind("email");
+		binder.forField(login)//
+				.asRequired("O campo é obrigatório")//
+				.bind("login");
+		binder.forField(senha)//
+				.asRequired("O campo é obrigatório")//
+				.bind("senha");
+		binder.forField(status)//
+				.asRequired("O campo é obrigatório")//
+				.bind("status");
 
 		BodyView bodyView = new BodyView() {
 			private static final long serialVersionUID = -4336915723509556999L;
@@ -78,25 +89,21 @@ public class AtendenteForm extends BaseForm {
 				getToolbarArea().setEditarListener(e -> editar());
 				getToolbarArea().setExcluirListener(e -> excluir());
 
-				getFilterArea().addFilters(fNome);
+				getFilterArea().addFilters(fNome, fLogin);
 				getFilterArea().setPesquisarListener(e -> pesquisar());
 				getFilterArea().setLimparListener(e -> limpar());
 			}
 		};
 
 		id.setEnabled(false);
-		usuario.setEmptySelectionAllowed(false);
-		Map<String, Object> filters = new HashMap<>();
-		filters.put("status", Status.ATIVO);
-		filters.put("tipoUsuario#ne", TipoUsuario.ADMINISTRADOR);
-		usuario.setItems(usuarioService.list(filters));
-		usuario.setItemCaptionGenerator(Usuario::getNome);
+		status.setEmptySelectionAllowed(false);
+		status.setItems(EnumSet.allOf(Status.class));
 
 		BodyEdit bodyEdit = new BodyEdit() {
 			private static final long serialVersionUID = 6951503876938584530L;
 
 			{
-				addFields(id, nome, usuario);
+				addFields(id, nome, email, login, senha, status);
 
 				setSalvarListener(e -> salvar());
 				setCancelarListener(e -> view());
@@ -160,11 +167,14 @@ public class AtendenteForm extends BaseForm {
 		Map<String, Object> params = new HashMap<>();
 		if (!fNome.isEmpty())
 			params.put("nome#like", fNome.getValue());
+		if (!fLogin.isEmpty())
+			params.put("login#like", fLogin.getValue());
 		updateGrid(params);
 	}
 
 	private void limpar() {
 		fNome.clear();
+		fLogin.clear();
 		updateGrid();
 	}
 }

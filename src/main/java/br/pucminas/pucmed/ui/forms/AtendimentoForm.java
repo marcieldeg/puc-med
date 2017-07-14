@@ -15,10 +15,12 @@ import com.vaadin.ui.Grid;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 
+import br.pucminas.pucmed.authentication.UserSession;
 import br.pucminas.pucmed.bean.BeanGetter;
 import br.pucminas.pucmed.model.Atendimento;
 import br.pucminas.pucmed.model.Medico;
 import br.pucminas.pucmed.model.Paciente;
+import br.pucminas.pucmed.model.Usuario;
 import br.pucminas.pucmed.service.AtendimentoService;
 import br.pucminas.pucmed.service.MedicoService;
 import br.pucminas.pucmed.service.PacienteService;
@@ -118,7 +120,10 @@ public class AtendimentoForm extends BaseForm {
 		medico.setEmptySelectionAllowed(false);
 		medico.setItems(medicoService.list());
 		medico.setItemCaptionGenerator(Medico::getNome);
-		
+		Usuario usuario = UserSession.get().getUsuario();
+		if (usuario instanceof Medico)
+			medico.setSelectedItem((Medico) usuario);
+
 		fPaciente.setEmptySelectionAllowed(false);
 		fPaciente.setItems(pacienteService.list());
 		fPaciente.setItemCaptionGenerator(Paciente::getNome);

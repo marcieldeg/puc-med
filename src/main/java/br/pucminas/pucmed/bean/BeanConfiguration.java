@@ -30,8 +30,8 @@ public class BeanConfiguration {
 		sessionFactoryBean.setPackagesToScan("br.pucminas.pucmed.service", "br.pucminas.pucmed.model");
 		Properties hibernateProperties = new Properties();
 		hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-		hibernateProperties.put("hibernate.show_sql", "true");
-		hibernateProperties.put("hibernate.hbm2ddl.auto", "update");
+		//hibernateProperties.put("hibernate.show_sql", "true");
+		hibernateProperties.put("hibernate.hbm2ddl.auto", "create");
 		hibernateProperties.put("hibernate.hbm2ddl.import_files", "initial_data.sql");
 		sessionFactoryBean.setHibernateProperties(hibernateProperties);
 		return sessionFactoryBean;

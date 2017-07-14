@@ -1,5 +1,6 @@
 package br.pucminas.pucmed.ui.forms;
 
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.ListSelect;
+import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.Window;
 
@@ -20,11 +22,8 @@ import br.pucminas.pucmed.bean.BeanGetter;
 import br.pucminas.pucmed.enums.Status;
 import br.pucminas.pucmed.model.Especialidade;
 import br.pucminas.pucmed.model.Medico;
-import br.pucminas.pucmed.model.Usuario;
-import br.pucminas.pucmed.model.Usuario.TipoUsuario;
 import br.pucminas.pucmed.service.EspecialidadeService;
 import br.pucminas.pucmed.service.MedicoService;
-import br.pucminas.pucmed.service.UsuarioService;
 import br.pucminas.pucmed.ui.BaseForm;
 import br.pucminas.pucmed.ui.BodyEdit;
 import br.pucminas.pucmed.ui.BodyView;
@@ -35,7 +34,6 @@ public class MedicoForm extends BaseForm {
 	private static final long serialVersionUID = 3796349348214384355L;
 
 	private MedicoService service = BeanGetter.getService(MedicoService.class);
-	private UsuarioService usuarioService = BeanGetter.getService(UsuarioService.class);
 	private EspecialidadeService especialidadeService = BeanGetter.getService(EspecialidadeService.class);
 
 	private Binder<Medico> binder = new Binder<>(Medico.class);
@@ -45,14 +43,16 @@ public class MedicoForm extends BaseForm {
 	private TextField nome = new TextField("Nome");
 	private TextField crm = new TextField("CRM");
 	private ListSelect<Especialidade> especialidades = new ListSelect<>("Especialidade");
-
-	private ComboBox<Usuario> usuario = new ComboBox<>("Usuário");
+	private TextField email = new TextField("E-mail");
+	private TextField login = new TextField("Login");
+	private PasswordField senha = new PasswordField("Senha");
+	private ComboBox<Status> status = new ComboBox<>("Status");
 
 	private TextField fNome = new TextField("Nome");
 	private TextField fCrm = new TextField("CRM");
 
 	public MedicoForm() {
-		super("Cadastro de Medicos");
+		super("Cadastro de Médicos");
 
 		updateGrid();
 		grid.removeAllColumns();
@@ -65,9 +65,9 @@ public class MedicoForm extends BaseForm {
 				: o.getEspecialidades().stream().map(p -> p.getNome()).collect(Collectors.joining(", ")))//
 				.setWidth(Constants.LARGE_FIELD)//
 				.setCaption("Especialidades");
-		grid.addColumn(o -> o.getUsuario() == null ? null : o.getUsuario().getNome())//
-				.setWidth(Constants.MEDIUM_FIELD)//
-				.setCaption("Usuário");
+		grid.addColumn("email").setWidth(Constants.LARGE_FIELD).setCaption("E-mail");
+		grid.addColumn("login").setWidth(Constants.MEDIUM_FIELD);
+		grid.addColumn("senha").setWidth(Constants.MEDIUM_FIELD);
 
 		grid.addSelectionListener(e -> {
 			Optional<Medico> medico = e.getFirstSelectedItem();
@@ -91,9 +91,18 @@ public class MedicoForm extends BaseForm {
 		binder.forField(especialidades)//
 				.asRequired("O campo é obrigatório")//
 				.bind("especialidades");
-		binder.forField(usuario)//
+		binder.forField(email)//
 				.asRequired("O campo é obrigatório")//
-				.bind("usuario");
+				.bind("email");
+		binder.forField(login)//
+				.asRequired("O campo é obrigatório")//
+				.bind("login");
+		binder.forField(senha)//
+				.asRequired("O campo é obrigatório")//
+				.bind("senha");
+		binder.forField(status)//
+				.asRequired("O campo é obrigatório")//
+				.bind("status");
 
 		BodyView bodyView = new BodyView() {
 			private static final long serialVersionUID = -4336915723509556999L;
@@ -116,12 +125,8 @@ public class MedicoForm extends BaseForm {
 		};
 
 		id.setEnabled(false);
-		usuario.setEmptySelectionAllowed(false);
-		Map<String, Object> filters = new HashMap<>();
-		filters.put("status", Status.ATIVO);
-		filters.put("tipoUsuario#ne", TipoUsuario.ADMINISTRADOR);
-		usuario.setItems(usuarioService.list(filters));
-		usuario.setItemCaptionGenerator(Usuario::getNome);
+		status.setEmptySelectionAllowed(false);
+		status.setItems(EnumSet.allOf(Status.class));
 
 		especialidades.setItems(especialidadeService.list());
 		especialidades.setItemCaptionGenerator(Especialidade::getNome);
@@ -131,7 +136,7 @@ public class MedicoForm extends BaseForm {
 			private static final long serialVersionUID = 6951503876938584530L;
 
 			{
-				addFields(id, nome, crm, especialidades, usuario);
+				addFields(id, nome, crm, especialidades, email, login, senha, status);
 
 				setSalvarListener(e -> salvar());
 				setCancelarListener(e -> view());
