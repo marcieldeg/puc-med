@@ -176,11 +176,10 @@ public class AtendimentoForm extends BaseForm {
 	}
 
 	private void abrirReceituarios() {
-		// SubWindow subWindow = new SubWindow(" Receituário", new
-		// ExameForm(grid.asSingleSelect().getValue()));
-		// subWindow.addCloseListener(o -> getUI().removeWindow(subWindow));
-		// subWindow.setIcon(VaadinIcons.PILLS);
-		// getUI().addWindow(subWindow);
+		SubWindow subWindow = new SubWindow(" Receituário", new ReceituarioForm(grid.asSingleSelect().getValue()));
+		subWindow.addCloseListener(o -> getUI().removeWindow(subWindow));
+		subWindow.setIcon(VaadinIcons.PILLS);
+		getUI().addWindow(subWindow);
 	}
 
 	private void editar() {

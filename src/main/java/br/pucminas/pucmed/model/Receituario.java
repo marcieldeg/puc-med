@@ -1,21 +1,13 @@
 package br.pucminas.pucmed.model;
 
-import java.util.Date;
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,13 +30,14 @@ public class Receituario implements BaseModel {
 	private Atendimento atendimento;
 
 	@NotNull
-	private Date data;
+	@ManyToOne
+	@JoinColumn(name = "id_medicamento")
+	private Medicamento medicamento;
+	
+	@NotNull
+	private Long quantidade;
 
-	@NotEmpty
-	@OneToMany(mappedBy = "receituario")
-	@Cascade({ CascadeType.SAVE_UPDATE, CascadeType.DELETE })
-	private Set<ReceituarioPosologia> receituarioPosologia;
-
+	@NotNull
 	@Size(max = 4000)
-	private String observacoes;
+	private String posologia;
 }

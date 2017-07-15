@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -45,8 +46,9 @@ public class Atendimento implements BaseModel {
 	private String diagnostico;
 
 	/*@OneToMany(fetch = FetchType.EAGER, mappedBy = "atendimento")
-	private Set<Exame> exames;
+	private Set<Exame> exames;*/
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "atendimento")
-	private Set<Receituario> receituarios;*/
+	@OneToOne
+	@JoinColumn(name = "id_receituario")
+	private Receituario receituario;
 }
