@@ -1,16 +1,21 @@
 package br.pucminas.pucmed.ui.forms;
 
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import com.vaadin.data.Binder;
-import com.vaadin.data.converter.LocalDateToDateConverter;
+import com.vaadin.data.converter.LocalDateTimeToDateConverter;
 import com.vaadin.data.converter.StringToLongConverter;
+import com.vaadin.icons.VaadinIcons;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.DateField;
+import com.vaadin.ui.DateTimeField;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
@@ -27,8 +32,10 @@ import br.pucminas.pucmed.service.PacienteService;
 import br.pucminas.pucmed.ui.BaseForm;
 import br.pucminas.pucmed.ui.BodyEdit;
 import br.pucminas.pucmed.ui.BodyView;
-import br.pucminas.pucmed.ui.utils.MessageBox;
+import br.pucminas.pucmed.ui.extra.MessageBox;
+import br.pucminas.pucmed.ui.extra.SubWindow;
 import br.pucminas.pucmed.utils.Constants;
+import br.pucminas.pucmed.utils.Utils;
 
 public class AtendimentoForm extends BaseForm {
 	private static final long serialVersionUID = 3796349348214384355L;
@@ -42,7 +49,7 @@ public class AtendimentoForm extends BaseForm {
 	private Grid<Atendimento> grid = new Grid<>(Atendimento.class);
 	private TextField id = new TextField("Código");
 	private ComboBox<Paciente> paciente = new ComboBox<>("Paciente");
-	private DateField data = new DateField("Data");
+	private DateTimeField data = new DateTimeField("Data");
 	private TextArea descricao = new TextArea("Descrição");
 	private TextField diagnostico = new TextField("Diagnóstico");
 	private ComboBox<Medico> medico = new ComboBox<>("Médico");
@@ -51,7 +58,7 @@ public class AtendimentoForm extends BaseForm {
 	private DateField fData = new DateField("Data");
 
 	public AtendimentoForm() {
-		super("Cadastro de Atendimentos");
+		super();
 
 		updateGrid();
 		grid.removeAllColumns();
@@ -59,7 +66,15 @@ public class AtendimentoForm extends BaseForm {
 		grid.addColumn(o -> o.getPaciente() == null ? null : o.getPaciente().getNome())//
 				.setWidth(Constants.LARGE_FIELD)//
 				.setCaption("Paciente");
-		grid.addColumn("data").setWidth(Constants.LARGE_FIELD);
+		grid.addColumn(//
+				o -> {
+					if (o.getData() == null)
+						return null;
+					SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+					return format.format(o.getData());
+				})//
+				.setWidth(Constants.MEDIUM_FIELD)//
+				.setCaption("Data");
 		grid.addColumn("descricao").setWidth(Constants.LARGE_FIELD).setCaption("Descrição");
 		grid.addColumn("diagnostico").setWidth(Constants.LARGE_FIELD).setCaption("Diagnóstico");
 		grid.addColumn(o -> o.getMedico() == null ? null : o.getMedico().getNome())//
@@ -70,6 +85,8 @@ public class AtendimentoForm extends BaseForm {
 			Optional<Atendimento> atendimento = e.getFirstSelectedItem();
 			getBodyView().getToolbarArea().setEditarEnabled(atendimento.isPresent());
 			getBodyView().getToolbarArea().setExcluirEnabled(atendimento.isPresent());
+			getBodyView().getToolbarArea().getCustomButton("Exames").setEnabled(atendimento.isPresent());
+			getBodyView().getToolbarArea().getCustomButton("Receituários").setEnabled(atendimento.isPresent());
 		});
 
 		grid.setSizeFull();
@@ -81,7 +98,7 @@ public class AtendimentoForm extends BaseForm {
 				.asRequired("O campo é obrigatório")//
 				.bind("paciente");
 		binder.forField(data)//
-				.withConverter(new LocalDateToDateConverter())//
+				.withConverter(new LocalDateTimeToDateConverter(ZoneOffset.UTC))//
 				.asRequired("O campo é obrigatório")//
 				.bind("data");
 		binder.forField(descricao)//
@@ -103,6 +120,12 @@ public class AtendimentoForm extends BaseForm {
 				getToolbarArea().setAdicionarListener(e -> novo());
 				getToolbarArea().setEditarListener(e -> editar());
 				getToolbarArea().setExcluirListener(e -> excluir());
+				Button botaoExames = getToolbarArea().addCustomButton("Exames");
+				botaoExames.setIcon(VaadinIcons.DOCTOR_BRIEFCASE);
+				botaoExames.addClickListener(e -> abrirExames());
+				Button botaoReceituarios = getToolbarArea().addCustomButton("Receituários");
+				botaoReceituarios.setIcon(VaadinIcons.PILLS);
+				botaoReceituarios.addClickListener(e -> abrirReceituarios());
 
 				getFilterArea().addFilters(fPaciente, fData);
 				getFilterArea().setPesquisarListener(e -> pesquisar());
@@ -145,6 +168,21 @@ public class AtendimentoForm extends BaseForm {
 		view();
 	}
 
+	private void abrirExames() {
+		SubWindow subWindow = new SubWindow(" Exames", new ExameForm(grid.asSingleSelect().getValue()));
+		subWindow.addCloseListener(o -> getUI().removeWindow(subWindow));
+		subWindow.setIcon(VaadinIcons.DOCTOR_BRIEFCASE);
+		getUI().addWindow(subWindow);
+	}
+
+	private void abrirReceituarios() {
+		// SubWindow subWindow = new SubWindow(" Receituário", new
+		// ExameForm(grid.asSingleSelect().getValue()));
+		// subWindow.addCloseListener(o -> getUI().removeWindow(subWindow));
+		// subWindow.setIcon(VaadinIcons.PILLS);
+		// getUI().addWindow(subWindow);
+	}
+
 	private void editar() {
 		if (!grid.asSingleSelect().isEmpty()) {
 			binder.setBean(grid.asSingleSelect().getValue());
@@ -174,7 +212,7 @@ public class AtendimentoForm extends BaseForm {
 
 	private void novo() {
 		binder.setBean(null);
-		data.setValue(LocalDate.now());
+		data.setValue(LocalDateTime.now());
 		edit();
 	}
 
@@ -197,8 +235,10 @@ public class AtendimentoForm extends BaseForm {
 		Map<String, Object> params = new HashMap<>();
 		if (!fPaciente.isEmpty())
 			params.put("paciente", fPaciente.getValue());
-		if (!fData.isEmpty())
-			params.put("data", fData.getValue());
+		if (!fData.isEmpty()) {
+			params.put("data#ge", Utils.convertLocalDateToDate(fData.getValue()));
+			params.put("data#lt", Utils.convertLocalDateToDate(fData.getValue().plusDays(1)));
+		}
 		updateGrid(params);
 	}
 

@@ -16,7 +16,7 @@ import br.pucminas.pucmed.service.EspecialidadeService;
 import br.pucminas.pucmed.ui.BaseForm;
 import br.pucminas.pucmed.ui.BodyEdit;
 import br.pucminas.pucmed.ui.BodyView;
-import br.pucminas.pucmed.ui.utils.MessageBox;
+import br.pucminas.pucmed.ui.extra.MessageBox;
 import br.pucminas.pucmed.utils.Constants;
 
 public class EspecialidadeForm extends BaseForm {
@@ -33,7 +33,7 @@ public class EspecialidadeForm extends BaseForm {
 	private TextField fNome = new TextField("Nome");
 
 	public EspecialidadeForm() {
-		super("Cadastro de Especialidades");
+		super();
 
 		updateGrid();
 		grid.setColumns("id", "nome");

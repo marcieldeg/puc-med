@@ -1,4 +1,4 @@
-package br.pucminas.pucmed.ui.utils;
+package br.pucminas.pucmed.ui.extra;
 
 import com.vaadin.server.Page;
 import com.vaadin.shared.Position;

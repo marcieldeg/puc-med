@@ -8,6 +8,8 @@ import java.util.Optional;
 
 import com.vaadin.data.Binder;
 import com.vaadin.data.converter.StringToLongConverter;
+import com.vaadin.data.validator.EmailValidator;
+import com.vaadin.data.validator.StringLengthValidator;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.PasswordField;
@@ -20,7 +22,7 @@ import br.pucminas.pucmed.service.AtendenteService;
 import br.pucminas.pucmed.ui.BaseForm;
 import br.pucminas.pucmed.ui.BodyEdit;
 import br.pucminas.pucmed.ui.BodyView;
-import br.pucminas.pucmed.ui.utils.MessageBox;
+import br.pucminas.pucmed.ui.extra.MessageBox;
 import br.pucminas.pucmed.utils.Constants;
 
 public class AtendenteForm extends BaseForm {
@@ -42,7 +44,7 @@ public class AtendenteForm extends BaseForm {
 	private TextField fLogin = new TextField("Login");
 
 	public AtendenteForm() {
-		super("Cadastro de Atendentes");
+		super();
 
 		updateGrid();
 		grid.removeAllColumns();
@@ -50,7 +52,6 @@ public class AtendenteForm extends BaseForm {
 		grid.addColumn("nome").setWidth(Constants.LARGE_FIELD);
 		grid.addColumn("email").setWidth(Constants.LARGE_FIELD).setCaption("E-mail");
 		grid.addColumn("login").setWidth(Constants.MEDIUM_FIELD);
-		grid.addColumn("senha").setWidth(Constants.MEDIUM_FIELD);
 
 		grid.addSelectionListener(e -> {
 			Optional<Atendente> atendente = e.getFirstSelectedItem();
@@ -67,12 +68,15 @@ public class AtendenteForm extends BaseForm {
 				.asRequired("O campo é obrigatório")//
 				.bind("nome");
 		binder.forField(email)//
+				.withValidator(new EmailValidator("E-mail inválido"))//
 				.asRequired("O campo é obrigatório")//
 				.bind("email");
 		binder.forField(login)//
+				.withValidator(new StringLengthValidator("O login deve ter entre 5 e 20 caracteres", 5, 20))//
 				.asRequired("O campo é obrigatório")//
 				.bind("login");
 		binder.forField(senha)//
+				.withValidator(new StringLengthValidator("A senha deve ter entre 5 e 20 caracteres", 5, 20))//
 				.asRequired("O campo é obrigatório")//
 				.bind("senha");
 		binder.forField(status)//
@@ -119,6 +123,7 @@ public class AtendenteForm extends BaseForm {
 	private void editar() {
 		if (!grid.asSingleSelect().isEmpty()) {
 			binder.setBean(grid.asSingleSelect().getValue());
+			status.setEnabled(true);
 			edit();
 		}
 	}
@@ -145,6 +150,8 @@ public class AtendenteForm extends BaseForm {
 
 	private void novo() {
 		binder.setBean(null);
+		status.setSelectedItem(Status.ATIVO);
+		status.setEnabled(false);
 		edit();
 	}
 

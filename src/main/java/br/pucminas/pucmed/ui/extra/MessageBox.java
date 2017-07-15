@@ -1,4 +1,4 @@
-package br.pucminas.pucmed.ui.utils;
+package br.pucminas.pucmed.ui.extra;
 
 import com.vaadin.ui.themes.ValoTheme;
 

@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 
 import com.vaadin.data.Binder;
 import com.vaadin.data.converter.StringToLongConverter;
+import com.vaadin.data.validator.EmailValidator;
+import com.vaadin.data.validator.StringLengthValidator;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
@@ -16,7 +18,6 @@ import com.vaadin.ui.Grid;
 import com.vaadin.ui.ListSelect;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
-import com.vaadin.ui.Window;
 
 import br.pucminas.pucmed.bean.BeanGetter;
 import br.pucminas.pucmed.enums.Status;
@@ -27,7 +28,8 @@ import br.pucminas.pucmed.service.MedicoService;
 import br.pucminas.pucmed.ui.BaseForm;
 import br.pucminas.pucmed.ui.BodyEdit;
 import br.pucminas.pucmed.ui.BodyView;
-import br.pucminas.pucmed.ui.utils.MessageBox;
+import br.pucminas.pucmed.ui.extra.MessageBox;
+import br.pucminas.pucmed.ui.extra.SubWindow;
 import br.pucminas.pucmed.utils.Constants;
 
 public class MedicoForm extends BaseForm {
@@ -50,9 +52,10 @@ public class MedicoForm extends BaseForm {
 
 	private TextField fNome = new TextField("Nome");
 	private TextField fCrm = new TextField("CRM");
+	private ComboBox<Especialidade> fEspecialidade = new ComboBox<>("Especialidade");
 
 	public MedicoForm() {
-		super("Cadastro de Médicos");
+		super();
 
 		updateGrid();
 		grid.removeAllColumns();
@@ -67,7 +70,6 @@ public class MedicoForm extends BaseForm {
 				.setCaption("Especialidades");
 		grid.addColumn("email").setWidth(Constants.LARGE_FIELD).setCaption("E-mail");
 		grid.addColumn("login").setWidth(Constants.MEDIUM_FIELD);
-		grid.addColumn("senha").setWidth(Constants.MEDIUM_FIELD);
 
 		grid.addSelectionListener(e -> {
 			Optional<Medico> medico = e.getFirstSelectedItem();
@@ -92,17 +94,24 @@ public class MedicoForm extends BaseForm {
 				.asRequired("O campo é obrigatório")//
 				.bind("especialidades");
 		binder.forField(email)//
+				.withValidator(new EmailValidator("E-mail inválido"))//
 				.asRequired("O campo é obrigatório")//
 				.bind("email");
 		binder.forField(login)//
+				.withValidator(new StringLengthValidator("O login deve ter entre 5 e 20 caracteres", 5, 20))//
 				.asRequired("O campo é obrigatório")//
 				.bind("login");
 		binder.forField(senha)//
+				.withValidator(new StringLengthValidator("A senha deve ter entre 5 e 20 caracteres", 5, 20))//
 				.asRequired("O campo é obrigatório")//
 				.bind("senha");
 		binder.forField(status)//
 				.asRequired("O campo é obrigatório")//
 				.bind("status");
+
+		fEspecialidade.setEmptySelectionAllowed(false);
+		fEspecialidade.setItems(especialidadeService.list());
+		fEspecialidade.setItemCaptionGenerator(Especialidade::getNome);
 
 		BodyView bodyView = new BodyView() {
 			private static final long serialVersionUID = -4336915723509556999L;
@@ -118,7 +127,7 @@ public class MedicoForm extends BaseForm {
 				botaoExpedientes.setIcon(VaadinIcons.CLOCK);
 				botaoExpedientes.addClickListener(e -> abrirExpedientes());
 
-				getFilterArea().addFilters(fNome, fCrm);
+				getFilterArea().addFilters(fNome, fCrm, fEspecialidade);
 				getFilterArea().setPesquisarListener(e -> pesquisar());
 				getFilterArea().setLimparListener(e -> limpar());
 			}
@@ -150,12 +159,16 @@ public class MedicoForm extends BaseForm {
 	}
 
 	private void abrirExpedientes() {
-		getUI().addWindow(new ExpedienteWindow(new MedicoExpedienteForm(binder.getBean())));
+		SubWindow subWindow = new SubWindow(" Expedientes", new MedicoExpedienteForm(grid.asSingleSelect().getValue()));
+		subWindow.addCloseListener(o -> getUI().removeWindow(subWindow));
+		subWindow.setIcon(VaadinIcons.CLOCK);
+		getUI().addWindow(subWindow);
 	}
 
 	private void editar() {
 		if (!grid.asSingleSelect().isEmpty()) {
 			binder.setBean(grid.asSingleSelect().getValue());
+			status.setEnabled(true);
 			edit();
 		}
 	}
@@ -182,6 +195,8 @@ public class MedicoForm extends BaseForm {
 
 	private void novo() {
 		binder.setBean(null);
+		status.setSelectedItem(Status.ATIVO);
+		status.setEnabled(false);
 		edit();
 	}
 
@@ -204,24 +219,18 @@ public class MedicoForm extends BaseForm {
 		Map<String, Object> params = new HashMap<>();
 		if (!fNome.isEmpty())
 			params.put("nome#like", fNome.getValue());
+		if (!fCrm.isEmpty())
+			params.put("crm", fNome.getValue());
+		if (!fEspecialidade.isEmpty()) {
+			params.put("especialidades#exists", fEspecialidade.getValue().getId());
+		}
 		updateGrid(params);
 	}
 
 	private void limpar() {
 		fNome.clear();
+		fCrm.clear();
+		fEspecialidade.clear();
 		updateGrid();
-	}
-
-	private static class ExpedienteWindow extends Window {
-		private static final long serialVersionUID = 6157453624162378876L;
-
-		public ExpedienteWindow(BaseForm baseForm) {
-			super("Expedientes");
-			center();
-			setContent(baseForm);
-			setVisible(true);
-			setWidth("50%");
-			setHeight("50%");
-		}
 	}
 }

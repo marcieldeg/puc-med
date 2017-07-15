@@ -1,6 +1,7 @@
 package br.pucminas.pucmed.ui;
 
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.themes.ValoTheme;
 
 public abstract class BaseForm extends Panel {
 	private static final long serialVersionUID = -8362608289138855719L;
@@ -8,10 +9,10 @@ public abstract class BaseForm extends Panel {
 	private BodyView bodyView;
 	private BodyEdit bodyEdit;
 
-	protected BaseForm(String caption) {
+	protected BaseForm() {
 		super();
 		setSizeFull();
-		setCaption(caption);
+		setStyleName(ValoTheme.PANEL_BORDERLESS);
 	}
 
 	protected void edit() {

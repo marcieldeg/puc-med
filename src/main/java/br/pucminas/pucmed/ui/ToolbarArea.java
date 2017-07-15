@@ -9,7 +9,7 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
-import br.pucminas.pucmed.ui.utils.InternalButton;
+import br.pucminas.pucmed.ui.extra.InternalButton;
 
 public class ToolbarArea extends HorizontalLayout {
 	private static final long serialVersionUID = -1687384805810835459L;

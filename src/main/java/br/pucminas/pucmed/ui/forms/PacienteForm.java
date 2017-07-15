@@ -28,7 +28,7 @@ import br.pucminas.pucmed.service.PacienteService;
 import br.pucminas.pucmed.ui.BaseForm;
 import br.pucminas.pucmed.ui.BodyEdit;
 import br.pucminas.pucmed.ui.BodyView;
-import br.pucminas.pucmed.ui.utils.MessageBox;
+import br.pucminas.pucmed.ui.extra.MessageBox;
 import br.pucminas.pucmed.utils.Constants;
 
 public class PacienteForm extends BaseForm {
@@ -58,7 +58,7 @@ public class PacienteForm extends BaseForm {
 	private TextField fNome = new TextField("Nome");
 
 	public PacienteForm() {
-		super("Cadastro de Pacientes");
+		super();
 
 		updateGrid();
 		grid.removeAllColumns();

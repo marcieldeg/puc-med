@@ -21,7 +21,7 @@ import br.pucminas.pucmed.service.MedicoExpedienteService;
 import br.pucminas.pucmed.ui.BaseForm;
 import br.pucminas.pucmed.ui.BodyEdit;
 import br.pucminas.pucmed.ui.BodyView;
-import br.pucminas.pucmed.ui.utils.MessageBox;
+import br.pucminas.pucmed.ui.extra.MessageBox;
 import br.pucminas.pucmed.utils.Constants;
 
 public class MedicoExpedienteForm extends BaseForm {
@@ -42,7 +42,7 @@ public class MedicoExpedienteForm extends BaseForm {
 	private ComboBox<Turno> fTurno = new ComboBox<>("Turno");
 
 	public MedicoExpedienteForm(Medico medico) {
-		super("Cadastro de Expedientes");
+		super();
 
 		this.medico = medico;
 

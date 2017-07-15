@@ -16,7 +16,7 @@ import br.pucminas.pucmed.service.MedicamentoService;
 import br.pucminas.pucmed.ui.BaseForm;
 import br.pucminas.pucmed.ui.BodyEdit;
 import br.pucminas.pucmed.ui.BodyView;
-import br.pucminas.pucmed.ui.utils.MessageBox;
+import br.pucminas.pucmed.ui.extra.MessageBox;
 import br.pucminas.pucmed.utils.Constants;
 
 public class MedicamentoForm extends BaseForm {
@@ -37,7 +37,7 @@ public class MedicamentoForm extends BaseForm {
 	private TextField fFabricante = new TextField("Fabricante");
 
 	public MedicamentoForm() {
-		super("Cadastro de Medicamentos");
+		super();
 
 		updateGrid();
 		grid.setColumns("id", "nomeComercial", "nomeGenerico", "fabricante");

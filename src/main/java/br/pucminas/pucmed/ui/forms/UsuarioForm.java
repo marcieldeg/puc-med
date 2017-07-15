@@ -23,9 +23,9 @@ import br.pucminas.pucmed.service.UsuarioService;
 import br.pucminas.pucmed.ui.BaseForm;
 import br.pucminas.pucmed.ui.BodyEdit;
 import br.pucminas.pucmed.ui.BodyView;
-import br.pucminas.pucmed.ui.utils.MessageBox;
-import br.pucminas.pucmed.ui.utils.Notification;
-import br.pucminas.pucmed.ui.utils.Notification.Type;
+import br.pucminas.pucmed.ui.extra.MessageBox;
+import br.pucminas.pucmed.ui.extra.Notification;
+import br.pucminas.pucmed.ui.extra.Notification.Type;
 import br.pucminas.pucmed.utils.Constants;
 
 public class UsuarioForm extends BaseForm {
@@ -45,14 +45,13 @@ public class UsuarioForm extends BaseForm {
 	private TextField fNome = new TextField("Nome");
 
 	public UsuarioForm() {
-		super("Cadastro de Usuários");
+		super();
 
 		updateGrid();
-		grid.setColumns("id", "nome", "email", "tipoUsuario");
+		grid.setColumns("id", "nome", "email");
 		grid.getColumn("id").setWidth(Constants.SMALL_FIELD);
 		grid.getColumn("nome").setWidth(Constants.LARGE_FIELD);
 		grid.getColumn("email").setWidth(Constants.LARGE_FIELD);
-		grid.getColumn("tipoUsuario").setWidth(Constants.LARGE_FIELD);
 
 		grid.addSelectionListener(e -> {
 			Optional<Usuario> usuario = e.getFirstSelectedItem();

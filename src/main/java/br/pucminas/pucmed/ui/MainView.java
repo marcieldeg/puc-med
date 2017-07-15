@@ -56,7 +56,7 @@ public class MainView extends VerticalLayout implements View {
 
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-				setBody(AtendimentoForm.class, "Atendimentos");
+				setBody(AtendimentoForm.class, "Cadastro de Atendimentos");
 			}
 		});
 		cadastro.addItem("Pacientes", new Command() {
@@ -64,7 +64,7 @@ public class MainView extends VerticalLayout implements View {
 
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-				setBody(PacienteForm.class, "Pacientes");
+				setBody(PacienteForm.class, "Cadastro de Pacientes");
 			}
 		});
 		cadastro.addItem("Usuários", new Command() {
@@ -72,7 +72,7 @@ public class MainView extends VerticalLayout implements View {
 
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-				setBody(UsuarioForm.class, "Usuários");
+				setBody(UsuarioForm.class, "Cadastro de Usuários");
 			}
 		});
 		cadastro.addItem("Médicos", new Command() {
@@ -80,7 +80,7 @@ public class MainView extends VerticalLayout implements View {
 
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-				setBody(MedicoForm.class, "Médicos");
+				setBody(MedicoForm.class, "Cadastro de Médicos");
 			}
 		});
 		cadastro.addItem("Atendentes", new Command() {
@@ -88,7 +88,7 @@ public class MainView extends VerticalLayout implements View {
 
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-				setBody(AtendenteForm.class, "Atendentes");
+				setBody(AtendenteForm.class, "Cadastro de Atendentes");
 			}
 		});
 		cadastro.addItem("Medicamentos", new Command() {
@@ -96,7 +96,7 @@ public class MainView extends VerticalLayout implements View {
 
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-				setBody(MedicamentoForm.class, "Medicamentos");
+				setBody(MedicamentoForm.class, "Cadastro de Medicamentos");
 			}
 		});
 
@@ -105,7 +105,7 @@ public class MainView extends VerticalLayout implements View {
 
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-				setBody(EspecialidadeForm.class, "Especialidades");
+				setBody(EspecialidadeForm.class, "Cadastro de Especialidades");
 			}
 		});
 		MenuItem relatorio = menubar.addItem("Relatórios", null);

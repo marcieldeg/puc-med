@@ -23,8 +23,8 @@ import br.pucminas.pucmed.email.Email;
 import br.pucminas.pucmed.enums.Status;
 import br.pucminas.pucmed.model.Usuario;
 import br.pucminas.pucmed.service.UsuarioService;
-import br.pucminas.pucmed.ui.utils.Notification;
-import br.pucminas.pucmed.ui.utils.Notification.Type;
+import br.pucminas.pucmed.ui.extra.Notification;
+import br.pucminas.pucmed.ui.extra.Notification.Type;
 import br.pucminas.pucmed.utils.Constants;
 
 @SpringView

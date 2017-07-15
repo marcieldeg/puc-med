@@ -8,6 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Property;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.util.StringUtils;
 
 import br.pucminas.pucmed.model.BaseModel;
@@ -89,6 +90,8 @@ public class CriteriaUtils {
 			case LT:
 				detachedCriteria.add(property.lt(value));
 				break;
+			case EXISTS:
+				detachedCriteria.createCriteria(key).add(Restrictions.eq("id", value));
 			default:
 				break;
 			}
@@ -106,6 +109,6 @@ public class CriteriaUtils {
 	}
 
 	private enum Operation {
-		IN, LIKE, EQ, NE, LT, GT, LE, GE, ISNULL, ISNOTNULL
+		IN, LIKE, EQ, NE, LT, GT, LE, GE, ISNULL, ISNOTNULL, EXISTS
 	}
 }
