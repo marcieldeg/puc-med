@@ -22,4 +22,8 @@ public class BeanGetter implements ApplicationContextAware {
 	public static <T extends BaseService<?>> T getService(String beanName) {
 		return (T) context.getBean(beanName);
 	}
+
+	public static <T> T getBean(Class<T> clazz) {
+		return context.getBean(clazz);
+	}
 }

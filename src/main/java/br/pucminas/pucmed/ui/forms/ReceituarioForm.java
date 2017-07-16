@@ -1,5 +1,7 @@
 package br.pucminas.pucmed.ui.forms;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,15 +9,21 @@ import java.util.Optional;
 
 import com.vaadin.data.Binder;
 import com.vaadin.data.converter.StringToLongConverter;
+import com.vaadin.icons.VaadinIcons;
+import com.vaadin.server.FileDownloader;
+import com.vaadin.server.StreamResource;
+import com.vaadin.server.StreamResource.StreamSource;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Grid;
+import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 
 import br.pucminas.pucmed.bean.BeanGetter;
 import br.pucminas.pucmed.model.Atendimento;
 import br.pucminas.pucmed.model.Medicamento;
-import br.pucminas.pucmed.model.Paciente;
 import br.pucminas.pucmed.model.Receituario;
+import br.pucminas.pucmed.reports.ReportsRunner;
 import br.pucminas.pucmed.service.MedicamentoService;
 import br.pucminas.pucmed.service.ReceituarioService;
 import br.pucminas.pucmed.ui.BaseForm;
@@ -26,7 +34,7 @@ import br.pucminas.pucmed.utils.Constants;
 
 public class ReceituarioForm extends BaseForm {
 	private static final long serialVersionUID = 3796349348214384355L;
-	
+
 	private Atendimento atendimento;
 
 	private ReceituarioService service = BeanGetter.getService(ReceituarioService.class);
@@ -38,13 +46,13 @@ public class ReceituarioForm extends BaseForm {
 	private TextField id = new TextField("Código");
 	private ComboBox<Medicamento> medicamento = new ComboBox<>("Medicamento");
 	private TextField quantidade = new TextField("Quantidade");
-	private TextField posologia = new TextField("Posologia");
-	
+	private TextArea posologia = new TextArea("Posologia");
+
 	private ComboBox<Medicamento> fMedicamento = new ComboBox<>("Medicamento");
 
 	public ReceituarioForm(Atendimento atendimento) {
 		super();
-		
+
 		this.atendimento = atendimento;
 
 		updateGrid();
@@ -77,9 +85,9 @@ public class ReceituarioForm extends BaseForm {
 		binder.forField(posologia)//
 				.asRequired("O campo é obrigatório")//
 				.bind("posologia");
-		
+
 		List<Medicamento> medicamentos = medicamentoService.list();
-		
+
 		fMedicamento.setEmptySelectionAllowed(false);
 		fMedicamento.setItems(medicamentos);
 		fMedicamento.setItemCaptionGenerator(Medicamento::getNomeComercial);
@@ -93,6 +101,19 @@ public class ReceituarioForm extends BaseForm {
 				getToolbarArea().setAdicionarListener(e -> novo());
 				getToolbarArea().setEditarListener(e -> editar());
 				getToolbarArea().setExcluirListener(e -> excluir());
+
+				Button botaoImprimir = getToolbarArea().addCustomButton("Imprimir");
+				botaoImprimir.setIcon(VaadinIcons.PRINT);
+				botaoImprimir.setEnabled(true);
+				FileDownloader fileDownloader = new FileDownloader(new StreamResource(new StreamSource() {
+					private static final long serialVersionUID = 1L;
+
+					@Override
+					public InputStream getStream() {
+						return new ByteArrayInputStream(new ReportsRunner().runReceituario(atendimento.getId()));
+					}
+				}, "receituário_" + atendimento.getId() + ".pdf"));
+				fileDownloader.extend(botaoImprimir);
 
 				getFilterArea().addFilters(fMedicamento);
 				getFilterArea().setPesquisarListener(e -> pesquisar());

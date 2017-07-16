@@ -41,7 +41,7 @@ public class UsuarioForm extends BaseForm {
 	private PasswordField senha = new PasswordField("Senha");
 	private PasswordField confSenha = new PasswordField("Confirmar senha");
 	private TextField email = new TextField("E-Mail");
-	
+
 	private TextField fNome = new TextField("Nome");
 
 	public UsuarioForm() {

@@ -33,7 +33,7 @@ public class Receituario implements BaseModel {
 	@ManyToOne
 	@JoinColumn(name = "id_medicamento")
 	private Medicamento medicamento;
-	
+
 	@NotNull
 	private Long quantidade;
 

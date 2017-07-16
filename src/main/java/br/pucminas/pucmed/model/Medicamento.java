@@ -29,4 +29,23 @@ public class Medicamento implements BaseModel {
 
 	@NotNull
 	private String fabricante;
+
+	@NotNull
+	private Embalagem embalagem;
+
+	public static enum Embalagem {
+		CAIXA, FRASCO;
+
+		@Override
+		public String toString() {
+			switch (this) {
+			case CAIXA:
+				return "Caixa";
+			case FRASCO:
+				return "Frasco";
+			default:
+				return "";
+			}
+		}
+	}
 }

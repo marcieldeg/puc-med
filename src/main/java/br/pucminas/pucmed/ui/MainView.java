@@ -16,6 +16,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
 import br.pucminas.pucmed.authentication.UserSession;
+import br.pucminas.pucmed.ui.forms.AgendaForm;
 import br.pucminas.pucmed.ui.forms.AtendenteForm;
 import br.pucminas.pucmed.ui.forms.AtendimentoForm;
 import br.pucminas.pucmed.ui.forms.EspecialidadeForm;
@@ -51,12 +52,20 @@ public class MainView extends VerticalLayout implements View {
 		MenuBar menubar = new MenuBar();
 		menubar.setWidth("100%");
 		MenuItem cadastro = menubar.addItem("Cadastro", null);
+		cadastro.addItem("Agendamento", new Command() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void menuSelected(MenuItem selectedItem) {
+				createTab(AgendaForm.class, "Cadastro de Agendamentos");
+			}
+		});
 		cadastro.addItem("Atendimentos", new Command() {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-				setBody(AtendimentoForm.class, "Cadastro de Atendimentos");
+				createTab(AtendimentoForm.class, "Cadastro de Atendimentos");
 			}
 		});
 		cadastro.addItem("Pacientes", new Command() {
@@ -64,7 +73,7 @@ public class MainView extends VerticalLayout implements View {
 
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-				setBody(PacienteForm.class, "Cadastro de Pacientes");
+				createTab(PacienteForm.class, "Cadastro de Pacientes");
 			}
 		});
 		cadastro.addItem("Usuários", new Command() {
@@ -72,7 +81,7 @@ public class MainView extends VerticalLayout implements View {
 
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-				setBody(UsuarioForm.class, "Cadastro de Usuários");
+				createTab(UsuarioForm.class, "Cadastro de Usuários");
 			}
 		});
 		cadastro.addItem("Médicos", new Command() {
@@ -80,7 +89,7 @@ public class MainView extends VerticalLayout implements View {
 
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-				setBody(MedicoForm.class, "Cadastro de Médicos");
+				createTab(MedicoForm.class, "Cadastro de Médicos");
 			}
 		});
 		cadastro.addItem("Atendentes", new Command() {
@@ -88,7 +97,7 @@ public class MainView extends VerticalLayout implements View {
 
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-				setBody(AtendenteForm.class, "Cadastro de Atendentes");
+				createTab(AtendenteForm.class, "Cadastro de Atendentes");
 			}
 		});
 		cadastro.addItem("Medicamentos", new Command() {
@@ -96,7 +105,7 @@ public class MainView extends VerticalLayout implements View {
 
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-				setBody(MedicamentoForm.class, "Cadastro de Medicamentos");
+				createTab(MedicamentoForm.class, "Cadastro de Medicamentos");
 			}
 		});
 
@@ -105,7 +114,7 @@ public class MainView extends VerticalLayout implements View {
 
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-				setBody(EspecialidadeForm.class, "Cadastro de Especialidades");
+				createTab(EspecialidadeForm.class, "Cadastro de Especialidades");
 			}
 		});
 		MenuItem relatorio = menubar.addItem("Relatórios", null);
@@ -136,7 +145,7 @@ public class MainView extends VerticalLayout implements View {
 		return null;
 	}
 
-	private <T extends Component> void setBody(Class<T> formClass, String name) {
+	private <T extends Component> void createTab(Class<T> formClass, String name) {
 		T c = getForm(formClass);
 		if (c == null) {
 			try {
@@ -146,6 +155,8 @@ public class MainView extends VerticalLayout implements View {
 			}
 			forms.add(c);
 		}
+		
+		// TODO: verificar se aba está aberta
 
 		Tab tab = tabSheet.addTab(c, name);
 		tab.setClosable(true);

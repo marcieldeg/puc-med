@@ -1,5 +1,6 @@
 package br.pucminas.pucmed.ui;
 
+import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
@@ -9,7 +10,7 @@ import br.pucminas.pucmed.utils.Constants;
 
 //@Viewport("user-scalable=no,initial-scale=1.0,width=device-width")
 @SpringUI
-// @Theme("tests-valo-facebook")
+@Theme("puc-med")
 public class NavigatorUI extends UI {
 	private static final long serialVersionUID = -9025178974527284267L;
 

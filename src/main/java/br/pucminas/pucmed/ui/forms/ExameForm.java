@@ -1,7 +1,6 @@
 package br.pucminas.pucmed.ui.forms;
 
 import java.text.SimpleDateFormat;
-import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,14 +93,14 @@ public class ExameForm extends BaseForm {
 				.withConverter(new StringToLongConverter("Código Inválido"))//
 				.bind("id");
 		binder.forField(dataSolicitacao)//
-				.withConverter(new LocalDateTimeToDateConverter(ZoneOffset.UTC))//
+				.withConverter(new LocalDateTimeToDateConverter(Constants.ZONE_OFFSET))//
 				.asRequired("O campo é obrigatório")//
 				.bind("dataSolicitacao");
 		binder.forField(tipoExame)//
 				.asRequired("O campo é obrigatório")//
 				.bind("tipoExame");
 		binder.forField(dataRealizacao)//
-				.withConverter(new LocalDateTimeToDateConverter(ZoneOffset.UTC))//
+				.withConverter(new LocalDateTimeToDateConverter(Constants.ZONE_OFFSET))//
 				.bind("dataRealizacao");
 		binder.forField(resultado)//
 				.bind("resultado");

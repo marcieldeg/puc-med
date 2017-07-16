@@ -14,7 +14,7 @@ public class MedicoService extends BaseService<Medico> {
 	public MedicoService() {
 		super(Medico.class);
 	}
-	
+
 	public Medico getByUsuario(Usuario usuario) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("usuario", usuario);

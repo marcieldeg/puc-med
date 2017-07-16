@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aba42067-0563-48bd-9e17-30246aa898f9">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="PUC-MED"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<subDataset name="Posologia" uuid="63965de3-c909-41cd-963b-4cb5e716fc5c">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="PUC-MED"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<queryString>
+			<![CDATA[select row_number() over() as item,
+       medicamento.nomeComercial,
+          receituario.quantidade
+       || case medicamento.embalagem when 0 then ' Caixa' when 1 then 'Frasco' end
+       || case receituario.quantidade when 1 then '' else 's' end as embalagem,
+       receituario.posologia
+  from receituario,
+       medicamento
+ where receituario.id_medicamento = medicamento.id
+order by receituario.id]]>
+		</queryString>
+		<field name="item" class="java.lang.Long"/>
+		<field name="nomecomercial" class="java.lang.String"/>
+		<field name="embalagem" class="java.lang.String"/>
+		<field name="posologia" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="id" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[select paciente.nome as nome_paciente,
+          date_part('year',age(now(), paciente.dataNascimento)) || 'a, '
+       || date_part('month',age(now(), paciente.dataNascimento)) || 'm, '
+       || date_part('month',age(now(), paciente.dataNascimento)) || 'd'
+       as idade,
+       atendimento.data,
+       usuario.nome as nome_medico,
+       medico.crm
+  from atendimento,
+       paciente,
+       medico,
+       usuario
+ where atendimento.id_paciente = paciente.id
+   and atendimento.id_medico = medico.id
+   and medico.id = usuario.id
+   and atendimento.id = $P{id}]]>
+	</queryString>
+	<field name="nome_paciente" class="java.lang.String"/>
+	<field name="idade" class="java.lang.String"/>
+	<field name="data" class="java.sql.Timestamp"/>
+	<field name="nome_medico" class="java.lang.String"/>
+	<field name="crm" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="64" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="0" width="200" height="30" uuid="76a3d16e-79af-4eb3-93f0-cd232bc8b605"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Receituário]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="50" height="20" uuid="1962a1b8-42de-409d-8b11-8a3687d34d7a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paciente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="0" width="40" height="20" uuid="879dbe99-bb4b-4a8f-8fe5-54b0f2c8945f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Idade:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="0" width="100" height="20" uuid="35884736-7a52-42cc-adfb-01bc49da6279"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Atendimento:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="0" width="200" height="20" uuid="673a9bb0-2f80-435a-b2d4-48be081cf8bc"/>
+				<textFieldExpression><![CDATA[$F{nome_paciente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="0" width="70" height="20" uuid="2a97125d-77d3-4b72-abf4-095f2b779d2e"/>
+				<textFieldExpression><![CDATA[$F{idade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="92" height="20" uuid="4bdf4634-6d45-4786-ab46-cda98629a4be"/>
+				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="73" splitType="Stretch">
+			<componentElement>
+				<reportElement x="2" y="20" width="550" height="50" uuid="fee1eabc-26bb-4323-9a3b-ca5808e1977a"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Posologia" uuid="0f815f39-236e-48c3-b83d-9676d438d1cb">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="50" width="550">
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="40" height="40" uuid="bdf10543-33eb-4ec6-9cbb-a5947fee0db0"/>
+							<textElement textAlignment="Left">
+								<font size="12" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{item}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="320" y="0" width="220" height="20" uuid="018f327e-745a-4145-bdfc-1316c93f15bd"/>
+							<textFieldExpression><![CDATA[$F{embalagem}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="50" y="0" width="260" height="20" uuid="46041f3a-cfe4-47d0-bc83-46d8dddc5240"/>
+							<textFieldExpression><![CDATA[$F{nomecomercial}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="50" y="20" width="490" height="20" uuid="84a84c29-e07f-4e0c-94c4-209b241da08c"/>
+							<textFieldExpression><![CDATA[$F{posologia}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="53">
+			<textField>
+				<reportElement x="180" y="40" width="200" height="13" uuid="2cbd3313-1c85-41fc-a51b-07debc03001a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["CRM: " + $F{crm}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="20" width="200" height="13" uuid="bb783b9e-fbe1-48cc-a2dd-c5ba9b33521c"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Dr. " + $F{nome_medico}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

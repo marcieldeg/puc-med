@@ -52,7 +52,7 @@ public class Paciente implements BaseModel {
 	private String complemento;
 
 	private String bairro;
-	
+
 	private String cidade;
 
 	@ManyToOne

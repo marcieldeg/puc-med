@@ -38,7 +38,7 @@ public class Usuario implements BaseModel {
 	@NotNull
 	@Size(min = 5, max = 20)
 	private String senha;
-	
+
 	@NotNull
 	private String nome;
 

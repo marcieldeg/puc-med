@@ -1,5 +1,8 @@
 package br.pucminas.pucmed.model;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import br.pucminas.pucmed.utils.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -57,6 +61,13 @@ public class MedicoExpediente implements BaseModel {
 				return "";
 			}
 		}
+
+		public static DiaSemana fromDate(Date date) {
+			Calendar c = Calendar.getInstance();
+			c.setTime(date);
+			int dia = c.get(Calendar.DAY_OF_WEEK);
+			return DiaSemana.values()[dia - 1];
+		}
 	}
 
 	public enum Turno {
@@ -74,6 +85,17 @@ public class MedicoExpediente implements BaseModel {
 			default:
 				return "";
 			}
+		}
+
+		public static Turno fromDate(Date date) {
+			Calendar c = Calendar.getInstance();
+			c.setTime(date);
+			int hora = c.get(Calendar.HOUR_OF_DAY);
+			if (Constants.TURNO_MANHA.contains(hora))
+				return Turno.MANHA;
+			if (Constants.TURNO_TARDE.contains(hora))
+				return Turno.TARDE;
+			throw new IndexOutOfBoundsException("Fora do período de trabalho");
 		}
 	}
 }

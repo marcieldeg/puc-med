@@ -1,5 +1,6 @@
 package br.pucminas.pucmed.ui.forms;
 
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,11 +8,13 @@ import java.util.Optional;
 
 import com.vaadin.data.Binder;
 import com.vaadin.data.converter.StringToLongConverter;
+import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.TextField;
 
 import br.pucminas.pucmed.bean.BeanGetter;
 import br.pucminas.pucmed.model.Medicamento;
+import br.pucminas.pucmed.model.Medicamento.Embalagem;
 import br.pucminas.pucmed.service.MedicamentoService;
 import br.pucminas.pucmed.ui.BaseForm;
 import br.pucminas.pucmed.ui.BodyEdit;
@@ -31,6 +34,7 @@ public class MedicamentoForm extends BaseForm {
 	private TextField nomeComercial = new TextField("Nome Comercial");
 	private TextField nomeGenerico = new TextField("Nome Genérico");
 	private TextField fabricante = new TextField("Fabricante");
+	private ComboBox<Embalagem> embalagem = new ComboBox<>("Embalagem");
 
 	private TextField fNomeComercial = new TextField("Nome Comercial");
 	private TextField fNomeGenerico = new TextField("Nome Genérico");
@@ -40,11 +44,12 @@ public class MedicamentoForm extends BaseForm {
 		super();
 
 		updateGrid();
-		grid.setColumns("id", "nomeComercial", "nomeGenerico", "fabricante");
-		grid.getColumn("id").setWidth(Constants.SMALL_FIELD);
-		grid.getColumn("nomeComercial").setWidth(Constants.LARGE_FIELD);
-		grid.getColumn("nomeGenerico").setWidth(Constants.LARGE_FIELD).setCaption("Nome Genérico");
-		grid.getColumn("fabricante").setWidth(Constants.LARGE_FIELD);
+		grid.removeAllColumns();
+		grid.addColumn("id").setWidth(Constants.SMALL_FIELD);
+		grid.addColumn("nomeComercial").setWidth(Constants.LARGE_FIELD);
+		grid.addColumn("nomeGenerico").setWidth(Constants.LARGE_FIELD).setCaption("Nome Genérico");
+		grid.addColumn("fabricante").setWidth(Constants.MEDIUM_FIELD);
+		grid.addColumn("embalagem").setWidth(Constants.MEDIUM_FIELD);
 
 		grid.addSelectionListener(e -> {
 			Optional<Medicamento> medicamento = e.getFirstSelectedItem();
@@ -84,12 +89,14 @@ public class MedicamentoForm extends BaseForm {
 		};
 
 		id.setEnabled(false);
+		embalagem.setEmptySelectionAllowed(false);
+		embalagem.setItems(EnumSet.allOf(Embalagem.class));
 
 		BodyEdit bodyEdit = new BodyEdit() {
 			private static final long serialVersionUID = 6951503876938584530L;
 
 			{
-				addFields(id, nomeComercial, nomeGenerico, fabricante);
+				addFields(id, nomeComercial, nomeGenerico, fabricante, embalagem);
 
 				setSalvarListener(e -> salvar());
 				setCancelarListener(e -> view());
