@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTemplate;
@@ -12,13 +13,25 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 @Configuration
 public class BeanConfiguration {
+	@Value("${spring.datasource.driver-class-name}")
+	private String driver;
+	
+	@Value("${spring.datasource.url}")
+	private String database;
+	
+	@Value("${spring.datasource.username}")
+	private String username;
+	
+	@Value("${spring.datasource.password}")
+	private String password;
+	
 	@Bean
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl("jdbc:postgresql://localhost:5432/puc-med");
-		dataSource.setUsername("postgres");
-		dataSource.setPassword("degasperi");
+		dataSource.setDriverClassName(driver);
+		dataSource.setUrl(database);
+		dataSource.setUsername(username);
+		dataSource.setPassword(password);
 		//dataSource.setDefaultAutoCommit(false);
 		return dataSource;
 	}

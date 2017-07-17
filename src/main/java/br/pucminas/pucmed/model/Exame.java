@@ -38,10 +38,6 @@ public class Exame implements BaseModel {
 	@JoinColumn(name = "id_atendimento")
 	private Atendimento atendimento;
 
-	@NotNull
-	@Type(type = "date")
-	private Date dataSolicitacao;
-
 	@Type(type = "date")
 	private Date dataRealizacao;
 

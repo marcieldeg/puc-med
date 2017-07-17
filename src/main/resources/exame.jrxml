@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="exame" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aa2f292e-af0d-4b8c-b8bb-fdb88f00b09f">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="PUC-MED"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="id" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[select paciente.nome as nome_paciente,
+          date_part('year',age(now(), paciente.dataNascimento)) || 'a, '
+       || date_part('month',age(now(), paciente.dataNascimento)) || 'm, '
+       || date_part('month',age(now(), paciente.dataNascimento)) || 'd'
+       as idade,
+       case paciente.sexo when 0 then 'M' when 1 then 'F' end as sexo,
+       atendimento.data as datasolicitacao,
+       tipoexame.nome as tipoexame,
+       usuario.nome as nome_medico,
+       medico.crm,
+       exame.datarealizacao,
+       exame.resultado
+  from exame,
+       tipoexame,
+       atendimento,
+       paciente,
+       medico,
+       usuario
+ where exame.id_tipoexame = tipoexame.id
+   and exame.id_atendimento = atendimento.id
+   and atendimento.id_paciente = paciente.id
+   and atendimento.id_medico = medico.id
+   and medico.id = usuario.id
+   and exame.id = $P{id}]]>
+	</queryString>
+	<field name="nome_paciente" class="java.lang.String"/>
+	<field name="idade" class="java.lang.String"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="datasolicitacao" class="java.sql.Timestamp"/>
+	<field name="tipoexame" class="java.lang.String"/>
+	<field name="nome_medico" class="java.lang.String"/>
+	<field name="crm" class="java.lang.Long"/>
+	<field name="datarealizacao" class="java.sql.Date"/>
+	<field name="resultado" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="52" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="0" width="200" height="30" uuid="ccdb4e0e-249a-4bb9-8dc9-e9eefdcff0b2"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Exame]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="88" splitType="Stretch">
+			<staticText>
+				<reportElement x="350" y="20" width="90" height="20" uuid="1a710910-d38d-4ebf-bdd5-d1b5cdd78664"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Realização:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="20" width="70" height="20" uuid="40293260-c0b4-41aa-9615-55cbc975cf0f"/>
+				<textFieldExpression><![CDATA[$F{idade}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="440" y="20" width="112" height="20" uuid="9f714607-5b77-4730-b1aa-3e89d9ac4664"/>
+				<textFieldExpression><![CDATA[$F{datarealizacao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="180" y="20" width="50" height="20" uuid="bae3e81e-d176-438f-b6d9-94958ad02fc4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sexo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="50" height="20" uuid="06003e94-50e3-44c6-91e4-de8d1784df7a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Idade:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="50" height="20" uuid="80e0d188-c112-45c5-a58b-31c530c1aae2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paciente:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="0" width="502" height="20" uuid="0f8eba57-ff16-4b93-aaf1-071a1032cf83"/>
+				<textFieldExpression><![CDATA[$F{nome_paciente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="20" width="50" height="20" uuid="4cc1f1ed-0589-4419-89fd-f1b8d5642905"/>
+				<textFieldExpression><![CDATA[$F{sexo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="40" width="280" height="20" uuid="302ec4ae-9bd8-4e03-a7ec-0030c5f03f02"/>
+				<textFieldExpression><![CDATA[$F{tipoexame}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="40" width="70" height="20" uuid="9ef215b1-777e-4d1a-baaf-d32a3aceec5d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Exame:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="40" width="50" height="20" uuid="2c733379-266e-4a27-b50b-9ab946fcaaaf"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Médico:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="400" y="40" width="152" height="20" uuid="31021039-6244-49a1-9997-af1f3c8f498d"/>
+				<textFieldExpression><![CDATA["Dr(a). " + $F{nome_medico}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="68" width="70" height="20" uuid="02662356-48b0-45b1-9eac-d723bb96b3ad"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resultados:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="552" height="20" uuid="90cd041a-674e-4b19-a8d2-6026e70d4455"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{resultado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="180" y="40" width="200" height="13" uuid="d8a494ff-44ae-47d9-b47b-db2b5d914d06"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["CRM: " + $F{crm}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="20" width="200" height="13" uuid="ec8921ff-1020-486e-8c58-e673f7568d03"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Dr(a). " + $F{nome_medico}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -2,14 +2,8 @@ package br.pucminas.pucmed;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import br.pucminas.pucmed.enums.Status;
-import br.pucminas.pucmed.model.Atendente;
-import br.pucminas.pucmed.service.AtendenteService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -19,7 +13,7 @@ public class MedicoTest {
 	public void contextLoads() {
 	}
 
-	@Autowired
+	/*@Autowired
 	AtendenteService s;
 
 	@Test
@@ -32,7 +26,7 @@ public class MedicoTest {
 		a.setEmail("e@mail.com");
 		a.setStatus(Status.ATIVO);
 		s.insert(a);
-	}
+	}*/
 
 	/*
 	 * @Autowired MedicoDAO medicoDAO;

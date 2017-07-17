@@ -157,7 +157,7 @@ order by receituario.id]]>
 					<topPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA["Dr. " + $F{nome_medico}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Dr(a). " + $F{nome_medico}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>

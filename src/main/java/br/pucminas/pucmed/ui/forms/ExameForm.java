@@ -1,5 +1,7 @@
 package br.pucminas.pucmed.ui.forms;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +11,11 @@ import java.util.Optional;
 import com.vaadin.data.Binder;
 import com.vaadin.data.converter.LocalDateTimeToDateConverter;
 import com.vaadin.data.converter.StringToLongConverter;
+import com.vaadin.icons.VaadinIcons;
+import com.vaadin.server.BrowserWindowOpener;
+import com.vaadin.server.StreamResource;
+import com.vaadin.server.StreamResource.StreamSource;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.DateTimeField;
@@ -21,6 +28,7 @@ import br.pucminas.pucmed.model.Atendimento;
 import br.pucminas.pucmed.model.Exame;
 import br.pucminas.pucmed.model.Paciente;
 import br.pucminas.pucmed.model.TipoExame;
+import br.pucminas.pucmed.reports.ReportsRunner;
 import br.pucminas.pucmed.service.ExameService;
 import br.pucminas.pucmed.service.PacienteService;
 import br.pucminas.pucmed.service.TipoExameService;
@@ -45,18 +53,19 @@ public class ExameForm extends BaseForm {
 
 	private Grid<Exame> grid = new Grid<>(Exame.class);
 	private TextField id = new TextField("Código");
-	private DateTimeField dataSolicitacao = new DateTimeField("Data de Solicitação");
 	private ComboBox<TipoExame> tipoExame = new ComboBox<>("Tipo de Exame");
 	private DateTimeField dataRealizacao = new DateTimeField("Data de Realização");
 	private TextArea resultado = new TextArea("Resultado");
 
 	private ComboBox<Paciente> fPaciente = new ComboBox<Paciente>("Paciente");
-	private DateField fDataSolicitacao = new DateField("Data de Solicitação");
 	private ComboBox<TipoExame> fTipoExame = new ComboBox<>("Tipo de Exame");
 	private DateField fDataRealizacao = new DateField("Data de Realização");
+	
+	private boolean abertoDoMenu = false;
 
 	public ExameForm() {
 		this(null);
+		abertoDoMenu = true; 
 	}
 
 	public ExameForm(Atendimento atendimento) {
@@ -69,10 +78,8 @@ public class ExameForm extends BaseForm {
 		grid.addColumn("id").setWidth(Constants.SMALL_FIELD);
 		grid.addColumn(//
 				o -> {
-					if (o.getDataSolicitacao() == null)
-						return null;
 					SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-					return format.format(o.getDataSolicitacao());
+					return format.format(o.getAtendimento().getData());
 				})//
 				.setWidth(Constants.MEDIUM_FIELD)//
 				.setCaption("Data de Solicitação");
@@ -94,6 +101,8 @@ public class ExameForm extends BaseForm {
 			Optional<Exame> exame = e.getFirstSelectedItem();
 			getBodyView().getToolbarArea().setEditarEnabled(exame.isPresent());
 			getBodyView().getToolbarArea().setExcluirEnabled(exame.isPresent() && atendimento != null);
+			getBodyView().getToolbarArea().getCustomButton("Imprimir")
+					.setEnabled(exame.isPresent() && exame.get().getDataRealizacao() != null);
 		});
 
 		grid.setSizeFull();
@@ -101,10 +110,6 @@ public class ExameForm extends BaseForm {
 		binder.forField(id)//
 				.withConverter(new StringToLongConverter("Código Inválido"))//
 				.bind("id");
-		binder.forField(dataSolicitacao)//
-				.withConverter(new LocalDateTimeToDateConverter(Constants.ZONE_OFFSET))//
-				.asRequired("O campo é obrigatório")//
-				.bind("dataSolicitacao");
 		binder.forField(tipoExame)//
 				.asRequired("O campo é obrigatório")//
 				.bind("tipoExame");
@@ -118,9 +123,11 @@ public class ExameForm extends BaseForm {
 		fTipoExame.setItemCaptionGenerator(TipoExame::getNome);
 		fTipoExame.setEmptySelectionAllowed(false);
 
-		fPaciente.setItems(pacienteService.list());
-		fPaciente.setEmptySelectionAllowed(false);
-		fPaciente.setItemCaptionGenerator(Paciente::getNome);
+		if (atendimento == null) {
+			fPaciente.setItems(pacienteService.list());
+			fPaciente.setEmptySelectionAllowed(false);
+			fPaciente.setItemCaptionGenerator(Paciente::getNome);
+		}
 
 		BodyView bodyView = new BodyView() {
 			{
@@ -129,12 +136,32 @@ public class ExameForm extends BaseForm {
 				getToolbarArea().setAdicionarListener(e -> novo());
 				getToolbarArea().setEditarListener(e -> editar());
 				getToolbarArea().setExcluirListener(e -> excluir());
+
+				Button botaoImprimir = getToolbarArea().addCustomButton("Imprimir");
+				botaoImprimir.setIcon(VaadinIcons.PRINT);
+
+				BrowserWindowOpener browserWindowOpener = new BrowserWindowOpener(//
+						new StreamResource(//
+								new StreamSource() {
+									@Override
+									public InputStream getStream() {
+										return new ByteArrayInputStream(
+												new ReportsRunner().runExame(grid.asSingleSelect().getValue().getId()));
+									}
+								}, "exame.pdf") {
+							{
+								setMIMEType("application/pdf");
+							}
+						});
+				browserWindowOpener.extend(botaoImprimir);
+
 				if (atendimento == null) {
 					getToolbarArea().setAdicionarEnabled(false);
 					getToolbarArea().setExcluirEnabled(false);
 					getFilterArea().addFilters(fPaciente);
 				}
-				getFilterArea().addFilters(fTipoExame, fDataSolicitacao, fDataRealizacao);
+
+				getFilterArea().addFilters(fTipoExame, fDataRealizacao);
 				getFilterArea().setPesquisarListener(e -> pesquisar());
 				getFilterArea().setLimparListener(e -> limpar());
 			}
@@ -149,7 +176,7 @@ public class ExameForm extends BaseForm {
 
 		BodyEdit bodyEdit = new BodyEdit() {
 			{
-				addFields(id, dataSolicitacao, tipoExame, dataRealizacao, resultado);
+				addFields(id, tipoExame, dataRealizacao, resultado);
 
 				setSalvarListener(e -> salvar());
 				setCancelarListener(e -> view());
@@ -165,12 +192,13 @@ public class ExameForm extends BaseForm {
 	private void editar() {
 		if (!grid.asSingleSelect().isEmpty()) {
 			Exame e = grid.asSingleSelect().getValue();
-			
+			atendimento = e.getAtendimento();
+
 			if (e.getDataRealizacao() != null) {
 				Notification.show("Esse exame já foi realizado e não pode ser alterado", Type.ERROR);
 				return;
 			}
-			
+
 			binder.setBean(e);
 			edit();
 		}
@@ -179,12 +207,12 @@ public class ExameForm extends BaseForm {
 	private void excluir() {
 		if (!grid.asSingleSelect().isEmpty()) {
 			Exame e = grid.asSingleSelect().getValue();
-			
+
 			if (e.getDataRealizacao() != null) {
 				Notification.show("Esse exame já foi realizado e não pode ser excluído", Type.ERROR);
 				return;
 			}
-			
+
 			MessageBox.showQuestion("Confirma a exclusão desse registro?", //
 					() -> {
 						service.delete(e);
@@ -198,7 +226,7 @@ public class ExameForm extends BaseForm {
 	}
 
 	private void updateGrid(Map<String, Object> params) {
-		if (atendimento != null)
+		if (!abertoDoMenu)
 			params.put("atendimento", atendimento);
 		List<Exame> exames = service.list(params);
 		grid.setItems(exames);
@@ -211,11 +239,9 @@ public class ExameForm extends BaseForm {
 
 	private void salvar() {
 		Exame exame = new Exame();
+		exame.setAtendimento(atendimento);
 		if (binder.writeBeanIfValid(exame)) {
 			if (exame.getId() == null) {
-				if (atendimento == null)
-					return;
-				exame.setAtendimento(atendimento);
 				service.insert(exame);
 			} else
 				service.update(exame);
@@ -228,10 +254,6 @@ public class ExameForm extends BaseForm {
 
 	private void pesquisar() {
 		Map<String, Object> params = new HashMap<>();
-		if (!fDataSolicitacao.isEmpty()) {
-			params.put("dataSolicitacao#ge", Utils.convertLocalDateToDate(fDataSolicitacao.getValue()));
-			params.put("dataSolicitacao#lt", Utils.convertLocalDateToDate(fDataSolicitacao.getValue().plusDays(1)));
-		}
 		if (!fTipoExame.isEmpty()) {
 			params.put("tipoExame", fTipoExame.getValue());
 		}
@@ -243,18 +265,18 @@ public class ExameForm extends BaseForm {
 	}
 
 	private void limpar() {
-		fDataSolicitacao.clear();
+		if (abertoDoMenu)
+			fPaciente.clear();
 		fTipoExame.clear();
 		fDataRealizacao.clear();
 		updateGrid();
 	}
-	
+
 	@Override
 	protected void edit() {
-		dataSolicitacao.setEnabled(!(atendimento == null));
-		tipoExame.setEnabled(!(atendimento == null));
-		dataRealizacao.setEnabled(atendimento == null);
-		resultado.setEnabled(atendimento == null);
+		tipoExame.setEnabled(!abertoDoMenu);
+		dataRealizacao.setEnabled(abertoDoMenu);
+		resultado.setEnabled(abertoDoMenu);
 		super.edit();
 	}
 }

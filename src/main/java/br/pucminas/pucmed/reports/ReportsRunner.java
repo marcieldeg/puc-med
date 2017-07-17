@@ -19,26 +19,35 @@ public class ReportsRunner {
 	private LocalSessionFactoryBean sessionFactoryBean = BeanGetter.getBean(LocalSessionFactoryBean.class);
 
 	private static final String RECEITUARIO_NAME = "receituario.jrxml";
+	private static final String EXAME_NAME = "exame.jrxml";
 
 	private Connection getConnection() throws SQLException {
 		return sessionFactoryBean.getObject().getSessionFactoryOptions().getServiceRegistry()
 				.getService(ConnectionProvider.class).getConnection();
 	}
-
-	public byte[] runReceituario(Long idAtendimento) {
+	
+	private byte[] runReport(String name, Long id) {
 		try {
 			Connection connection = getConnection();
 
 			ClassLoader classLoader = getClass().getClassLoader();
-			InputStream is = classLoader.getResource(RECEITUARIO_NAME).openStream();
+			InputStream is = classLoader.getResource(name).openStream();
 			JasperReport jasperReport = JasperCompileManager.compileReport(is);
 			HashMap<String, Object> params = new HashMap<>();
-			params.put("id", idAtendimento);
+			params.put("id", id);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, connection);
 			return JasperExportManager.exportReportToPdf(jasperPrint);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public byte[] runReceituario(Long idAtendimento) {
+		return runReport(RECEITUARIO_NAME, idAtendimento);
+	}
+
+	public byte[] runExame(Long idExame) {
+		return runReport(EXAME_NAME, idExame);
 	}
 }
