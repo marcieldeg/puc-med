@@ -67,7 +67,7 @@ public class AgendaForm extends BaseForm {
 				o -> {
 					if (o.getData() == null)
 						return null;
-					SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+					SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 					return format.format(o.getData());
 				})//
 				.setWidth(Constants.LARGE_FIELD)//

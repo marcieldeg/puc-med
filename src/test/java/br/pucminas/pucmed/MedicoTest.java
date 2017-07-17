@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.pucminas.pucmed.enums.Status;
@@ -22,6 +23,7 @@ public class MedicoTest {
 	AtendenteService s;
 
 	@Test
+	@Rollback
 	public void test() {
 		Atendente a = new Atendente();
 		a.setNome("Marciel");

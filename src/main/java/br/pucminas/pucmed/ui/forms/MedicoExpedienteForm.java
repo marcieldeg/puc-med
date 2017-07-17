@@ -133,11 +133,11 @@ public class MedicoExpedienteForm extends BaseForm {
 	}
 
 	private void updateGrid() {
-		List<MedicoExpediente> medicoExpedientes = service.list();
-		grid.setItems(medicoExpedientes);
+		updateGrid(new HashMap<>());
 	}
 
 	private void updateGrid(Map<String, Object> params) {
+		params.put("medico", medico);
 		List<MedicoExpediente> medicoExpedientes = service.list(params);
 		grid.setItems(medicoExpedientes);
 	}

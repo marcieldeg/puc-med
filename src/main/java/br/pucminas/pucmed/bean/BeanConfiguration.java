@@ -19,7 +19,7 @@ public class BeanConfiguration {
 		dataSource.setUrl("jdbc:postgresql://localhost:5432/puc-med");
 		dataSource.setUsername("postgres");
 		dataSource.setPassword("degasperi");
-		// dataSource.setDefaultAutoCommit(false);
+		//dataSource.setDefaultAutoCommit(false);
 		return dataSource;
 	}
 
@@ -33,6 +33,7 @@ public class BeanConfiguration {
 		hibernateProperties.put("hibernate.show_sql", "true");
 		hibernateProperties.put("hibernate.hbm2ddl.auto", "update");
 		hibernateProperties.put("hibernate.hbm2ddl.import_files", "initial_data.sql");
+		hibernateProperties.put("hibernate.enable_lazy_load_no_trans", "true");
 		sessionFactoryBean.setHibernateProperties(hibernateProperties);
 		return sessionFactoryBean;
 	}

@@ -71,6 +71,9 @@ public class MedicamentoForm extends BaseForm {
 		binder.forField(fabricante)//
 				.asRequired("O campo é obrigatório")//
 				.bind("fabricante");
+		binder.forField(embalagem)//
+				.asRequired("O campo é obrigatório")//
+				.bind("embalagem");
 
 		BodyView bodyView = new BodyView() {
 			private static final long serialVersionUID = -4336915723509556999L;

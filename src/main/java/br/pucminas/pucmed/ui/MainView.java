@@ -3,12 +3,12 @@ package br.pucminas.pucmed.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.MenuBar;
-import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.TabSheet.Tab;
@@ -20,10 +20,10 @@ import br.pucminas.pucmed.ui.forms.AgendaForm;
 import br.pucminas.pucmed.ui.forms.AtendenteForm;
 import br.pucminas.pucmed.ui.forms.AtendimentoForm;
 import br.pucminas.pucmed.ui.forms.EspecialidadeForm;
+import br.pucminas.pucmed.ui.forms.ExameForm;
 import br.pucminas.pucmed.ui.forms.MedicamentoForm;
 import br.pucminas.pucmed.ui.forms.MedicoForm;
 import br.pucminas.pucmed.ui.forms.PacienteForm;
-import br.pucminas.pucmed.ui.forms.UsuarioForm;
 
 @SpringView
 public class MainView extends VerticalLayout implements View {
@@ -31,109 +31,85 @@ public class MainView extends VerticalLayout implements View {
 
 	public static final String NAME = "index";
 
-	// private final VerticalLayout body = new VerticalLayout();
+	private final VerticalLayout layout = new VerticalLayout();
 	private final TabSheet tabSheet = new TabSheet();
 	private final List<Component> forms = new ArrayList<>();
+	private final MenuBar menubar = new MenuBar();
+
+	private WelcomeLayout welcome = null;
 
 	public MainView() {
 		setMargin(false);
 		setSpacing(false);
 		setSizeFull();
 
-		tabSheet.addTab(createMenu(), "Área de Trabalho");
+		layout.setSpacing(false);
+		layout.setMargin(false);
+		layout.addComponent(createMenu());
+		tabSheet.addTab(layout, "Área de Trabalho");
 		tabSheet.setHeight(100.0f, Unit.PERCENTAGE);
 		tabSheet.addStyleName(ValoTheme.TABSHEET_FRAMED);
 
 		addComponent(tabSheet);
 		setExpandRatio(tabSheet, 3f);
+
+		refreshMenuPermissions();
 	}
 
-	private MenuBar createMenu() {
-		MenuBar menubar = new MenuBar();
+	private Component createMenu() {
 		menubar.setWidth("100%");
-		MenuItem cadastro = menubar.addItem("Cadastro", null);
-		cadastro.addItem("Agendamento", new Command() {
-			private static final long serialVersionUID = 1L;
 
-			@Override
-			public void menuSelected(MenuItem selectedItem) {
-				createTab(AgendaForm.class, "Cadastro de Agendamentos");
-			}
-		});
-		cadastro.addItem("Atendimentos", new Command() {
-			private static final long serialVersionUID = 1L;
+		MenuItem grupoMenu = menubar.addItem("Atendimento", null);
+		grupoMenu.addItem("Agendamento", e -> createTab(AgendaForm.class, "Cadastro de Agendamentos"))
+				.setIcon(VaadinIcons.NOTEBOOK);
+		grupoMenu.addItem("Atendimento", e -> createTab(AtendimentoForm.class, "Cadastro de Atendimentos"))
+				.setIcon(VaadinIcons.AMBULANCE);
+		grupoMenu.addItem("Pacientes", e -> createTab(PacienteForm.class, "Cadastro de Pacientes"))
+				.setIcon(VaadinIcons.USER_HEART);
+		grupoMenu.addItem("Exames", e -> createTab(ExameForm.class, "Cadastro de Exames"))
+				.setIcon(VaadinIcons.DOCTOR_BRIEFCASE);
 
-			@Override
-			public void menuSelected(MenuItem selectedItem) {
-				createTab(AtendimentoForm.class, "Cadastro de Atendimentos");
-			}
-		});
-		cadastro.addItem("Pacientes", new Command() {
-			private static final long serialVersionUID = 1L;
+		grupoMenu = menubar.addItem("Pessoal", null);
 
-			@Override
-			public void menuSelected(MenuItem selectedItem) {
-				createTab(PacienteForm.class, "Cadastro de Pacientes");
-			}
-		});
-		cadastro.addItem("Usuários", new Command() {
-			private static final long serialVersionUID = 1L;
+		grupoMenu.addItem("Atendentes", e -> createTab(AtendenteForm.class, "Cadastro de Atendentes"))
+				.setIcon(VaadinIcons.USER_CARD);
+		grupoMenu.addItem("Médicos", e -> createTab(MedicoForm.class, "Cadastro de Médicos"))
+				.setIcon(VaadinIcons.DOCTOR);
+		grupoMenu.addItem("Especialidades", e -> createTab(EspecialidadeForm.class, "Cadastro de Especialidades"))
+				.setIcon(VaadinIcons.DIPLOMA_SCROLL);
 
-			@Override
-			public void menuSelected(MenuItem selectedItem) {
-				createTab(UsuarioForm.class, "Cadastro de Usuários");
-			}
-		});
-		cadastro.addItem("Médicos", new Command() {
-			private static final long serialVersionUID = 1L;
+		grupoMenu = menubar.addItem("Materiais", null);
+		grupoMenu.addItem("Medicamentos", e -> createTab(MedicamentoForm.class, "Cadastro de Medicamentos"))
+				.setIcon(VaadinIcons.PILL);
 
-			@Override
-			public void menuSelected(MenuItem selectedItem) {
-				createTab(MedicoForm.class, "Cadastro de Médicos");
-			}
-		});
-		cadastro.addItem("Atendentes", new Command() {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void menuSelected(MenuItem selectedItem) {
-				createTab(AtendenteForm.class, "Cadastro de Atendentes");
-			}
-		});
-		cadastro.addItem("Medicamentos", new Command() {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void menuSelected(MenuItem selectedItem) {
-				createTab(MedicamentoForm.class, "Cadastro de Medicamentos");
-			}
-		});
-
-		cadastro.addItem("Especialidades", new Command() {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void menuSelected(MenuItem selectedItem) {
-				createTab(EspecialidadeForm.class, "Cadastro de Especialidades");
-			}
-		});
-		MenuItem relatorio = menubar.addItem("Relatórios", null);
-		relatorio.addItem("Pacientes", null);
-		relatorio.addItem("Usuários", null);
-		relatorio.addItem("Médicos", null);
-		relatorio.addItem("Atendentes", null);
-		relatorio.addItem("Medicamentos", null);
-
-		menubar.addItem("Sair", new Command() {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void menuSelected(MenuItem selectedItem) {
-				logOff();
-			}
-		});
+		menubar.addItem("Sair", e -> logOff());
 
 		return menubar;
+	}
+
+	private MenuItem getChildByName(String name) {
+		for (MenuItem i : menubar.getItems()) {
+			if (!i.hasChildren())
+				continue;
+			for (MenuItem j : i.getChildren())
+				if (j.getText().equals(name))
+					return j;
+		}
+		return null;
+	}
+
+	public void refreshMenuPermissions() {
+		if (!UserSession.exists())
+			return;
+		UserSession u = UserSession.get();
+		getChildByName("Agendamento").setEnabled(u.isAtendenteRole());
+		getChildByName("Atendimento").setEnabled(u.isMedicoRole());
+		getChildByName("Pacientes").setEnabled(u.isAtendenteRole());
+		getChildByName("Exames").setEnabled(u.isAtendenteRole());
+		getChildByName("Atendentes").setEnabled(u.isAtendenteRole());
+		getChildByName("Médicos").setEnabled(u.isAtendenteRole());
+		getChildByName("Especialidades").setEnabled(u.isAtendenteRole());
+		getChildByName("Medicamentos").setEnabled(u.isMedicoRole());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -155,7 +131,7 @@ public class MainView extends VerticalLayout implements View {
 			}
 			forms.add(c);
 		}
-		
+
 		// TODO: verificar se aba está aberta
 
 		Tab tab = tabSheet.addTab(c, name);
@@ -165,6 +141,7 @@ public class MainView extends VerticalLayout implements View {
 
 	private void logOff() {
 		UserSession.set(null);
+		layout.removeComponent(welcome);
 		getUI().getNavigator().navigateTo(LoginView.NAME);
 	}
 
@@ -172,5 +149,9 @@ public class MainView extends VerticalLayout implements View {
 	public void enter(ViewChangeEvent event) {
 		if (!UserSession.exists())
 			getUI().getNavigator().navigateTo(LoginView.NAME);
+
+		refreshMenuPermissions();
+		welcome = new WelcomeLayout();
+		layout.addComponent(welcome);
 	}
 }

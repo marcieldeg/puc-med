@@ -56,6 +56,8 @@ public class AtendimentoForm extends BaseForm {
 	private ComboBox<Paciente> fPaciente = new ComboBox<>("Paciente");
 	private DateField fData = new DateField("Data");
 
+	UserSession userSession = UserSession.get();
+
 	public AtendimentoForm() {
 		super();
 
@@ -69,7 +71,7 @@ public class AtendimentoForm extends BaseForm {
 				o -> {
 					if (o.getData() == null)
 						return null;
-					SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+					SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 					return format.format(o.getData());
 				})//
 				.setWidth(Constants.MEDIUM_FIELD)//
@@ -85,7 +87,7 @@ public class AtendimentoForm extends BaseForm {
 			getBodyView().getToolbarArea().setEditarEnabled(atendimento.isPresent());
 			getBodyView().getToolbarArea().setExcluirEnabled(atendimento.isPresent());
 			getBodyView().getToolbarArea().getCustomButton("Exames").setEnabled(atendimento.isPresent());
-			getBodyView().getToolbarArea().getCustomButton("Receituários").setEnabled(atendimento.isPresent());
+			getBodyView().getToolbarArea().getCustomButton("Receituário").setEnabled(atendimento.isPresent());
 		});
 
 		grid.setSizeFull();
@@ -122,7 +124,7 @@ public class AtendimentoForm extends BaseForm {
 				Button botaoExames = getToolbarArea().addCustomButton("Exames");
 				botaoExames.setIcon(VaadinIcons.DOCTOR_BRIEFCASE);
 				botaoExames.addClickListener(e -> abrirExames());
-				Button botaoReceituarios = getToolbarArea().addCustomButton("Receituários");
+				Button botaoReceituarios = getToolbarArea().addCustomButton("Receituário");
 				botaoReceituarios.setIcon(VaadinIcons.PILLS);
 				botaoReceituarios.addClickListener(e -> abrirReceituarios());
 
@@ -199,11 +201,20 @@ public class AtendimentoForm extends BaseForm {
 	}
 
 	private void updateGrid() {
-		List<Atendimento> usuarios = service.list();
+		List<Atendimento> usuarios;
+		if (userSession.getUsuario() instanceof Medico) {
+			Map<String, Object> params = new HashMap<>();
+			params.put("medico", (Medico)userSession.getUsuario());
+			usuarios = service.list(params);
+		}else {
+			usuarios = service.list();
+		}
 		grid.setItems(usuarios);
 	}
 
 	private void updateGrid(Map<String, Object> params) {
+		if (userSession.getUsuario() instanceof Medico)
+			params.put("medico", (Medico)userSession.getUsuario());
 		List<Atendimento> usuarios = service.list(params);
 		grid.setItems(usuarios);
 	}

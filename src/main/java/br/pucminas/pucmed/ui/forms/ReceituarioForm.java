@@ -10,7 +10,7 @@ import java.util.Optional;
 import com.vaadin.data.Binder;
 import com.vaadin.data.converter.StringToLongConverter;
 import com.vaadin.icons.VaadinIcons;
-import com.vaadin.server.FileDownloader;
+import com.vaadin.server.BrowserWindowOpener;
 import com.vaadin.server.StreamResource;
 import com.vaadin.server.StreamResource.StreamSource;
 import com.vaadin.ui.Button;
@@ -92,9 +92,8 @@ public class ReceituarioForm extends BaseForm {
 		fMedicamento.setItems(medicamentos);
 		fMedicamento.setItemCaptionGenerator(Medicamento::getNomeComercial);
 
+		@SuppressWarnings("serial")
 		BodyView bodyView = new BodyView() {
-			private static final long serialVersionUID = -4336915723509556999L;
-
 			{
 				setBody(grid);
 
@@ -105,15 +104,21 @@ public class ReceituarioForm extends BaseForm {
 				Button botaoImprimir = getToolbarArea().addCustomButton("Imprimir");
 				botaoImprimir.setIcon(VaadinIcons.PRINT);
 				botaoImprimir.setEnabled(true);
-				FileDownloader fileDownloader = new FileDownloader(new StreamResource(new StreamSource() {
-					private static final long serialVersionUID = 1L;
 
-					@Override
-					public InputStream getStream() {
-						return new ByteArrayInputStream(new ReportsRunner().runReceituario(atendimento.getId()));
-					}
-				}, "receituário_" + atendimento.getId() + ".pdf"));
-				fileDownloader.extend(botaoImprimir);
+				BrowserWindowOpener browserWindowOpener = new BrowserWindowOpener(//
+						new StreamResource(//
+								new StreamSource() {
+									@Override
+									public InputStream getStream() {
+										return new ByteArrayInputStream(
+												new ReportsRunner().runReceituario(atendimento.getId()));
+									}
+								}, "receituário_" + atendimento.getId() + ".pdf") {
+							{
+								setMIMEType("application/pdf");
+							}
+						});
+				browserWindowOpener.extend(botaoImprimir);
 
 				getFilterArea().addFilters(fMedicamento);
 				getFilterArea().setPesquisarListener(e -> pesquisar());
@@ -126,9 +131,8 @@ public class ReceituarioForm extends BaseForm {
 		medicamento.setItems(medicamentos);
 		medicamento.setItemCaptionGenerator(Medicamento::getNomeComercial);
 
+		@SuppressWarnings("serial")
 		BodyEdit bodyEdit = new BodyEdit() {
-			private static final long serialVersionUID = 6951503876938584530L;
-
 			{
 				addFields(id, medicamento, quantidade, posologia);
 
@@ -161,11 +165,11 @@ public class ReceituarioForm extends BaseForm {
 	}
 
 	private void updateGrid() {
-		List<Receituario> usuarios = service.list();
-		grid.setItems(usuarios);
+		updateGrid(new HashMap<>());
 	}
 
 	private void updateGrid(Map<String, Object> params) {
+		params.put("atendimento", atendimento);
 		List<Receituario> usuarios = service.list(params);
 		grid.setItems(usuarios);
 	}

@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.pucminas.pucmed.model.BaseModel;
 import br.pucminas.pucmed.utils.CriteriaUtils;
 
-// @Transactional(rollbackFor = Exception.class)
+//@Transactional(rollbackFor = Exception.class)
 public abstract class BaseService<T extends BaseModel> {
 	@Autowired
 	private HibernateTemplate hibernateTemplate;

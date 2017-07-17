@@ -31,13 +31,13 @@ public class Medico extends Usuario {
 	private Long crm;
 
 	@NotEmpty
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "medicoespecialidade", //
 			joinColumns = @JoinColumn(name = "id_medico"), //
 			inverseJoinColumns = @JoinColumn(name = "id_especialidade") //
 	)
 	private Set<Especialidade> especialidades;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "medico")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "medico")
 	private Set<MedicoExpediente> expediente;
 }

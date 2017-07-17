@@ -3,7 +3,6 @@ package br.pucminas.pucmed.ui;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringView;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CheckBox;
@@ -45,7 +44,14 @@ public class LoginView extends VerticalLayout implements View {
 	public LoginView() {
 		Panel panel = new Panel();
 		panel.setCaption(Constants.APPLICATION_TITLE + " - Entrar no sistema");
-		panel.setWidth("400px");
+		//panel.setWidth("350px");
+		panel.setResponsive(true);
+		panel.setStyleName("responsive");
+		
+//		int width = UI.getCurrent().getPage().getBrowserWindowWidth();
+//		int height = UI.getCurrent().getPage().getBrowserWindowHeight();
+//		
+//		Notification.show(String.format("%d x %d", width, height));
 
 		VerticalLayout formLayout = new VerticalLayout();
 		formLayout.setMargin(true);
@@ -74,7 +80,7 @@ public class LoginView extends VerticalLayout implements View {
 
 		addComponent(panel);
 		// setSizeFull();
-		setComponentAlignment(panel, Alignment.TOP_CENTER);
+		// setComponentAlignment(panel, Alignment.TOP_CENTER);
 		setResponsive(true);
 
 		usuario.focus();

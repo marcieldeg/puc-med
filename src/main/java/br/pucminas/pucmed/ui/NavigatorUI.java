@@ -10,7 +10,7 @@ import br.pucminas.pucmed.utils.Constants;
 
 //@Viewport("user-scalable=no,initial-scale=1.0,width=device-width")
 @SpringUI
-@Theme("puc-med")
+@Theme("valo-facebook")
 public class NavigatorUI extends UI {
 	private static final long serialVersionUID = -9025178974527284267L;
 
