@@ -5,7 +5,7 @@
 
 	<groupId>br.pucminas</groupId>
 	<artifactId>puc-med</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 
 	<name>puc-med</name>
@@ -85,6 +85,10 @@
 			<artifactId>commons-lang</artifactId>
 			<version>2.5</version>
 		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-client-compiled</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -108,7 +112,7 @@
 			<plugin>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-maven-plugin</artifactId>
-				<version>8.0.6</version>
+				<version>${vaadin.version}</version>
 				<executions>
 					<execution>
 						<goals>
@@ -124,6 +128,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>
