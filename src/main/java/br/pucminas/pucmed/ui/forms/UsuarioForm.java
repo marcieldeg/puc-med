@@ -7,8 +7,6 @@ import java.util.Optional;
 
 import com.vaadin.data.Binder;
 import com.vaadin.data.ValidationResult;
-import com.vaadin.data.Validator;
-import com.vaadin.data.ValueContext;
 import com.vaadin.data.converter.StringToLongConverter;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.data.validator.StringLengthValidator;
@@ -28,9 +26,8 @@ import br.pucminas.pucmed.ui.extra.Notification;
 import br.pucminas.pucmed.ui.extra.Notification.Type;
 import br.pucminas.pucmed.utils.Constants;
 
+@SuppressWarnings("serial")
 public class UsuarioForm extends BaseForm {
-	private static final long serialVersionUID = 3796349348214384355L;
-
 	private UsuarioService service = BeanGetter.getService(UsuarioService.class);
 
 	private Binder<Usuario> binder = new Binder<>(Usuario.class);
@@ -79,22 +76,16 @@ public class UsuarioForm extends BaseForm {
 				.asRequired("O campo é obrigatório")//
 				.bind("email");
 
-		binder.withValidator(new Validator<Usuario>() {
-			private static final long serialVersionUID = 6277993876834752213L;
-
-			@Override
-			public ValidationResult apply(Usuario s, ValueContext valueContext) {
-				if (!s.getSenha().equals(confSenha.getValue())) {
-					Notification.show("As senhas digitadas não conferem", Type.ERROR);
-					return ValidationResult.error("As senhas digitadas não conferem");
-				} else
-					return ValidationResult.ok();
-			}
-		});
+		binder.withValidator(//
+				(s, v) -> {
+					if (!s.getSenha().equals(confSenha.getValue())) {
+						Notification.show("As senhas digitadas não conferem", Type.ERROR);
+						return ValidationResult.error("As senhas digitadas não conferem");
+					} else
+						return ValidationResult.ok();
+				});
 
 		BodyView bodyView = new BodyView() {
-			private static final long serialVersionUID = -4336915723509556999L;
-
 			{
 				setBody(grid);
 
@@ -111,8 +102,6 @@ public class UsuarioForm extends BaseForm {
 		id.setEnabled(false);
 
 		BodyEdit bodyEdit = new BodyEdit() {
-			private static final long serialVersionUID = 6951503876938584530L;
-
 			{
 				addFields(id, nome, senha, confSenha, email);
 

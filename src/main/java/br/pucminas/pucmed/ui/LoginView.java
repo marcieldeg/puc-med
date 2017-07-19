@@ -26,10 +26,9 @@ import br.pucminas.pucmed.ui.extra.Notification;
 import br.pucminas.pucmed.ui.extra.Notification.Type;
 import br.pucminas.pucmed.utils.Constants;
 
+@SuppressWarnings("serial")
 @SpringView
 public class LoginView extends VerticalLayout implements View {
-	private static final long serialVersionUID = 3796349348214384355L;
-
 	public static final String NAME = "";
 
 	private final TextField usuario = new TextField("Usuário:");
@@ -113,8 +112,6 @@ public class LoginView extends VerticalLayout implements View {
 	}
 
 	private static class RecuperarSenhaWindow extends Window {
-		private static final long serialVersionUID = 1L;
-
 		private final VerticalLayout verticalLayout = new VerticalLayout();
 		private final CssLayout cssLayout = new CssLayout();
 		private final Label titulo = new Label("Informe seu e-mail:");

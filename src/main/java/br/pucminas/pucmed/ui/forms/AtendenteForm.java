@@ -25,9 +25,8 @@ import br.pucminas.pucmed.ui.BodyView;
 import br.pucminas.pucmed.ui.extra.MessageBox;
 import br.pucminas.pucmed.utils.Constants;
 
+@SuppressWarnings("serial")
 public class AtendenteForm extends BaseForm {
-	private static final long serialVersionUID = 3796349348214384355L;
-
 	private AtendenteService service = BeanGetter.getService(AtendenteService.class);
 
 	private Binder<Atendente> binder = new Binder<>(Atendente.class);
@@ -84,8 +83,6 @@ public class AtendenteForm extends BaseForm {
 				.bind("status");
 
 		BodyView bodyView = new BodyView() {
-			private static final long serialVersionUID = -4336915723509556999L;
-
 			{
 				setBody(grid);
 
@@ -104,8 +101,6 @@ public class AtendenteForm extends BaseForm {
 		status.setItems(EnumSet.allOf(Status.class));
 
 		BodyEdit bodyEdit = new BodyEdit() {
-			private static final long serialVersionUID = 6951503876938584530L;
-
 			{
 				addFields(id, nome, email, login, senha, status);
 

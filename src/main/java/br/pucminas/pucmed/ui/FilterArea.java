@@ -9,9 +9,8 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
+@SuppressWarnings("serial")
 public class FilterArea extends HorizontalLayout {
-	private static final long serialVersionUID = 7540088915648392996L;
-
 	private final Button botaoPesquisar = new Button("Pesquisar");
 	private Registration removePesquisarListener;
 	private final Button botaoLimpar = new Button("Limpar");
@@ -30,6 +29,7 @@ public class FilterArea extends HorizontalLayout {
 
 	private void addButtons() {
 		botaoPesquisar.setIcon(VaadinIcons.SEARCH);
+		botaoPesquisar.setStyleName(ValoTheme.BUTTON_FRIENDLY);
 		addComponent(botaoPesquisar);
 		setComponentAlignment(botaoPesquisar, Alignment.BOTTOM_RIGHT);
 		botaoLimpar.setIcon(VaadinIcons.CLOSE_SMALL);

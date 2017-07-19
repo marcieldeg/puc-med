@@ -957,7 +957,7 @@
  */
 
 .v-vaadin-version:after {
-	content: "8.0.6";
+	content: "8.0.7";
 }
 
 .v-widget {
@@ -13187,6 +13187,9 @@ div.v-layout.v-horizontal.v-widget {
 		height: 75%;
 		margin: auto;
 	}
+	.m-small-field .m-medium-field .m-large-field .m-xlarge-field {
+		width: 100%;
+	}
 }
 
 @media (min-width :480px) {
@@ -13199,6 +13202,12 @@ div.v-layout.v-horizontal.v-widget {
 		height: 75%;
 		margin: auto;
 	}
+	.m-small-field {
+		width: 75%;
+	}
+	.m-medium-field .m-large-field .m-xlarge-field {
+		width: 100%;
+	}
 }
 
 @media ( min-width :600px) {
@@ -13210,6 +13219,15 @@ div.v-layout.v-horizontal.v-widget {
 		width: 100%;
 		height: 75%;
 		margin: auto;
+	}
+	.m-small-field {
+		width: 50%;
+	}
+	.m-medium-field {
+		width: 75%;
+	}
+	.m-large-field .m-xlarge-field {
+		width: 100%;
 	}
 }
 

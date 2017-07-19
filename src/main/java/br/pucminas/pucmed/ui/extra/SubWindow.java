@@ -4,9 +4,8 @@ import com.vaadin.ui.Window;
 
 import br.pucminas.pucmed.ui.BaseForm;
 
+@SuppressWarnings("serial")
 public class SubWindow extends Window {
-	private static final long serialVersionUID = 6157453624162378876L;
-
 	public SubWindow(String caption, BaseForm baseForm) {
 		super(caption);
 		center();

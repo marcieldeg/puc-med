@@ -31,9 +31,8 @@ import br.pucminas.pucmed.ui.BodyView;
 import br.pucminas.pucmed.ui.extra.MessageBox;
 import br.pucminas.pucmed.utils.Constants;
 
+@SuppressWarnings("serial")
 public class PacienteForm extends BaseForm {
-	private static final long serialVersionUID = 3796349348214384355L;
-
 	private PacienteService service = BeanGetter.getService(PacienteService.class);
 	private EstadoService estadoService = BeanGetter.getService(EstadoService.class);
 
@@ -49,7 +48,7 @@ public class PacienteForm extends BaseForm {
 	private TextField numero = new TextField("Número");
 	private TextField complemento = new TextField("Complemento");
 	private TextField bairro = new TextField("Bairro");
-	private TextField cidade = new TextField("cidade");
+	private TextField cidade = new TextField("Cidade");
 	private ComboBox<Estado> estado = new ComboBox<>("Estado");
 	private TextField cep = new TextField("CEP");
 	private TextField email = new TextField("E-mail");
@@ -126,29 +125,35 @@ public class PacienteForm extends BaseForm {
 				.asRequired("O campo é obrigatório")//
 				.bind("cpf");
 		binder.forField(endereco)//
+				.asRequired("O campo é obrigatório")//
 				.bind("endereco");
 		binder.forField(numero)//
+				.withNullRepresentation("")//
 				.withConverter(new StringToLongConverter("Número Inválido"))//
 				.bind("numero");
 		binder.forField(complemento)//
+				.withNullRepresentation("")//
 				.bind("complemento");
 		binder.forField(bairro)//
+				.withNullRepresentation("")//
 				.bind("bairro");
 		binder.forField(cidade)//
+				.withNullRepresentation("")//
 				.bind("cidade");
 		binder.forField(estado)//
 				.bind("estado");
 		binder.forField(cep)//
+				.withNullRepresentation("")//
 				.bind("cep");
 		binder.forField(email)//
+				.withNullRepresentation("")//
 				.withValidator(new EmailValidator("E-mail inválido"))//
 				.bind("email");
 		binder.forField(telefone)//
+				.withNullRepresentation("")//
 				.bind("telefone");
 
 		BodyView bodyView = new BodyView() {
-			private static final long serialVersionUID = -4336915723509556999L;
-
 			{
 				setBody(grid);
 
@@ -170,9 +175,23 @@ public class PacienteForm extends BaseForm {
 		estado.setItems(estadoService.list());
 		estado.setItemCaptionGenerator(o -> o.getSigla());
 
-		BodyEdit bodyEdit = new BodyEdit() {
-			private static final long serialVersionUID = 6951503876938584530L;
+		id.addStyleName(Constants.SMALL_FIELD_STYLE);
+		id.setSizeUndefined();
+		nome.addStyleName(Constants.LARGE_FIELD_STYLE);
+		sexo.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		dataNascimento.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		cpf.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		endereco.addStyleName(Constants.LARGE_FIELD_STYLE);
+		numero.addStyleName(Constants.SMALL_FIELD_STYLE);
+		complemento.addStyleName(Constants.LARGE_FIELD_STYLE);
+		bairro.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		cidade.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		estado.addStyleName(Constants.SMALL_FIELD_STYLE);
+		cep.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		email.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		telefone.addStyleName(Constants.MEDIUM_FIELD_STYLE);
 
+		BodyEdit bodyEdit = new BodyEdit() {
 			{
 				addFields(id, nome, sexo, dataNascimento, cpf, endereco, numero, complemento, bairro, cidade, estado,
 						cep, email, telefone);

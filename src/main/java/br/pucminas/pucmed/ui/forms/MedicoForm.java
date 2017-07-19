@@ -32,9 +32,8 @@ import br.pucminas.pucmed.ui.extra.MessageBox;
 import br.pucminas.pucmed.ui.extra.SubWindow;
 import br.pucminas.pucmed.utils.Constants;
 
+@SuppressWarnings("serial")
 public class MedicoForm extends BaseForm {
-	private static final long serialVersionUID = 3796349348214384355L;
-
 	private MedicoService service = BeanGetter.getService(MedicoService.class);
 	private EspecialidadeService especialidadeService = BeanGetter.getService(EspecialidadeService.class);
 
@@ -114,8 +113,6 @@ public class MedicoForm extends BaseForm {
 		fEspecialidade.setItemCaptionGenerator(Especialidade::getNome);
 
 		BodyView bodyView = new BodyView() {
-			private static final long serialVersionUID = -4336915723509556999L;
-
 			{
 				setBody(grid);
 
@@ -142,8 +139,6 @@ public class MedicoForm extends BaseForm {
 		especialidades.setRows(6);
 
 		BodyEdit bodyEdit = new BodyEdit() {
-			private static final long serialVersionUID = 6951503876938584530L;
-
 			{
 				addFields(id, nome, crm, especialidades, email, login, senha, status);
 

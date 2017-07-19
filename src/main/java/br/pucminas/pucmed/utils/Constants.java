@@ -11,6 +11,11 @@ public class Constants {
 	public static final int MEDIUM_FIELD = SMALL_FIELD * 2;
 	public static final int LARGE_FIELD = SMALL_FIELD * 4;
 	public static final int XLARGE_FIELD = SMALL_FIELD * 8;
+	
+	public static final String SMALL_FIELD_STYLE = "m-small-field";
+	public static final String MEDIUM_FIELD_STYLE = "m-medium-field";
+	public static final String LARGE_FIELD_STYLE = "m-large-field";
+	public static final String XLARGE_FIELD_STYLE = "m-xlarge-field";
 
 	public static final List<Integer> TURNO_MANHA = Arrays.asList(8, 9, 10, 11);
 	public static final List<Integer> TURNO_TARDE = Arrays.asList(14, 15, 16, 17);

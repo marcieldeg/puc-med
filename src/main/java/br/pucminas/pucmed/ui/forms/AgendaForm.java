@@ -9,8 +9,6 @@ import java.util.Set;
 
 import com.vaadin.data.Binder;
 import com.vaadin.data.ValidationResult;
-import com.vaadin.data.Validator;
-import com.vaadin.data.ValueContext;
 import com.vaadin.data.converter.LocalDateTimeToDateConverter;
 import com.vaadin.data.converter.StringToLongConverter;
 import com.vaadin.ui.ComboBox;
@@ -38,9 +36,8 @@ import br.pucminas.pucmed.ui.extra.Notification.Type;
 import br.pucminas.pucmed.utils.Constants;
 import br.pucminas.pucmed.utils.Utils;
 
+@SuppressWarnings("serial")
 public class AgendaForm extends BaseForm {
-	private static final long serialVersionUID = 3796349348214384355L;
-
 	private AgendaService service = BeanGetter.getService(AgendaService.class);
 	private PacienteService pacienteService = BeanGetter.getService(PacienteService.class);
 	private MedicoService medicoService = BeanGetter.getService(MedicoService.class);
@@ -101,34 +98,30 @@ public class AgendaForm extends BaseForm {
 				.asRequired("O campo é obrigatório")//
 				.bind("medico");
 
-		binder.withValidator(new Validator<Agenda>() {
-			private static final long serialVersionUID = 6277993876834752213L;
+		binder.withValidator(//
+				(s, v) -> {
+					Set<MedicoExpediente> expedientes = s.getMedico().getExpediente();
+					DiaSemana diaSemana = DiaSemana.fromDate(s.getData());
 
-			@Override
-			public ValidationResult apply(Agenda s, ValueContext valueContext) {
-				Set<MedicoExpediente> expedientes = s.getMedico().getExpediente();
-				DiaSemana diaSemana = DiaSemana.fromDate(s.getData());
+					Turno turno = Turno.INTEGRAL;
+					try {
+						turno = Turno.fromDate(s.getData());
+					} catch (IndexOutOfBoundsException e) {
+						Notification.show("Horário indisponível para agendamento", Type.ERROR);
+						return ValidationResult.error("Horário indisponível para agendamento");
+					}
 
-				Turno turno = Turno.INTEGRAL;
-				try {
-					turno = Turno.fromDate(s.getData());
-				} catch (IndexOutOfBoundsException e) {
-					Notification.show("Horário indisponível para agendamento", Type.ERROR);
-					return ValidationResult.error("Horário indisponível para agendamento");
-				}
-
-				for (MedicoExpediente e : expedientes) {
-					if (e.getDiaSemana().equals(diaSemana)) {
-						if (e.getTurno().equals(Turno.INTEGRAL) || e.getTurno().equals(turno)) {
-							return ValidationResult.ok();
+					for (MedicoExpediente e : expedientes) {
+						if (e.getDiaSemana().equals(diaSemana)) {
+							if (e.getTurno().equals(Turno.INTEGRAL) || e.getTurno().equals(turno)) {
+								return ValidationResult.ok();
+							}
 						}
 					}
-				}
 
-				Notification.show("Esse médico não atende no horário informado", Type.ERROR);
-				return ValidationResult.error("Esse médico não atende no horário informado");
-			}
-		});
+					Notification.show("Esse médico não atende no horário informado", Type.ERROR);
+					return ValidationResult.error("Esse médico não atende no horário informado");
+				});
 
 		List<Paciente> pacientes = pacienteService.list();
 		List<Medico> medicos = medicoService.list();
@@ -150,8 +143,6 @@ public class AgendaForm extends BaseForm {
 		fMedico.setItemCaptionGenerator(Medico::getNome);
 
 		BodyView bodyView = new BodyView() {
-			private static final long serialVersionUID = -4336915723509556999L;
-
 			{
 				setBody(grid);
 
@@ -168,8 +159,6 @@ public class AgendaForm extends BaseForm {
 		id.setEnabled(false);
 
 		BodyEdit bodyEdit = new BodyEdit() {
-			private static final long serialVersionUID = 6951503876938584530L;
-
 			{
 				addFields(id, data, paciente, medico);
 

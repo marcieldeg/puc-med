@@ -32,9 +32,8 @@ import br.pucminas.pucmed.ui.BodyView;
 import br.pucminas.pucmed.ui.extra.MessageBox;
 import br.pucminas.pucmed.utils.Constants;
 
+@SuppressWarnings("serial")
 public class ReceituarioForm extends BaseForm {
-	private static final long serialVersionUID = 3796349348214384355L;
-
 	private Atendimento atendimento;
 
 	private ReceituarioService service = BeanGetter.getService(ReceituarioService.class);
@@ -92,7 +91,6 @@ public class ReceituarioForm extends BaseForm {
 		fMedicamento.setItems(medicamentos);
 		fMedicamento.setItemCaptionGenerator(Medicamento::getNomeComercial);
 
-		@SuppressWarnings("serial")
 		BodyView bodyView = new BodyView() {
 			{
 				setBody(grid);
@@ -131,7 +129,6 @@ public class ReceituarioForm extends BaseForm {
 		medicamento.setItems(medicamentos);
 		medicamento.setItemCaptionGenerator(Medicamento::getNomeComercial);
 
-		@SuppressWarnings("serial")
 		BodyEdit bodyEdit = new BodyEdit() {
 			{
 				addFields(id, medicamento, quantidade, posologia);

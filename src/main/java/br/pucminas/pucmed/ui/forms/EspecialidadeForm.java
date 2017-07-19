@@ -19,9 +19,8 @@ import br.pucminas.pucmed.ui.BodyView;
 import br.pucminas.pucmed.ui.extra.MessageBox;
 import br.pucminas.pucmed.utils.Constants;
 
+@SuppressWarnings("serial")
 public class EspecialidadeForm extends BaseForm {
-	private static final long serialVersionUID = 3796349348214384355L;
-
 	private EspecialidadeService service = BeanGetter.getService(EspecialidadeService.class);
 
 	private Binder<Especialidade> binder = new Binder<>(Especialidade.class);
@@ -56,8 +55,6 @@ public class EspecialidadeForm extends BaseForm {
 				.bind("nome");
 
 		BodyView bodyView = new BodyView() {
-			private static final long serialVersionUID = -4336915723509556999L;
-
 			{
 				setBody(grid);
 
@@ -74,8 +71,6 @@ public class EspecialidadeForm extends BaseForm {
 		id.setEnabled(false);
 
 		BodyEdit bodyEdit = new BodyEdit() {
-			private static final long serialVersionUID = 6951503876938584530L;
-
 			{
 				addFields(id, nome);
 

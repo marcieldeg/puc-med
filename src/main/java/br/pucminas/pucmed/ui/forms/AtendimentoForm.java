@@ -36,9 +36,8 @@ import br.pucminas.pucmed.ui.extra.SubWindow;
 import br.pucminas.pucmed.utils.Constants;
 import br.pucminas.pucmed.utils.Utils;
 
+@SuppressWarnings("serial")
 public class AtendimentoForm extends BaseForm {
-	private static final long serialVersionUID = 3796349348214384355L;
-
 	private AtendimentoService service = BeanGetter.getService(AtendimentoService.class);
 	private PacienteService pacienteService = BeanGetter.getService(PacienteService.class);
 	private MedicoService medicoService = BeanGetter.getService(MedicoService.class);
@@ -113,8 +112,6 @@ public class AtendimentoForm extends BaseForm {
 				.bind("medico");
 
 		BodyView bodyView = new BodyView() {
-			private static final long serialVersionUID = -4336915723509556999L;
-
 			{
 				setBody(grid);
 
@@ -153,8 +150,6 @@ public class AtendimentoForm extends BaseForm {
 		fPaciente.setItemCaptionGenerator(Paciente::getNome);
 
 		BodyEdit bodyEdit = new BodyEdit() {
-			private static final long serialVersionUID = 6951503876938584530L;
-
 			{
 				addFields(id, paciente, data, descricao, diagnostico, medico);
 

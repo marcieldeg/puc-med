@@ -22,9 +22,8 @@ import br.pucminas.pucmed.ui.BodyView;
 import br.pucminas.pucmed.ui.extra.MessageBox;
 import br.pucminas.pucmed.utils.Constants;
 
+@SuppressWarnings("serial")
 public class MedicamentoForm extends BaseForm {
-	private static final long serialVersionUID = 3796349348214384355L;
-
 	private MedicamentoService service = BeanGetter.getService(MedicamentoService.class);
 
 	private Binder<Medicamento> binder = new Binder<>(Medicamento.class);
@@ -76,8 +75,6 @@ public class MedicamentoForm extends BaseForm {
 				.bind("embalagem");
 
 		BodyView bodyView = new BodyView() {
-			private static final long serialVersionUID = -4336915723509556999L;
-
 			{
 				setBody(grid);
 
@@ -96,8 +93,6 @@ public class MedicamentoForm extends BaseForm {
 		embalagem.setItems(EnumSet.allOf(Embalagem.class));
 
 		BodyEdit bodyEdit = new BodyEdit() {
-			private static final long serialVersionUID = 6951503876938584530L;
-
 			{
 				addFields(id, nomeComercial, nomeGenerico, fabricante, embalagem);
 

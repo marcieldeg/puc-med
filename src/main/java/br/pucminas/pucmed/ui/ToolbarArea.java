@@ -11,9 +11,8 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import br.pucminas.pucmed.ui.extra.InternalButton;
 
+@SuppressWarnings("serial")
 public class ToolbarArea extends HorizontalLayout {
-	private static final long serialVersionUID = -1687384805810835459L;
-
 	private final InternalButton botaoAdicionar = new InternalButton("Novo");
 	private final InternalButton botaoEditar = new InternalButton("Editar");
 	private final InternalButton botaoExcluir = new InternalButton("Excluir");

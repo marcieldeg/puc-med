@@ -11,9 +11,8 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import br.pucminas.pucmed.ui.extra.InternalButton;
 
+@SuppressWarnings("serial")
 public abstract class BodyEdit extends VerticalLayout {
-	private static final long serialVersionUID = -8080953914658823870L;
-
 	private final FormLayout body = new FormLayout();
 	private final HorizontalLayout buttons = new HorizontalLayout();
 	private final InternalButton salvar = new InternalButton("Salvar");
@@ -25,6 +24,7 @@ public abstract class BodyEdit extends VerticalLayout {
 		setSizeFull();
 		Panel panel = new Panel(body);
 		body.setSizeUndefined();
+		body.setWidth("100%");
 		panel.setSizeFull();
 		panel.setStyleName(ValoTheme.PANEL_BORDERLESS);
 		salvar.setIcon(VaadinIcons.CHECK);

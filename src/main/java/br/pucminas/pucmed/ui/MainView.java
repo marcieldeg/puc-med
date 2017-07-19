@@ -25,10 +25,9 @@ import br.pucminas.pucmed.ui.forms.MedicamentoForm;
 import br.pucminas.pucmed.ui.forms.MedicoForm;
 import br.pucminas.pucmed.ui.forms.PacienteForm;
 
+@SuppressWarnings("serial")
 @SpringView
 public class MainView extends VerticalLayout implements View {
-	private static final long serialVersionUID = -7806307405081829079L;
-
 	public static final String NAME = "index";
 
 	private final VerticalLayout layout = new VerticalLayout();

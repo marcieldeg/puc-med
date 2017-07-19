@@ -8,6 +8,6 @@ public class Email {
 	}
 
 	public static void enviarSenha(String email) {
-		// TODO:
+		// TODO: algoritmo para enviar senha por email
 	}
 }

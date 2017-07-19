@@ -5,9 +5,8 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
+@SuppressWarnings("serial")
 public abstract class BodyView extends VerticalLayout {
-	private static final long serialVersionUID = 1070789855165580813L;
-
 	private final FilterArea filterArea = new FilterArea();
 	private final Panel body = new Panel();
 	private final ToolbarArea toolbarArea = new ToolbarArea();
