@@ -53,9 +53,11 @@ public class AgendaForm extends BaseForm {
 	private DateField fData = new DateField("Data");
 	private ComboBox<Paciente> fPaciente = new ComboBox<>("Paciente");
 	private ComboBox<Medico> fMedico = new ComboBox<>("Médico");
+	
+	public static final String CAPTION = "Cadastro de Agendamentos";
 
 	public AgendaForm() {
-		super();
+		super(CAPTION);
 
 		updateGrid();
 		grid.removeAllColumns();

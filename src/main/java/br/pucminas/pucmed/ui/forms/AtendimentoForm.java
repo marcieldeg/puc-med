@@ -56,9 +56,11 @@ public class AtendimentoForm extends BaseForm {
 	private DateField fData = new DateField("Data");
 
 	UserSession userSession = UserSession.get();
+	
+	public static final String CAPTION = "Cadastro de Atendimentos";
 
 	public AtendimentoForm() {
-		super();
+		super(CAPTION);
 
 		updateGrid();
 		grid.removeAllColumns();
@@ -111,6 +113,10 @@ public class AtendimentoForm extends BaseForm {
 				.asRequired("O campo é obrigatório")//
 				.bind("medico");
 
+		fPaciente.setEmptySelectionAllowed(false);
+		fPaciente.setItems(pacienteService.list());
+		fPaciente.setItemCaptionGenerator(Paciente::getNome);
+
 		BodyView bodyView = new BodyView() {
 			{
 				setBody(grid);
@@ -132,22 +138,24 @@ public class AtendimentoForm extends BaseForm {
 		};
 
 		id.setEnabled(false);
-		id.setWidth(Constants.SMALL_FIELD + "px");
 		paciente.setEmptySelectionAllowed(false);
 		paciente.setItems(pacienteService.list());
 		paciente.setItemCaptionGenerator(Paciente::getNome);
-		descricao.setWidth(Constants.LARGE_FIELD + "px");
-		diagnostico.setWidth(Constants.LARGE_FIELD + "px");
 		medico.setEmptySelectionAllowed(false);
 		medico.setItems(medicoService.list());
 		medico.setItemCaptionGenerator(Medico::getNome);
 		Usuario usuario = UserSession.get().getUsuario();
-		if (usuario instanceof Medico)
+		if (usuario instanceof Medico) {
 			medico.setSelectedItem((Medico) usuario);
-
-		fPaciente.setEmptySelectionAllowed(false);
-		fPaciente.setItems(pacienteService.list());
-		fPaciente.setItemCaptionGenerator(Paciente::getNome);
+			medico.setEnabled(false);
+		}
+		
+		id.addStyleName(Constants.SMALL_FIELD_STYLE);
+		paciente.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		data.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		descricao.addStyleName(Constants.LARGE_FIELD_STYLE);
+		diagnostico.addStyleName(Constants.LARGE_FIELD_STYLE);
+		medico.addStyleName(Constants.MEDIUM_FIELD_STYLE);
 
 		BodyEdit bodyEdit = new BodyEdit() {
 			{

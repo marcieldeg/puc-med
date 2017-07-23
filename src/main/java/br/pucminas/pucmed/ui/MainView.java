@@ -6,8 +6,14 @@ import java.util.List;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.Page;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.spring.annotation.SpringView;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.TabSheet;
@@ -17,10 +23,11 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import br.pucminas.pucmed.authentication.UserSession;
 import br.pucminas.pucmed.ui.forms.AgendaForm;
-import br.pucminas.pucmed.ui.forms.AtendenteForm;
+import br.pucminas.pucmed.ui.forms.RecepcionistaForm;
 import br.pucminas.pucmed.ui.forms.AtendimentoForm;
 import br.pucminas.pucmed.ui.forms.EspecialidadeForm;
 import br.pucminas.pucmed.ui.forms.ExameForm;
+import br.pucminas.pucmed.ui.forms.LaboratorioForm;
 import br.pucminas.pucmed.ui.forms.MedicamentoForm;
 import br.pucminas.pucmed.ui.forms.MedicoForm;
 import br.pucminas.pucmed.ui.forms.PacienteForm;
@@ -34,6 +41,7 @@ public class MainView extends VerticalLayout implements View {
 	private final TabSheet tabSheet = new TabSheet();
 	private final List<Component> forms = new ArrayList<>();
 	private final MenuBar menubar = new MenuBar();
+	private final HorizontalLayout touchMenu = new HorizontalLayout();
 
 	private WelcomeLayout welcome = null;
 
@@ -41,6 +49,8 @@ public class MainView extends VerticalLayout implements View {
 		setMargin(false);
 		setSpacing(false);
 		setSizeFull();
+
+		createTouchMenu();
 
 		layout.setSpacing(false);
 		layout.setMargin(false);
@@ -55,30 +65,89 @@ public class MainView extends VerticalLayout implements View {
 		refreshMenuPermissions();
 	}
 
+	private void createTouchMenu() {
+		touchMenu.setWidth("100%");
+		touchMenu.setStyleName(ValoTheme.LAYOUT_CARD);
+		touchMenu.addStyleName(ValoTheme.BUTTON_PRIMARY);
+		touchMenu.addStyleName("touch-menu");
+
+		MenuBar menuBar = new MenuBar();
+		menuBar.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
+		MenuItem grupoMenu = menuBar.addItem("Menu", null);
+		grupoMenu.setIcon(VaadinIcons.MENU);
+
+		grupoMenu.addItem("Atendimento", null).setEnabled(false);
+		grupoMenu.addSeparator();
+		grupoMenu.addItem("Agendamento", e -> createTab(AgendaForm.class, AgendaForm.CAPTION))
+				.setIcon(VaadinIcons.NOTEBOOK);
+		grupoMenu.addItem("Atendimento", e -> createTab(AtendimentoForm.class, AtendimentoForm.CAPTION))
+				.setIcon(VaadinIcons.AMBULANCE);
+		grupoMenu.addItem("Pacientes", e -> createTab(PacienteForm.class, PacienteForm.CAPTION))
+				.setIcon(VaadinIcons.USER_HEART);
+		grupoMenu.addItem("Exames", e -> createTab(ExameForm.class, ExameForm.CAPTION))
+				.setIcon(VaadinIcons.DOCTOR_BRIEFCASE);
+		grupoMenu.addSeparator();
+		grupoMenu.addItem("Pessoal", null).setEnabled(false);
+		grupoMenu.addSeparator();
+		grupoMenu.addItem("Recepcionistas", e -> createTab(RecepcionistaForm.class, RecepcionistaForm.CAPTION))
+				.setIcon(VaadinIcons.HEADSET);
+		grupoMenu.addItem("Laboratório", e -> createTab(LaboratorioForm.class, LaboratorioForm.CAPTION))
+				.setIcon(VaadinIcons.SPECIALIST);
+		grupoMenu.addItem("Médicos", e -> createTab(MedicoForm.class, MedicoForm.CAPTION))
+				.setIcon(VaadinIcons.DOCTOR);
+		grupoMenu.addItem("Especialidades", e -> createTab(EspecialidadeForm.class, EspecialidadeForm.CAPTION))
+				.setIcon(VaadinIcons.DIPLOMA_SCROLL);
+		grupoMenu.addSeparator();
+		grupoMenu.addItem("Materiais", null).setEnabled(false);
+		grupoMenu.addSeparator();
+		grupoMenu.addItem("Medicamentos", e -> createTab(MedicamentoForm.class, MedicamentoForm.CAPTION))
+		.setIcon(VaadinIcons.PILL);
+
+		touchMenu.addComponent(menuBar);
+
+		Label title = new Label("PUC-MED");
+		title.addStyleName(ValoTheme.LABEL_BOLD);
+		title.setSizeUndefined();
+		touchMenu.addComponent(title);
+		touchMenu.setComponentAlignment(title, Alignment.MIDDLE_CENTER);
+
+		Button botaoSair = new Button("Sair", e -> logOff());
+		botaoSair.setIcon(VaadinIcons.EXIT);
+		botaoSair.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+		touchMenu.addComponent(botaoSair);
+
+		touchMenu.setExpandRatio(title, 1f);
+
+		addComponent(touchMenu);
+	}
+
 	private Component createMenu() {
 		menubar.setWidth("100%");
+		menubar.addStyleName("desk-menu");
 
 		MenuItem grupoMenu = menubar.addItem("Atendimento", null);
-		grupoMenu.addItem("Agendamento", e -> createTab(AgendaForm.class, "Cadastro de Agendamentos"))
+		grupoMenu.addItem("Agendamento", e -> createTab(AgendaForm.class, AgendaForm.CAPTION))
 				.setIcon(VaadinIcons.NOTEBOOK);
-		grupoMenu.addItem("Atendimento", e -> createTab(AtendimentoForm.class, "Cadastro de Atendimentos"))
+		grupoMenu.addItem("Atendimento", e -> createTab(AtendimentoForm.class, AtendimentoForm.CAPTION))
 				.setIcon(VaadinIcons.AMBULANCE);
-		grupoMenu.addItem("Pacientes", e -> createTab(PacienteForm.class, "Cadastro de Pacientes"))
+		grupoMenu.addItem("Pacientes", e -> createTab(PacienteForm.class, PacienteForm.CAPTION))
 				.setIcon(VaadinIcons.USER_HEART);
-		grupoMenu.addItem("Exames", e -> createTab(ExameForm.class, "Cadastro de Exames"))
+		grupoMenu.addItem("Exames", e -> createTab(ExameForm.class, ExameForm.CAPTION))
 				.setIcon(VaadinIcons.DOCTOR_BRIEFCASE);
 
 		grupoMenu = menubar.addItem("Pessoal", null);
 
-		grupoMenu.addItem("Atendentes", e -> createTab(AtendenteForm.class, "Cadastro de Atendentes"))
-				.setIcon(VaadinIcons.USER_CARD);
-		grupoMenu.addItem("Médicos", e -> createTab(MedicoForm.class, "Cadastro de Médicos"))
+		grupoMenu.addItem("Recepcionistas", e -> createTab(RecepcionistaForm.class, RecepcionistaForm.CAPTION))
+				.setIcon(VaadinIcons.HEADSET);
+		grupoMenu.addItem("Laboratórios", e -> createTab(LaboratorioForm.class, LaboratorioForm.CAPTION))
+				.setIcon(VaadinIcons.SPECIALIST);
+		grupoMenu.addItem("Médicos", e -> createTab(MedicoForm.class, MedicoForm.CAPTION))
 				.setIcon(VaadinIcons.DOCTOR);
-		grupoMenu.addItem("Especialidades", e -> createTab(EspecialidadeForm.class, "Cadastro de Especialidades"))
+		grupoMenu.addItem("Especialidades", e -> createTab(EspecialidadeForm.class, EspecialidadeForm.CAPTION))
 				.setIcon(VaadinIcons.DIPLOMA_SCROLL);
 
 		grupoMenu = menubar.addItem("Materiais", null);
-		grupoMenu.addItem("Medicamentos", e -> createTab(MedicamentoForm.class, "Cadastro de Medicamentos"))
+		grupoMenu.addItem("Medicamentos", e -> createTab(MedicamentoForm.class, MedicamentoForm.CAPTION))
 				.setIcon(VaadinIcons.PILL);
 
 		menubar.addItem("Sair", e -> logOff());
@@ -101,13 +170,14 @@ public class MainView extends VerticalLayout implements View {
 		if (!UserSession.exists())
 			return;
 		UserSession u = UserSession.get();
-		getChildByName("Agendamento").setEnabled(u.isAtendenteRole());
+		getChildByName("Agendamento").setEnabled(u.isRecepcionistaRole());
 		getChildByName("Atendimento").setEnabled(u.isMedicoRole());
-		getChildByName("Pacientes").setEnabled(u.isAtendenteRole());
-		getChildByName("Exames").setEnabled(u.isAtendenteRole());
-		getChildByName("Atendentes").setEnabled(u.isAtendenteRole());
-		getChildByName("Médicos").setEnabled(u.isAtendenteRole());
-		getChildByName("Especialidades").setEnabled(u.isAtendenteRole());
+		getChildByName("Pacientes").setEnabled(u.isRecepcionistaRole());
+		getChildByName("Exames").setEnabled(u.isRecepcionistaRole());
+		getChildByName("Recepcionistas").setEnabled(u.isRecepcionistaRole());
+		getChildByName("Laboratório").setEnabled(u.isRecepcionistaRole());
+		getChildByName("Médicos").setEnabled(u.isRecepcionistaRole());
+		getChildByName("Especialidades").setEnabled(u.isRecepcionistaRole());
 		getChildByName("Medicamentos").setEnabled(u.isMedicoRole());
 	}
 
@@ -141,7 +211,9 @@ public class MainView extends VerticalLayout implements View {
 	private void logOff() {
 		UserSession.set(null);
 		layout.removeComponent(welcome);
-		getUI().getNavigator().navigateTo(LoginView.NAME);
+		VaadinSession.getCurrent().close();
+		Page.getCurrent().reload();
+		// getUI().getNavigator().navigateTo(LoginView.NAME);
 	}
 
 	@Override

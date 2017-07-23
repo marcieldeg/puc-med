@@ -14,6 +14,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
-public class Atendente extends Usuario {
+public class Recepcionista extends Usuario {
 
 }

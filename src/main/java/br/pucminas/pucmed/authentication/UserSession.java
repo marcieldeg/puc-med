@@ -3,7 +3,7 @@ package br.pucminas.pucmed.authentication;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.server.WrappedSession;
 
-import br.pucminas.pucmed.model.Atendente;
+import br.pucminas.pucmed.model.Recepcionista;
 import br.pucminas.pucmed.model.Medico;
 import br.pucminas.pucmed.model.Usuario;
 
@@ -19,15 +19,15 @@ public class UserSession {
 	}
 	
 	public boolean isMedicoRole() {
-		return !(usuario instanceof Atendente);
+		return !(usuario instanceof Recepcionista);
 	}
 	
-	public boolean isAtendenteRole() {
+	public boolean isRecepcionistaRole() {
 		return !(usuario instanceof Medico);
 	}
 	
 	public boolean isAdminRole() {
-		return !isMedicoRole() && !isAtendenteRole();
+		return !isMedicoRole() && !isRecepcionistaRole();
 	}
 
 	public static final String CURRENT_USER = "user";

@@ -1,67 +1,66 @@
 package br.pucminas.pucmed.ui.forms;
 
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import com.vaadin.data.Binder;
-import com.vaadin.data.ValidationResult;
 import com.vaadin.data.converter.StringToLongConverter;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.data.validator.StringLengthValidator;
+import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 
 import br.pucminas.pucmed.bean.BeanGetter;
 import br.pucminas.pucmed.enums.Status;
-import br.pucminas.pucmed.model.Usuario;
-import br.pucminas.pucmed.service.UsuarioService;
+import br.pucminas.pucmed.model.Laboratorio;
+import br.pucminas.pucmed.service.LaboratorioService;
 import br.pucminas.pucmed.ui.BaseForm;
 import br.pucminas.pucmed.ui.BodyEdit;
 import br.pucminas.pucmed.ui.BodyView;
 import br.pucminas.pucmed.ui.extra.MessageBox;
-import br.pucminas.pucmed.ui.extra.Notification;
-import br.pucminas.pucmed.ui.extra.Notification.Type;
 import br.pucminas.pucmed.utils.Constants;
 
 @SuppressWarnings("serial")
-public class UsuarioForm extends BaseForm {
-	private UsuarioService service = BeanGetter.getService(UsuarioService.class);
+public class LaboratorioForm extends BaseForm {
+	private LaboratorioService service = BeanGetter.getService(LaboratorioService.class);
 
-	private Binder<Usuario> binder = new Binder<>(Usuario.class);
+	private Binder<Laboratorio> binder = new Binder<>(Laboratorio.class);
 
-	private Grid<Usuario> grid = new Grid<>(Usuario.class);
+	private Grid<Laboratorio> grid = new Grid<>(Laboratorio.class);
 	private TextField id = new TextField("Código");
 	private TextField nome = new TextField("Nome");
+	private TextField email = new TextField("E-mail");
+	private TextField login = new TextField("Login");
 	private PasswordField senha = new PasswordField("Senha");
-	private PasswordField confSenha = new PasswordField("Confirmar senha");
-	private TextField email = new TextField("E-Mail");
+	private ComboBox<Status> status = new ComboBox<>("Status");
 
 	private TextField fNome = new TextField("Nome");
+	private TextField fLogin = new TextField("Login");
 	
-	public static final String CAPTION = "Cadastro de Usuários";
+	public static final String CAPTION = "Cadastro de Laboratórios";
 
-	public UsuarioForm() {
+	public LaboratorioForm() {
 		super(CAPTION);
 
 		updateGrid();
-		grid.setColumns("id", "nome", "email");
-		grid.getColumn("id").setWidth(Constants.SMALL_FIELD);
-		grid.getColumn("nome").setWidth(Constants.LARGE_FIELD);
-		grid.getColumn("email").setWidth(Constants.LARGE_FIELD);
+		grid.removeAllColumns();
+		grid.addColumn("id").setWidth(Constants.SMALL_FIELD);
+		grid.addColumn("nome").setWidth(Constants.LARGE_FIELD);
+		grid.addColumn("email").setWidth(Constants.LARGE_FIELD).setCaption("E-mail");
+		grid.addColumn("login").setWidth(Constants.MEDIUM_FIELD);
 
 		grid.addSelectionListener(e -> {
-			Optional<Usuario> usuario = e.getFirstSelectedItem();
-			getBodyView().getToolbarArea().setEditarEnabled(usuario.isPresent());
-			getBodyView().getToolbarArea().setExcluirEnabled(usuario.isPresent());
+			Optional<Laboratorio> Laboratorio = e.getFirstSelectedItem();
+			getBodyView().getToolbarArea().setEditarEnabled(Laboratorio.isPresent());
+			getBodyView().getToolbarArea().setExcluirEnabled(Laboratorio.isPresent());
 		});
 
 		grid.setSizeFull();
-
-		senha.setMaxLength(20);
-		confSenha.setMaxLength(20);
 
 		binder.forField(id)//
 				.withConverter(new StringToLongConverter("Código Inválido"))//
@@ -69,23 +68,21 @@ public class UsuarioForm extends BaseForm {
 		binder.forField(nome)//
 				.asRequired("O campo é obrigatório")//
 				.bind("nome");
-		binder.forField(senha)//
-				.withValidator(new StringLengthValidator("A senha deve conter entre 5 e 20 caracteres", 5, 20))//
-				.asRequired("O campo é obrigatório")//
-				.bind("senha");
 		binder.forField(email)//
 				.withValidator(new EmailValidator("E-mail inválido"))//
 				.asRequired("O campo é obrigatório")//
 				.bind("email");
-
-		binder.withValidator(//
-				(s, v) -> {
-					if (!s.getSenha().equals(confSenha.getValue())) {
-						Notification.show("As senhas digitadas não conferem", Type.ERROR);
-						return ValidationResult.error("As senhas digitadas não conferem");
-					} else
-						return ValidationResult.ok();
-				});
+		binder.forField(login)//
+				.withValidator(new StringLengthValidator("O login deve ter entre 5 e 20 caracteres", 5, 20))//
+				.asRequired("O campo é obrigatório")//
+				.bind("login");
+		binder.forField(senha)//
+				.withValidator(new StringLengthValidator("A senha deve ter entre 5 e 20 caracteres", 5, 20))//
+				.asRequired("O campo é obrigatório")//
+				.bind("senha");
+		binder.forField(status)//
+				.asRequired("O campo é obrigatório")//
+				.bind("status");
 
 		BodyView bodyView = new BodyView() {
 			{
@@ -95,17 +92,19 @@ public class UsuarioForm extends BaseForm {
 				getToolbarArea().setEditarListener(e -> editar());
 				getToolbarArea().setExcluirListener(e -> excluir());
 
-				getFilterArea().addFilters(fNome);
+				getFilterArea().addFilters(fNome, fLogin);
 				getFilterArea().setPesquisarListener(e -> pesquisar());
 				getFilterArea().setLimparListener(e -> limpar());
 			}
 		};
 
 		id.setEnabled(false);
+		status.setEmptySelectionAllowed(false);
+		status.setItems(EnumSet.allOf(Status.class));
 
 		BodyEdit bodyEdit = new BodyEdit() {
 			{
-				addFields(id, nome, senha, confSenha, email);
+				addFields(id, nome, email, login, senha, status);
 
 				setSalvarListener(e -> salvar());
 				setCancelarListener(e -> view());
@@ -121,6 +120,7 @@ public class UsuarioForm extends BaseForm {
 	private void editar() {
 		if (!grid.asSingleSelect().isEmpty()) {
 			binder.setBean(grid.asSingleSelect().getValue());
+			status.setEnabled(true);
 			edit();
 		}
 	}
@@ -136,28 +136,29 @@ public class UsuarioForm extends BaseForm {
 	}
 
 	private void updateGrid() {
-		List<Usuario> usuarios = service.list();
+		List<Laboratorio> usuarios = service.list();
 		grid.setItems(usuarios);
 	}
 
 	private void updateGrid(Map<String, Object> params) {
-		List<Usuario> usuarios = service.list(params);
+		List<Laboratorio> usuarios = service.list(params);
 		grid.setItems(usuarios);
 	}
 
 	private void novo() {
 		binder.setBean(null);
+		status.setSelectedItem(Status.ATIVO);
+		status.setEnabled(false);
 		edit();
 	}
 
 	private void salvar() {
-		Usuario usuario = new Usuario();
-		if (binder.writeBeanIfValid(usuario)) {
-			if (usuario.getId() == null) {
-				usuario.setStatus(Status.ATIVO);
-				service.insert(usuario);
+		Laboratorio Laboratorio = new Laboratorio();
+		if (binder.writeBeanIfValid(Laboratorio)) {
+			if (Laboratorio.getId() == null) {
+				service.insert(Laboratorio);
 			} else {
-				service.update(usuario);
+				service.update(Laboratorio);
 			}
 			updateGrid();
 			view();
@@ -170,11 +171,14 @@ public class UsuarioForm extends BaseForm {
 		Map<String, Object> params = new HashMap<>();
 		if (!fNome.isEmpty())
 			params.put("nome#like", fNome.getValue());
+		if (!fLogin.isEmpty())
+			params.put("login#like", fLogin.getValue());
 		updateGrid(params);
 	}
 
 	private void limpar() {
 		fNome.clear();
+		fLogin.clear();
 		updateGrid();
 	}
 }

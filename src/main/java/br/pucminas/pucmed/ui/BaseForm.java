@@ -8,8 +8,8 @@ public abstract class BaseForm extends Panel {
 	private BodyView bodyView;
 	private BodyEdit bodyEdit;
 
-	protected BaseForm() {
-		super();
+	protected BaseForm(String caption) {
+		super(caption);
 		setSizeFull();
 		setStyleName(ValoTheme.PANEL_BORDERLESS);
 	}

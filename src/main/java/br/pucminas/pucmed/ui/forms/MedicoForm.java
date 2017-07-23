@@ -52,9 +52,11 @@ public class MedicoForm extends BaseForm {
 	private TextField fNome = new TextField("Nome");
 	private TextField fCrm = new TextField("CRM");
 	private ComboBox<Especialidade> fEspecialidade = new ComboBox<>("Especialidade");
+	
+	public static final String CAPTION = "Cadastro de Médicos";
 
 	public MedicoForm() {
-		super();
+		super(CAPTION);
 
 		updateGrid();
 		grid.removeAllColumns();

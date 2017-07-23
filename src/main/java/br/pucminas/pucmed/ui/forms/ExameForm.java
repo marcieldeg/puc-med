@@ -62,6 +62,8 @@ public class ExameForm extends BaseForm {
 	private DateField fDataRealizacao = new DateField("Data de Realização");
 	
 	private boolean abertoDoMenu = false;
+	
+	public static final String CAPTION = "Cadastro de Exames";
 
 	public ExameForm() {
 		this(null);
@@ -69,7 +71,7 @@ public class ExameForm extends BaseForm {
 	}
 
 	public ExameForm(Atendimento atendimento) {
-		super();
+		super(CAPTION);
 
 		this.atendimento = atendimento;
 

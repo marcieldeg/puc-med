@@ -17,8 +17,8 @@ import com.vaadin.ui.TextField;
 
 import br.pucminas.pucmed.bean.BeanGetter;
 import br.pucminas.pucmed.enums.Status;
-import br.pucminas.pucmed.model.Atendente;
-import br.pucminas.pucmed.service.AtendenteService;
+import br.pucminas.pucmed.model.Recepcionista;
+import br.pucminas.pucmed.service.RecepcionistaService;
 import br.pucminas.pucmed.ui.BaseForm;
 import br.pucminas.pucmed.ui.BodyEdit;
 import br.pucminas.pucmed.ui.BodyView;
@@ -26,12 +26,12 @@ import br.pucminas.pucmed.ui.extra.MessageBox;
 import br.pucminas.pucmed.utils.Constants;
 
 @SuppressWarnings("serial")
-public class AtendenteForm extends BaseForm {
-	private AtendenteService service = BeanGetter.getService(AtendenteService.class);
+public class RecepcionistaForm extends BaseForm {
+	private RecepcionistaService service = BeanGetter.getService(RecepcionistaService.class);
 
-	private Binder<Atendente> binder = new Binder<>(Atendente.class);
+	private Binder<Recepcionista> binder = new Binder<>(Recepcionista.class);
 
-	private Grid<Atendente> grid = new Grid<>(Atendente.class);
+	private Grid<Recepcionista> grid = new Grid<>(Recepcionista.class);
 	private TextField id = new TextField("Código");
 	private TextField nome = new TextField("Nome");
 	private TextField email = new TextField("E-mail");
@@ -41,9 +41,11 @@ public class AtendenteForm extends BaseForm {
 
 	private TextField fNome = new TextField("Nome");
 	private TextField fLogin = new TextField("Login");
+	
+	public static final String CAPTION = "Cadastro de Recepcionistas";
 
-	public AtendenteForm() {
-		super();
+	public RecepcionistaForm() {
+		super(CAPTION);
 
 		updateGrid();
 		grid.removeAllColumns();
@@ -53,9 +55,9 @@ public class AtendenteForm extends BaseForm {
 		grid.addColumn("login").setWidth(Constants.MEDIUM_FIELD);
 
 		grid.addSelectionListener(e -> {
-			Optional<Atendente> atendente = e.getFirstSelectedItem();
-			getBodyView().getToolbarArea().setEditarEnabled(atendente.isPresent());
-			getBodyView().getToolbarArea().setExcluirEnabled(atendente.isPresent());
+			Optional<Recepcionista> recepcionista = e.getFirstSelectedItem();
+			getBodyView().getToolbarArea().setEditarEnabled(recepcionista.isPresent());
+			getBodyView().getToolbarArea().setExcluirEnabled(recepcionista.isPresent());
 		});
 
 		grid.setSizeFull();
@@ -134,12 +136,12 @@ public class AtendenteForm extends BaseForm {
 	}
 
 	private void updateGrid() {
-		List<Atendente> usuarios = service.list();
+		List<Recepcionista> usuarios = service.list();
 		grid.setItems(usuarios);
 	}
 
 	private void updateGrid(Map<String, Object> params) {
-		List<Atendente> usuarios = service.list(params);
+		List<Recepcionista> usuarios = service.list(params);
 		grid.setItems(usuarios);
 	}
 
@@ -151,12 +153,12 @@ public class AtendenteForm extends BaseForm {
 	}
 
 	private void salvar() {
-		Atendente atendente = new Atendente();
-		if (binder.writeBeanIfValid(atendente)) {
-			if (atendente.getId() == null) {
-				service.insert(atendente);
+		Recepcionista recepcionista = new Recepcionista();
+		if (binder.writeBeanIfValid(recepcionista)) {
+			if (recepcionista.getId() == null) {
+				service.insert(recepcionista);
 			} else {
-				service.update(atendente);
+				service.update(recepcionista);
 			}
 			updateGrid();
 			view();

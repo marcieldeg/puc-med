@@ -39,9 +39,11 @@ public class MedicoExpedienteForm extends BaseForm {
 
 	private ComboBox<DiaSemana> fDiaSemana = new ComboBox<>("Dia da Semana");
 	private ComboBox<Turno> fTurno = new ComboBox<>("Turno");
+	
+	public static final String CAPTION = "Cadastro de Expedientes";
 
 	public MedicoExpedienteForm(Medico medico) {
-		super();
+		super(CAPTION);
 
 		this.medico = medico;
 

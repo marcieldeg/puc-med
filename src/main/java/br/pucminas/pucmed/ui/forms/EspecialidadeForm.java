@@ -30,9 +30,11 @@ public class EspecialidadeForm extends BaseForm {
 	private TextField nome = new TextField("Nome");
 
 	private TextField fNome = new TextField("Nome");
+	
+	public static final String CAPTION = "Cadastro de Atendimentos";
 
 	public EspecialidadeForm() {
-		super();
+		super(CAPTION);
 
 		updateGrid();
 		grid.setColumns("id", "nome");

@@ -55,9 +55,11 @@ public class PacienteForm extends BaseForm {
 	private TextField telefone = new TextField("Telefone");
 
 	private TextField fNome = new TextField("Nome");
+	
+	public static final String CAPTION = "Cadastro de Pacientes";
 
 	public PacienteForm() {
-		super();
+		super(CAPTION);
 
 		updateGrid();
 		grid.removeAllColumns();

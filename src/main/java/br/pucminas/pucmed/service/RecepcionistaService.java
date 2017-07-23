@@ -6,21 +6,21 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import br.pucminas.pucmed.model.Atendente;
+import br.pucminas.pucmed.model.Recepcionista;
 import br.pucminas.pucmed.model.Usuario;
 
 @Service
-public class AtendenteService extends BaseService<Atendente> {
-	public AtendenteService() {
-		super(Atendente.class);
+public class RecepcionistaService extends BaseService<Recepcionista> {
+	public RecepcionistaService() {
+		super(Recepcionista.class);
 	}
 
-	public Atendente getByUsuario(Usuario usuario) {
+	public Recepcionista getByUsuario(Usuario usuario) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("usuario", usuario);
-		List<Atendente> atendentes = super.list(params);
-		if (atendentes.isEmpty())
+		List<Recepcionista> l = super.list(params);
+		if (l.isEmpty())
 			return null;
-		return atendentes.get(0);
+		return l.get(0);
 	}
 }

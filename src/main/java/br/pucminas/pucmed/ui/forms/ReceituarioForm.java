@@ -48,9 +48,11 @@ public class ReceituarioForm extends BaseForm {
 	private TextArea posologia = new TextArea("Posologia");
 
 	private ComboBox<Medicamento> fMedicamento = new ComboBox<>("Medicamento");
+	
+	public static final String CAPTION = "Cadastro de Atendimentos";
 
 	public ReceituarioForm(Atendimento atendimento) {
-		super();
+		super(CAPTION);
 
 		this.atendimento = atendimento;
 

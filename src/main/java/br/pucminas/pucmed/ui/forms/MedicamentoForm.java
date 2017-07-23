@@ -38,9 +38,11 @@ public class MedicamentoForm extends BaseForm {
 	private TextField fNomeComercial = new TextField("Nome Comercial");
 	private TextField fNomeGenerico = new TextField("Nome Genérico");
 	private TextField fFabricante = new TextField("Fabricante");
+	
+	public static final String CAPTION = "Cadastro de Medicamentos";
 
 	public MedicamentoForm() {
-		super();
+		super(CAPTION);
 
 		updateGrid();
 		grid.removeAllColumns();

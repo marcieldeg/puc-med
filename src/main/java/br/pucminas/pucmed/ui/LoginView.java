@@ -2,6 +2,7 @@ package br.pucminas.pucmed.ui;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -78,6 +79,7 @@ public class LoginView extends VerticalLayout implements View {
 		panel.setContent(formLayout);
 
 		addComponent(panel);
+		setMargin(new MarginInfo(true, false, true, false));
 		// setSizeFull();
 		// setComponentAlignment(panel, Alignment.TOP_CENTER);
 		setResponsive(true);

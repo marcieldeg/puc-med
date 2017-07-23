@@ -15,7 +15,7 @@ import com.vaadin.ui.VerticalLayout;
 import br.pucminas.pucmed.authentication.UserSession;
 import br.pucminas.pucmed.bean.BeanGetter;
 import br.pucminas.pucmed.model.Agenda;
-import br.pucminas.pucmed.model.Atendente;
+import br.pucminas.pucmed.model.Recepcionista;
 import br.pucminas.pucmed.model.Medico;
 import br.pucminas.pucmed.model.Usuario;
 import br.pucminas.pucmed.service.AgendaService;
@@ -32,8 +32,8 @@ public class WelcomeLayout extends VerticalLayout {
 	public WelcomeLayout() {
 		usuario = UserSession.get() == null ? null : UserSession.get().getUsuario();
 
-		if (usuario instanceof Atendente) {
-			addComponent(createAtendenteView());
+		if (usuario instanceof Recepcionista) {
+			addComponent(createRecepcionistaView());
 		} else if (usuario instanceof Medico) {
 			VerticalLayout l = createMedicoView();
 			addComponent(l);
@@ -41,7 +41,7 @@ public class WelcomeLayout extends VerticalLayout {
 		}
 	}
 
-	private Label createAtendenteView() {
+	private Label createRecepcionistaView() {
 		return new Label("Bem vindo, " + usuario.getNome());
 	}
 
