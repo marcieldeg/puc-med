@@ -52,7 +52,7 @@ public class MedicoForm extends BaseForm {
 	private TextField fNome = new TextField("Nome");
 	private TextField fCrm = new TextField("CRM");
 	private ComboBox<Especialidade> fEspecialidade = new ComboBox<>("Especialidade");
-	
+
 	public static final String CAPTION = "Cadastro de Médicos";
 
 	public MedicoForm() {
@@ -135,10 +135,18 @@ public class MedicoForm extends BaseForm {
 		id.setEnabled(false);
 		status.setEmptySelectionAllowed(false);
 		status.setItems(EnumSet.allOf(Status.class));
-
 		especialidades.setItems(especialidadeService.list());
 		especialidades.setItemCaptionGenerator(Especialidade::getNome);
 		especialidades.setRows(6);
+
+		id.addStyleName(Constants.SMALL_FIELD_STYLE);
+		nome.addStyleName(Constants.LARGE_FIELD_STYLE);
+		crm.addStyleName(Constants.SMALL_FIELD_STYLE);
+		especialidades.addStyleName(Constants.SMALL_FIELD_STYLE);
+		email.addStyleName(Constants.LARGE_FIELD_STYLE);
+		login.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		senha.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		status.addStyleName(Constants.SMALL_FIELD_STYLE);
 
 		BodyEdit bodyEdit = new BodyEdit() {
 			{

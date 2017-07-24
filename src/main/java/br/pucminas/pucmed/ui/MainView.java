@@ -23,7 +23,6 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import br.pucminas.pucmed.authentication.UserSession;
 import br.pucminas.pucmed.ui.forms.AgendaForm;
-import br.pucminas.pucmed.ui.forms.RecepcionistaForm;
 import br.pucminas.pucmed.ui.forms.AtendimentoForm;
 import br.pucminas.pucmed.ui.forms.EspecialidadeForm;
 import br.pucminas.pucmed.ui.forms.ExameForm;
@@ -31,6 +30,7 @@ import br.pucminas.pucmed.ui.forms.LaboratorioForm;
 import br.pucminas.pucmed.ui.forms.MedicamentoForm;
 import br.pucminas.pucmed.ui.forms.MedicoForm;
 import br.pucminas.pucmed.ui.forms.PacienteForm;
+import br.pucminas.pucmed.ui.forms.RecepcionistaForm;
 
 @SuppressWarnings("serial")
 @SpringView
@@ -42,6 +42,7 @@ public class MainView extends VerticalLayout implements View {
 	private final List<Component> forms = new ArrayList<>();
 	private final MenuBar menubar = new MenuBar();
 	private final HorizontalLayout touchMenu = new HorizontalLayout();
+	private final MenuBar touchMenubar = new MenuBar();
 
 	private WelcomeLayout welcome = null;
 
@@ -55,6 +56,7 @@ public class MainView extends VerticalLayout implements View {
 		layout.setSpacing(false);
 		layout.setMargin(false);
 		layout.addComponent(createMenu());
+		layout.setSizeFull();
 		tabSheet.addTab(layout, "Área de Trabalho");
 		tabSheet.setHeight(100.0f, Unit.PERCENTAGE);
 		tabSheet.addStyleName(ValoTheme.TABSHEET_FRAMED);
@@ -71,12 +73,11 @@ public class MainView extends VerticalLayout implements View {
 		touchMenu.addStyleName(ValoTheme.BUTTON_PRIMARY);
 		touchMenu.addStyleName("touch-menu");
 
-		MenuBar menuBar = new MenuBar();
-		menuBar.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
-		MenuItem grupoMenu = menuBar.addItem("Menu", null);
+		touchMenubar.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
+		MenuItem grupoMenu = touchMenubar.addItem("Menu", null);
 		grupoMenu.setIcon(VaadinIcons.MENU);
 
-		grupoMenu.addItem("Atendimento", null).setEnabled(false);
+		grupoMenu.addItem("Serviços", null).setEnabled(false);
 		grupoMenu.addSeparator();
 		grupoMenu.addItem("Agendamento", e -> createTab(AgendaForm.class, AgendaForm.CAPTION))
 				.setIcon(VaadinIcons.NOTEBOOK);
@@ -91,19 +92,18 @@ public class MainView extends VerticalLayout implements View {
 		grupoMenu.addSeparator();
 		grupoMenu.addItem("Recepcionistas", e -> createTab(RecepcionistaForm.class, RecepcionistaForm.CAPTION))
 				.setIcon(VaadinIcons.HEADSET);
-		grupoMenu.addItem("Laboratório", e -> createTab(LaboratorioForm.class, LaboratorioForm.CAPTION))
+		grupoMenu.addItem("Laboratórios", e -> createTab(LaboratorioForm.class, LaboratorioForm.CAPTION))
 				.setIcon(VaadinIcons.SPECIALIST);
-		grupoMenu.addItem("Médicos", e -> createTab(MedicoForm.class, MedicoForm.CAPTION))
-				.setIcon(VaadinIcons.DOCTOR);
+		grupoMenu.addItem("Médicos", e -> createTab(MedicoForm.class, MedicoForm.CAPTION)).setIcon(VaadinIcons.DOCTOR);
 		grupoMenu.addItem("Especialidades", e -> createTab(EspecialidadeForm.class, EspecialidadeForm.CAPTION))
 				.setIcon(VaadinIcons.DIPLOMA_SCROLL);
 		grupoMenu.addSeparator();
 		grupoMenu.addItem("Materiais", null).setEnabled(false);
 		grupoMenu.addSeparator();
 		grupoMenu.addItem("Medicamentos", e -> createTab(MedicamentoForm.class, MedicamentoForm.CAPTION))
-		.setIcon(VaadinIcons.PILL);
+				.setIcon(VaadinIcons.PILL);
 
-		touchMenu.addComponent(menuBar);
+		touchMenu.addComponent(touchMenubar);
 
 		Label title = new Label("PUC-MED");
 		title.addStyleName(ValoTheme.LABEL_BOLD);
@@ -125,7 +125,7 @@ public class MainView extends VerticalLayout implements View {
 		menubar.setWidth("100%");
 		menubar.addStyleName("desk-menu");
 
-		MenuItem grupoMenu = menubar.addItem("Atendimento", null);
+		MenuItem grupoMenu = menubar.addItem("Serviços", null);
 		grupoMenu.addItem("Agendamento", e -> createTab(AgendaForm.class, AgendaForm.CAPTION))
 				.setIcon(VaadinIcons.NOTEBOOK);
 		grupoMenu.addItem("Atendimento", e -> createTab(AtendimentoForm.class, AtendimentoForm.CAPTION))
@@ -141,8 +141,7 @@ public class MainView extends VerticalLayout implements View {
 				.setIcon(VaadinIcons.HEADSET);
 		grupoMenu.addItem("Laboratórios", e -> createTab(LaboratorioForm.class, LaboratorioForm.CAPTION))
 				.setIcon(VaadinIcons.SPECIALIST);
-		grupoMenu.addItem("Médicos", e -> createTab(MedicoForm.class, MedicoForm.CAPTION))
-				.setIcon(VaadinIcons.DOCTOR);
+		grupoMenu.addItem("Médicos", e -> createTab(MedicoForm.class, MedicoForm.CAPTION)).setIcon(VaadinIcons.DOCTOR);
 		grupoMenu.addItem("Especialidades", e -> createTab(EspecialidadeForm.class, EspecialidadeForm.CAPTION))
 				.setIcon(VaadinIcons.DIPLOMA_SCROLL);
 
@@ -155,30 +154,33 @@ public class MainView extends VerticalLayout implements View {
 		return menubar;
 	}
 
-	private MenuItem getChildByName(String name) {
+	private void setEnabledByName(String name, boolean enabled) {
 		for (MenuItem i : menubar.getItems()) {
 			if (!i.hasChildren())
 				continue;
 			for (MenuItem j : i.getChildren())
 				if (j.getText().equals(name))
-					return j;
+					j.setEnabled(enabled);
 		}
-		return null;
+		
+		for (MenuItem j : touchMenubar.getItems().get(0).getChildren())
+			if (j.getText().equals(name))
+				j.setEnabled(enabled);
 	}
 
 	public void refreshMenuPermissions() {
 		if (!UserSession.exists())
 			return;
 		UserSession u = UserSession.get();
-		getChildByName("Agendamento").setEnabled(u.isRecepcionistaRole());
-		getChildByName("Atendimento").setEnabled(u.isMedicoRole());
-		getChildByName("Pacientes").setEnabled(u.isRecepcionistaRole());
-		getChildByName("Exames").setEnabled(u.isRecepcionistaRole());
-		getChildByName("Recepcionistas").setEnabled(u.isRecepcionistaRole());
-		getChildByName("Laboratório").setEnabled(u.isRecepcionistaRole());
-		getChildByName("Médicos").setEnabled(u.isRecepcionistaRole());
-		getChildByName("Especialidades").setEnabled(u.isRecepcionistaRole());
-		getChildByName("Medicamentos").setEnabled(u.isMedicoRole());
+		setEnabledByName("Agendamento", u.isRecepcionistaRole());
+		setEnabledByName("Atendimento", u.isMedicoRole());
+		setEnabledByName("Pacientes", u.isRecepcionistaRole());
+		setEnabledByName("Exames", u.isLaboratorioRole());
+		setEnabledByName("Recepcionistas", u.isRecepcionistaRole());
+		setEnabledByName("Laboratórios", u.isRecepcionistaRole());
+		setEnabledByName("Médicos", u.isRecepcionistaRole());
+		setEnabledByName("Especialidades", u.isRecepcionistaRole());
+		setEnabledByName("Medicamentos", u.isMedicoRole());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -224,5 +226,6 @@ public class MainView extends VerticalLayout implements View {
 		refreshMenuPermissions();
 		welcome = new WelcomeLayout();
 		layout.addComponent(welcome);
+		layout.setExpandRatio(welcome, 2L);
 	}
 }

@@ -55,7 +55,7 @@ public class PacienteForm extends BaseForm {
 	private TextField telefone = new TextField("Telefone");
 
 	private TextField fNome = new TextField("Nome");
-	
+
 	public static final String CAPTION = "Cadastro de Pacientes";
 
 	public PacienteForm() {
@@ -178,10 +178,9 @@ public class PacienteForm extends BaseForm {
 		estado.setItemCaptionGenerator(o -> o.getSigla());
 
 		id.addStyleName(Constants.SMALL_FIELD_STYLE);
-		id.setSizeUndefined();
 		nome.addStyleName(Constants.LARGE_FIELD_STYLE);
-		sexo.addStyleName(Constants.MEDIUM_FIELD_STYLE);
-		dataNascimento.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		sexo.addStyleName(Constants.SMALL_FIELD_STYLE);
+		dataNascimento.addStyleName(Constants.SMALL_FIELD_STYLE);
 		cpf.addStyleName(Constants.MEDIUM_FIELD_STYLE);
 		endereco.addStyleName(Constants.LARGE_FIELD_STYLE);
 		numero.addStyleName(Constants.SMALL_FIELD_STYLE);

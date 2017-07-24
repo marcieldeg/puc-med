@@ -39,7 +39,7 @@ public class MedicoExpedienteForm extends BaseForm {
 
 	private ComboBox<DiaSemana> fDiaSemana = new ComboBox<>("Dia da Semana");
 	private ComboBox<Turno> fTurno = new ComboBox<>("Turno");
-	
+
 	public static final String CAPTION = "Cadastro de Expedientes";
 
 	public MedicoExpedienteForm(Medico medico) {
@@ -91,11 +91,14 @@ public class MedicoExpedienteForm extends BaseForm {
 		};
 
 		id.setEnabled(false);
-
 		diaSemana.setItems(EnumSet.allOf(DiaSemana.class));
 		diaSemana.setEmptySelectionAllowed(false);
 		turno.setItems(EnumSet.allOf(Turno.class));
 		turno.setEmptySelectionAllowed(false);
+		
+		id.addStyleName(Constants.SMALL_FIELD_STYLE);
+		diaSemana.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		turno.addStyleName(Constants.MEDIUM_FIELD_STYLE);
 
 		BodyEdit bodyEdit = new BodyEdit() {
 			{

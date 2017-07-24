@@ -60,14 +60,14 @@ public class ExameForm extends BaseForm {
 	private ComboBox<Paciente> fPaciente = new ComboBox<Paciente>("Paciente");
 	private ComboBox<TipoExame> fTipoExame = new ComboBox<>("Tipo de Exame");
 	private DateField fDataRealizacao = new DateField("Data de Realização");
-	
+
 	private boolean abertoDoMenu = false;
-	
+
 	public static final String CAPTION = "Cadastro de Exames";
 
 	public ExameForm() {
 		this(null);
-		abertoDoMenu = true; 
+		abertoDoMenu = true;
 	}
 
 	public ExameForm(Atendimento atendimento) {
@@ -170,11 +170,14 @@ public class ExameForm extends BaseForm {
 		};
 
 		id.setEnabled(false);
-
 		tipoExame.setItems(tipoExameService.list());
 		tipoExame.setItemCaptionGenerator(TipoExame::getNome);
 		tipoExame.setEmptySelectionAllowed(false);
-		resultado.setWidth("100%");
+		
+		id.addStyleName(Constants.SMALL_FIELD_STYLE);
+		tipoExame.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		dataRealizacao.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		resultado.addStyleName(Constants.XLARGE_FIELD_STYLE);
 
 		BodyEdit bodyEdit = new BodyEdit() {
 			{

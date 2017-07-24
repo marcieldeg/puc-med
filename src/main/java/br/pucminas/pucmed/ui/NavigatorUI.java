@@ -12,7 +12,7 @@ import br.pucminas.pucmed.utils.Constants;
 @SuppressWarnings("serial")
 @SpringUI
 @Theme("valo-facebook")
-@Viewport(value="initial-scale=1.0, maximum-scale=1.0")
+@Viewport(value = "initial-scale=1.0, maximum-scale=1.0")
 public class NavigatorUI extends UI {
 	private Navigator navigator;
 

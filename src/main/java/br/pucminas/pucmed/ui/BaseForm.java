@@ -9,7 +9,7 @@ public abstract class BaseForm extends Panel {
 	private BodyEdit bodyEdit;
 
 	protected BaseForm(String caption) {
-		super(caption);
+		super();
 		setSizeFull();
 		setStyleName(ValoTheme.PANEL_BORDERLESS);
 	}

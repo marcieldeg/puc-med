@@ -48,7 +48,7 @@ public class ReceituarioForm extends BaseForm {
 	private TextArea posologia = new TextArea("Posologia");
 
 	private ComboBox<Medicamento> fMedicamento = new ComboBox<>("Medicamento");
-	
+
 	public static final String CAPTION = "Cadastro de Atendimentos";
 
 	public ReceituarioForm(Atendimento atendimento) {
@@ -130,6 +130,11 @@ public class ReceituarioForm extends BaseForm {
 		medicamento.setEmptySelectionAllowed(false);
 		medicamento.setItems(medicamentos);
 		medicamento.setItemCaptionGenerator(Medicamento::getNomeComercial);
+
+		id.addStyleName(Constants.SMALL_FIELD_STYLE);
+		medicamento.addStyleName(Constants.LARGE_FIELD_STYLE);
+		quantidade.addStyleName(Constants.SMALL_FIELD_STYLE);
+		posologia.addStyleName(Constants.XLARGE_FIELD_STYLE);
 
 		BodyEdit bodyEdit = new BodyEdit() {
 			{

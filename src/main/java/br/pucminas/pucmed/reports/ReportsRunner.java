@@ -25,7 +25,7 @@ public class ReportsRunner {
 		return sessionFactoryBean.getObject().getSessionFactoryOptions().getServiceRegistry()
 				.getService(ConnectionProvider.class).getConnection();
 	}
-	
+
 	private byte[] runReport(String name, Long id) {
 		try {
 			Connection connection = getConnection();

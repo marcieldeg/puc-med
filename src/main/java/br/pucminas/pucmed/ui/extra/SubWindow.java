@@ -11,8 +11,8 @@ public class SubWindow extends Window {
 		center();
 		setContent(baseForm);
 		setVisible(true);
-		//setWidth("75%");
-		//setHeight("75%");
+		// setWidth("75%");
+		// setHeight("75%");
 		setStyleName("subwindow");
 	}
 }

@@ -30,8 +30,8 @@ public class EspecialidadeForm extends BaseForm {
 	private TextField nome = new TextField("Nome");
 
 	private TextField fNome = new TextField("Nome");
-	
-	public static final String CAPTION = "Cadastro de Atendimentos";
+
+	public static final String CAPTION = "Cadastro de Especialidades";
 
 	public EspecialidadeForm() {
 		super(CAPTION);
@@ -71,6 +71,9 @@ public class EspecialidadeForm extends BaseForm {
 		};
 
 		id.setEnabled(false);
+		
+		id.addStyleName(Constants.SMALL_FIELD_STYLE);
+		nome.addStyleName(Constants.LARGE_FIELD_STYLE);
 
 		BodyEdit bodyEdit = new BodyEdit() {
 			{

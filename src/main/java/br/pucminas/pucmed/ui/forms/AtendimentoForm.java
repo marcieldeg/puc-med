@@ -56,7 +56,7 @@ public class AtendimentoForm extends BaseForm {
 	private DateField fData = new DateField("Data");
 
 	UserSession userSession = UserSession.get();
-	
+
 	public static final String CAPTION = "Cadastro de Atendimentos";
 
 	public AtendimentoForm() {
@@ -149,12 +149,12 @@ public class AtendimentoForm extends BaseForm {
 			medico.setSelectedItem((Medico) usuario);
 			medico.setEnabled(false);
 		}
-		
+
 		id.addStyleName(Constants.SMALL_FIELD_STYLE);
 		paciente.addStyleName(Constants.MEDIUM_FIELD_STYLE);
 		data.addStyleName(Constants.MEDIUM_FIELD_STYLE);
-		descricao.addStyleName(Constants.LARGE_FIELD_STYLE);
-		diagnostico.addStyleName(Constants.LARGE_FIELD_STYLE);
+		descricao.addStyleName(Constants.XLARGE_FIELD_STYLE);
+		diagnostico.addStyleName(Constants.XLARGE_FIELD_STYLE);
 		medico.addStyleName(Constants.MEDIUM_FIELD_STYLE);
 
 		BodyEdit bodyEdit = new BodyEdit() {
@@ -207,9 +207,9 @@ public class AtendimentoForm extends BaseForm {
 		List<Atendimento> usuarios;
 		if (userSession.getUsuario() instanceof Medico) {
 			Map<String, Object> params = new HashMap<>();
-			params.put("medico", (Medico)userSession.getUsuario());
+			params.put("medico", (Medico) userSession.getUsuario());
 			usuarios = service.list(params);
-		}else {
+		} else {
 			usuarios = service.list();
 		}
 		grid.setItems(usuarios);
@@ -217,7 +217,7 @@ public class AtendimentoForm extends BaseForm {
 
 	private void updateGrid(Map<String, Object> params) {
 		if (userSession.getUsuario() instanceof Medico)
-			params.put("medico", (Medico)userSession.getUsuario());
+			params.put("medico", (Medico) userSession.getUsuario());
 		List<Atendimento> usuarios = service.list(params);
 		grid.setItems(usuarios);
 	}

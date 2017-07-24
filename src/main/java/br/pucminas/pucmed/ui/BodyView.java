@@ -17,11 +17,13 @@ public abstract class BodyView extends VerticalLayout {
 		setMargin(true);
 		setSizeFull();
 
+		filterArea.setVisible(false);
 		addComponent(filterArea);
 		body.setStyleName(ValoTheme.PANEL_BORDERLESS);
 		body.setSizeFull();
 		addComponent(body);
 		addComponent(toolbarArea);
+		toolbarArea.setPesquisarListener(e -> filterArea.setVisible(!filterArea.isVisible()));
 
 		setExpandRatio(body, 1);
 	}

@@ -13,6 +13,7 @@ import br.pucminas.pucmed.ui.extra.InternalButton;
 
 @SuppressWarnings("serial")
 public class ToolbarArea extends HorizontalLayout {
+	private final InternalButton botaoPesquisar = new InternalButton("Pesquisar");
 	private final InternalButton botaoAdicionar = new InternalButton("Novo");
 	private final InternalButton botaoEditar = new InternalButton("Editar");
 	private final InternalButton botaoExcluir = new InternalButton("Excluir");
@@ -23,12 +24,17 @@ public class ToolbarArea extends HorizontalLayout {
 		super();
 		setSpacing(false);
 		setStyleName(ValoTheme.LAYOUT_HORIZONTAL_WRAPPING);
+		botaoPesquisar.setIcon(VaadinIcons.SEARCH);
 		botaoAdicionar.setIcon(VaadinIcons.PLUS);
 		botaoEditar.setIcon(VaadinIcons.EDIT);
 		botaoEditar.setEnabled(false);
 		botaoExcluir.setIcon(VaadinIcons.ERASER);
 		botaoExcluir.setEnabled(false);
-		addComponents(botaoAdicionar, botaoEditar, botaoExcluir);
+		addComponents(botaoPesquisar, botaoAdicionar, botaoEditar, botaoExcluir);
+	}
+
+	public void setPesquisarEnabled(boolean enabled) {
+		botaoPesquisar.setEnabled(enabled);
 	}
 
 	public void setAdicionarEnabled(boolean enabled) {
@@ -54,6 +60,10 @@ public class ToolbarArea extends HorizontalLayout {
 
 	public Button getCustomButton(String caption) {
 		return customButtons.get(caption);
+	}
+
+	public void setPesquisarListener(ClickListener clickListener) {
+		botaoPesquisar.setClickListener(clickListener);
 	}
 
 	public void setAdicionarListener(ClickListener clickListener) {

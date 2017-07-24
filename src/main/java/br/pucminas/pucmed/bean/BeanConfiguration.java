@@ -15,16 +15,16 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 public class BeanConfiguration {
 	@Value("${spring.datasource.driver-class-name}")
 	private String driver;
-	
+
 	@Value("${spring.datasource.url}")
 	private String database;
-	
+
 	@Value("${spring.datasource.username}")
 	private String username;
-	
+
 	@Value("${spring.datasource.password}")
 	private String password;
-	
+
 	@Bean
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
@@ -32,7 +32,7 @@ public class BeanConfiguration {
 		dataSource.setUrl(database);
 		dataSource.setUsername(username);
 		dataSource.setPassword(password);
-		//dataSource.setDefaultAutoCommit(false);
+		// dataSource.setDefaultAutoCommit(false);
 		return dataSource;
 	}
 

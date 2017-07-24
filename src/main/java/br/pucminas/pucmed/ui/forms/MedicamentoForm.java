@@ -38,7 +38,7 @@ public class MedicamentoForm extends BaseForm {
 	private TextField fNomeComercial = new TextField("Nome Comercial");
 	private TextField fNomeGenerico = new TextField("Nome Genérico");
 	private TextField fFabricante = new TextField("Fabricante");
-	
+
 	public static final String CAPTION = "Cadastro de Medicamentos";
 
 	public MedicamentoForm() {
@@ -93,6 +93,12 @@ public class MedicamentoForm extends BaseForm {
 		id.setEnabled(false);
 		embalagem.setEmptySelectionAllowed(false);
 		embalagem.setItems(EnumSet.allOf(Embalagem.class));
+
+		id.addStyleName(Constants.SMALL_FIELD_STYLE);
+		nomeComercial.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		nomeGenerico.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		fabricante.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		embalagem.addStyleName(Constants.SMALL_FIELD_STYLE);
 
 		BodyEdit bodyEdit = new BodyEdit() {
 			{

@@ -53,7 +53,7 @@ public class AgendaForm extends BaseForm {
 	private DateField fData = new DateField("Data");
 	private ComboBox<Paciente> fPaciente = new ComboBox<>("Paciente");
 	private ComboBox<Medico> fMedico = new ComboBox<>("Médico");
-	
+
 	public static final String CAPTION = "Cadastro de Agendamentos";
 
 	public AgendaForm() {
@@ -159,6 +159,11 @@ public class AgendaForm extends BaseForm {
 		};
 
 		id.setEnabled(false);
+		
+		id.addStyleName(Constants.SMALL_FIELD_STYLE);
+		data.addStyleName(Constants.SMALL_FIELD_STYLE);
+		paciente.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		medico.addStyleName(Constants.MEDIUM_FIELD_STYLE);
 
 		BodyEdit bodyEdit = new BodyEdit() {
 			{

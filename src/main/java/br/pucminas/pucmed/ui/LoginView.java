@@ -44,14 +44,14 @@ public class LoginView extends VerticalLayout implements View {
 	public LoginView() {
 		Panel panel = new Panel();
 		panel.setCaption(Constants.APPLICATION_TITLE + " - Entrar no sistema");
-		//panel.setWidth("350px");
+		// panel.setWidth("350px");
 		panel.setResponsive(true);
 		panel.setStyleName("responsive");
-		
-//		int width = UI.getCurrent().getPage().getBrowserWindowWidth();
-//		int height = UI.getCurrent().getPage().getBrowserWindowHeight();
-//		
-//		Notification.show(String.format("%d x %d", width, height));
+
+		// int width = UI.getCurrent().getPage().getBrowserWindowWidth();
+		// int height = UI.getCurrent().getPage().getBrowserWindowHeight();
+		//
+		// Notification.show(String.format("%d x %d", width, height));
 
 		VerticalLayout formLayout = new VerticalLayout();
 		formLayout.setMargin(true);
