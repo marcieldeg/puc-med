@@ -2,11 +2,9 @@ package br.pucminas.pucmed.ui;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -34,7 +32,6 @@ public class LoginView extends VerticalLayout implements View {
 
 	private final TextField usuario = new TextField("Usuário:");
 	private final PasswordField senha = new PasswordField("Senha:");
-	private final CheckBox lembrar = new CheckBox("Lembrar meus dados");
 
 	private final Button entrar = new Button("Entrar", e -> entrarClick(e));
 	private final Button recuperarSenha = new Button("Esqueci minha senha", e -> recuperarSenhaClick(e));
@@ -44,14 +41,8 @@ public class LoginView extends VerticalLayout implements View {
 	public LoginView() {
 		Panel panel = new Panel();
 		panel.setCaption(Constants.APPLICATION_TITLE + " - Entrar no sistema");
-		// panel.setWidth("350px");
 		panel.setResponsive(true);
 		panel.setStyleName("responsive");
-
-		// int width = UI.getCurrent().getPage().getBrowserWindowWidth();
-		// int height = UI.getCurrent().getPage().getBrowserWindowHeight();
-		//
-		// Notification.show(String.format("%d x %d", width, height));
 
 		VerticalLayout formLayout = new VerticalLayout();
 		formLayout.setMargin(true);
@@ -62,8 +53,6 @@ public class LoginView extends VerticalLayout implements View {
 
 		senha.setWidth(100f, Unit.PERCENTAGE);
 		formLayout.addComponent(senha);
-
-		formLayout.addComponent(lembrar);
 
 		HorizontalLayout horizontalLayout = new HorizontalLayout();
 
@@ -79,9 +68,6 @@ public class LoginView extends VerticalLayout implements View {
 		panel.setContent(formLayout);
 
 		addComponent(panel);
-		setMargin(new MarginInfo(true, false, true, false));
-		// setSizeFull();
-		// setComponentAlignment(panel, Alignment.TOP_CENTER);
 		setResponsive(true);
 
 		usuario.focus();

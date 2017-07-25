@@ -83,10 +83,11 @@ public class MedicamentoForm extends BaseForm {
 				getToolbarArea().setAdicionarListener(e -> novo());
 				getToolbarArea().setEditarListener(e -> editar());
 				getToolbarArea().setExcluirListener(e -> excluir());
-
+				
+				fNomeComercial.addValueChangeListener(e -> pesquisar());
+				fNomeGenerico.addValueChangeListener(e -> pesquisar());
+				fFabricante.addValueChangeListener(e -> pesquisar());
 				getFilterArea().addFilters(fNomeComercial, fNomeGenerico, fFabricante);
-				getFilterArea().setPesquisarListener(e -> pesquisar());
-				getFilterArea().setLimparListener(e -> limpar());
 			}
 		};
 
@@ -95,8 +96,8 @@ public class MedicamentoForm extends BaseForm {
 		embalagem.setItems(EnumSet.allOf(Embalagem.class));
 
 		id.addStyleName(Constants.SMALL_FIELD_STYLE);
-		nomeComercial.addStyleName(Constants.MEDIUM_FIELD_STYLE);
-		nomeGenerico.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		nomeComercial.addStyleName(Constants.LARGE_FIELD_STYLE);
+		nomeGenerico.addStyleName(Constants.LARGE_FIELD_STYLE);
 		fabricante.addStyleName(Constants.MEDIUM_FIELD_STYLE);
 		embalagem.addStyleName(Constants.SMALL_FIELD_STYLE);
 
@@ -170,12 +171,5 @@ public class MedicamentoForm extends BaseForm {
 		if (!fFabricante.isEmpty())
 			params.put("fabricante#like", fFabricante.getValue());
 		updateGrid(params);
-	}
-
-	private void limpar() {
-		fNomeComercial.clear();
-		fNomeGenerico.clear();
-		fFabricante.clear();
-		updateGrid();
 	}
 }

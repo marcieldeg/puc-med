@@ -110,7 +110,6 @@ public class MedicoForm extends BaseForm {
 				.asRequired("O campo é obrigatório")//
 				.bind("status");
 
-		fEspecialidade.setEmptySelectionAllowed(false);
 		fEspecialidade.setItems(especialidadeService.list());
 		fEspecialidade.setItemCaptionGenerator(Especialidade::getNome);
 
@@ -126,9 +125,10 @@ public class MedicoForm extends BaseForm {
 				botaoExpedientes.setIcon(VaadinIcons.CLOCK);
 				botaoExpedientes.addClickListener(e -> abrirExpedientes());
 
+				fNome.addValueChangeListener(e -> pesquisar());
+				fCrm.addValueChangeListener(e -> pesquisar());
+				fEspecialidade.addValueChangeListener(e -> pesquisar());
 				getFilterArea().addFilters(fNome, fCrm, fEspecialidade);
-				getFilterArea().setPesquisarListener(e -> pesquisar());
-				getFilterArea().setLimparListener(e -> limpar());
 			}
 		};
 
@@ -138,6 +138,7 @@ public class MedicoForm extends BaseForm {
 		especialidades.setItems(especialidadeService.list());
 		especialidades.setItemCaptionGenerator(Especialidade::getNome);
 		especialidades.setRows(6);
+		especialidades.setSizeFull();
 
 		id.addStyleName(Constants.SMALL_FIELD_STYLE);
 		nome.addStyleName(Constants.LARGE_FIELD_STYLE);
@@ -230,12 +231,5 @@ public class MedicoForm extends BaseForm {
 			params.put("especialidades#exists", fEspecialidade.getValue().getId());
 		}
 		updateGrid(params);
-	}
-
-	private void limpar() {
-		fNome.clear();
-		fCrm.clear();
-		fEspecialidade.clear();
-		updateGrid();
 	}
 }

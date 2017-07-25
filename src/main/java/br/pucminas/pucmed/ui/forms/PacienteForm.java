@@ -55,6 +55,7 @@ public class PacienteForm extends BaseForm {
 	private TextField telefone = new TextField("Telefone");
 
 	private TextField fNome = new TextField("Nome");
+	private ComboBox<Estado> fEstado = new ComboBox<>("Estado");
 
 	public static final String CAPTION = "Cadastro de Pacientes";
 
@@ -154,6 +155,9 @@ public class PacienteForm extends BaseForm {
 		binder.forField(telefone)//
 				.withNullRepresentation("")//
 				.bind("telefone");
+		
+		fEstado.setItems(estadoService.list());
+		fEstado.setItemCaptionGenerator(Estado::getSigla);
 
 		BodyView bodyView = new BodyView() {
 			{
@@ -163,9 +167,9 @@ public class PacienteForm extends BaseForm {
 				getToolbarArea().setEditarListener(e -> editar());
 				getToolbarArea().setExcluirListener(e -> excluir());
 
-				getFilterArea().addFilters(fNome);
-				getFilterArea().setPesquisarListener(e -> pesquisar());
-				getFilterArea().setLimparListener(e -> limpar());
+				fNome.addValueChangeListener(e -> pesquisar());
+				fEstado.addValueChangeListener(e -> pesquisar());
+				getFilterArea().addFilters(fNome, fEstado);
 			}
 		};
 
@@ -175,7 +179,7 @@ public class PacienteForm extends BaseForm {
 		sexo.setItems(EnumSet.allOf(Sexo.class));
 		estado.setEmptySelectionAllowed(false);
 		estado.setItems(estadoService.list());
-		estado.setItemCaptionGenerator(o -> o.getSigla());
+		estado.setItemCaptionGenerator(Estado::getSigla);
 
 		id.addStyleName(Constants.SMALL_FIELD_STYLE);
 		nome.addStyleName(Constants.LARGE_FIELD_STYLE);
@@ -259,11 +263,8 @@ public class PacienteForm extends BaseForm {
 		Map<String, Object> params = new HashMap<>();
 		if (!fNome.isEmpty())
 			params.put("nome#like", fNome.getValue());
+		if (!fEstado.isEmpty())
+			params.put("estado", fEstado.getValue());
 		updateGrid(params);
-	}
-
-	private void limpar() {
-		fNome.clear();
-		updateGrid();
 	}
 }

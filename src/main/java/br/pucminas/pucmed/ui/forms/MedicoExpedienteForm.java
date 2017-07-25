@@ -72,9 +72,7 @@ public class MedicoExpedienteForm extends BaseForm {
 				.bind("turno");
 
 		fDiaSemana.setItems(EnumSet.allOf(DiaSemana.class));
-		fDiaSemana.setEmptySelectionAllowed(false);
 		fTurno.setItems(EnumSet.allOf(Turno.class));
-		fTurno.setEmptySelectionAllowed(false);
 
 		BodyView bodyView = new BodyView() {
 			{
@@ -84,9 +82,9 @@ public class MedicoExpedienteForm extends BaseForm {
 				getToolbarArea().setEditarListener(e -> editar());
 				getToolbarArea().setExcluirListener(e -> excluir());
 
+				fDiaSemana.addValueChangeListener(e -> pesquisar());
+				fTurno.addValueChangeListener(e -> pesquisar());
 				getFilterArea().addFilters(fDiaSemana, fTurno);
-				getFilterArea().setPesquisarListener(e -> pesquisar());
-				getFilterArea().setLimparListener(e -> limpar());
 			}
 		};
 
@@ -169,11 +167,5 @@ public class MedicoExpedienteForm extends BaseForm {
 		if (!fTurno.isEmpty())
 			params.put("turno", fTurno.getValue());
 		updateGrid(params);
-	}
-
-	private void limpar() {
-		fDiaSemana.clear();
-		fTurno.clear();
-		updateGrid();
 	}
 }

@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.util.StringUtils;
@@ -85,7 +86,7 @@ public class CriteriaUtils {
 				detachedCriteria.add(property.le(value));
 				break;
 			case LIKE:
-				detachedCriteria.add(property.like(value));
+				detachedCriteria.add(property.like(value.toString(), MatchMode.ANYWHERE).ignoreCase());
 				break;
 			case LT:
 				detachedCriteria.add(property.lt(value));

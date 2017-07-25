@@ -113,7 +113,6 @@ public class AtendimentoForm extends BaseForm {
 				.asRequired("O campo é obrigatório")//
 				.bind("medico");
 
-		fPaciente.setEmptySelectionAllowed(false);
 		fPaciente.setItems(pacienteService.list());
 		fPaciente.setItemCaptionGenerator(Paciente::getNome);
 
@@ -131,9 +130,9 @@ public class AtendimentoForm extends BaseForm {
 				botaoReceituarios.setIcon(VaadinIcons.PILLS);
 				botaoReceituarios.addClickListener(e -> abrirReceituarios());
 
+				fPaciente.addValueChangeListener(e -> pesquisar());
+				fData.addValueChangeListener(e -> pesquisar());
 				getFilterArea().addFilters(fPaciente, fData);
-				getFilterArea().setPesquisarListener(e -> pesquisar());
-				getFilterArea().setLimparListener(e -> limpar());
 			}
 		};
 
@@ -252,11 +251,5 @@ public class AtendimentoForm extends BaseForm {
 			params.put("data#lt", Utils.convertLocalDateToDate(fData.getValue().plusDays(1)));
 		}
 		updateGrid(params);
-	}
-
-	private void limpar() {
-		fPaciente.clear();
-		fData.clear();
-		updateGrid();
 	}
 }

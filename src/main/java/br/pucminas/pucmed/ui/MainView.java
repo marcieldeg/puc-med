@@ -13,7 +13,6 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.TabSheet;
@@ -31,6 +30,7 @@ import br.pucminas.pucmed.ui.forms.MedicamentoForm;
 import br.pucminas.pucmed.ui.forms.MedicoForm;
 import br.pucminas.pucmed.ui.forms.PacienteForm;
 import br.pucminas.pucmed.ui.forms.RecepcionistaForm;
+import br.pucminas.pucmed.utils.Constants;
 
 @SuppressWarnings("serial")
 @SpringView
@@ -57,6 +57,7 @@ public class MainView extends VerticalLayout implements View {
 		layout.setMargin(false);
 		layout.addComponent(createMenu());
 		layout.setSizeFull();
+		layout.addStyleName("area-trabalho");
 		tabSheet.addTab(layout, "Área de Trabalho");
 		tabSheet.setHeight(100.0f, Unit.PERCENTAGE);
 		tabSheet.addStyleName(ValoTheme.TABSHEET_FRAMED);
@@ -70,12 +71,13 @@ public class MainView extends VerticalLayout implements View {
 	private void createTouchMenu() {
 		touchMenu.setWidth("100%");
 		touchMenu.setStyleName(ValoTheme.LAYOUT_CARD);
-		touchMenu.addStyleName(ValoTheme.BUTTON_PRIMARY);
+		touchMenu.addStyleName(ValoTheme.MENU_ROOT);
 		touchMenu.addStyleName("touch-menu");
 
 		touchMenubar.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
-		MenuItem grupoMenu = touchMenubar.addItem("Menu", null);
+		MenuItem grupoMenu = touchMenubar.addItem("", null);
 		grupoMenu.setIcon(VaadinIcons.MENU);
+		grupoMenu.setStyleName(ValoTheme.MENU_PART + ' ' + ValoTheme.MENU_PART_LARGE_ICONS);
 
 		grupoMenu.addItem("Serviços", null).setEnabled(false);
 		grupoMenu.addSeparator();
@@ -105,16 +107,16 @@ public class MainView extends VerticalLayout implements View {
 
 		touchMenu.addComponent(touchMenubar);
 
-		Label title = new Label("PUC-MED");
-		title.addStyleName(ValoTheme.LABEL_BOLD);
+		Button title = new Button(Constants.APPLICATION_TITLE, e -> tabSheet.setSelectedTab(0));
+		title.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
 		title.setSizeUndefined();
 		touchMenu.addComponent(title);
 		touchMenu.setComponentAlignment(title, Alignment.MIDDLE_CENTER);
 
-		Button botaoSair = new Button("Sair", e -> logOff());
-		botaoSair.setIcon(VaadinIcons.EXIT);
-		botaoSair.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
-		touchMenu.addComponent(botaoSair);
+		MenuBar menuSair = new MenuBar();
+		menuSair.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
+		menuSair.addItem("Sair", e -> logOff()).setIcon(VaadinIcons.EXIT);
+		touchMenu.addComponent(menuSair);
 
 		touchMenu.setExpandRatio(title, 1f);
 
@@ -162,7 +164,7 @@ public class MainView extends VerticalLayout implements View {
 				if (j.getText().equals(name))
 					j.setEnabled(enabled);
 		}
-		
+
 		for (MenuItem j : touchMenubar.getItems().get(0).getChildren())
 			if (j.getText().equals(name))
 				j.setEnabled(enabled);

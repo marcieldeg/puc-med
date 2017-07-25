@@ -57,7 +57,7 @@ public class ExameForm extends BaseForm {
 	private DateTimeField dataRealizacao = new DateTimeField("Data de Realização");
 	private TextArea resultado = new TextArea("Resultado");
 
-	private ComboBox<Paciente> fPaciente = new ComboBox<Paciente>("Paciente");
+	private ComboBox<Paciente> fPaciente = new ComboBox<>("Paciente");
 	private ComboBox<TipoExame> fTipoExame = new ComboBox<>("Tipo de Exame");
 	private DateField fDataRealizacao = new DateField("Data de Realização");
 
@@ -123,11 +123,9 @@ public class ExameForm extends BaseForm {
 
 		fTipoExame.setItems(tipoExameService.list());
 		fTipoExame.setItemCaptionGenerator(TipoExame::getNome);
-		fTipoExame.setEmptySelectionAllowed(false);
 
 		if (atendimento == null) {
 			fPaciente.setItems(pacienteService.list());
-			fPaciente.setEmptySelectionAllowed(false);
 			fPaciente.setItemCaptionGenerator(Paciente::getNome);
 		}
 
@@ -157,15 +155,15 @@ public class ExameForm extends BaseForm {
 						});
 				browserWindowOpener.extend(botaoImprimir);
 
+				fPaciente.addValueChangeListener(e -> pesquisar());
+				fTipoExame.addValueChangeListener(e -> pesquisar());
+				fDataRealizacao.addValueChangeListener(e -> pesquisar());
 				if (atendimento == null) {
 					getToolbarArea().setAdicionarEnabled(false);
 					getToolbarArea().setExcluirEnabled(false);
 					getFilterArea().addFilters(fPaciente);
 				}
-
 				getFilterArea().addFilters(fTipoExame, fDataRealizacao);
-				getFilterArea().setPesquisarListener(e -> pesquisar());
-				getFilterArea().setLimparListener(e -> limpar());
 			}
 		};
 
@@ -267,14 +265,6 @@ public class ExameForm extends BaseForm {
 			params.put("dataRealizacao#lt", Utils.convertLocalDateToDate(fDataRealizacao.getValue().plusDays(1)));
 		}
 		updateGrid(params);
-	}
-
-	private void limpar() {
-		if (abertoDoMenu)
-			fPaciente.clear();
-		fTipoExame.clear();
-		fDataRealizacao.clear();
-		updateGrid();
 	}
 
 	@Override

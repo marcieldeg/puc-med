@@ -92,9 +92,9 @@ public class LaboratorioForm extends BaseForm {
 				getToolbarArea().setEditarListener(e -> editar());
 				getToolbarArea().setExcluirListener(e -> excluir());
 
+				fNome.addValueChangeListener(e -> pesquisar());
+				fLogin.addValueChangeListener(e -> pesquisar());
 				getFilterArea().addFilters(fNome, fLogin);
-				getFilterArea().setPesquisarListener(e -> pesquisar());
-				getFilterArea().setLimparListener(e -> limpar());
 			}
 		};
 
@@ -181,11 +181,5 @@ public class LaboratorioForm extends BaseForm {
 		if (!fLogin.isEmpty())
 			params.put("login#like", fLogin.getValue());
 		updateGrid(params);
-	}
-
-	private void limpar() {
-		fNome.clear();
-		fLogin.clear();
-		updateGrid();
 	}
 }

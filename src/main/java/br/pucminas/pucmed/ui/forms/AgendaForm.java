@@ -136,11 +136,9 @@ public class AgendaForm extends BaseForm {
 		medico.setItems(medicos);
 		medico.setItemCaptionGenerator(Medico::getNome);
 
-		fPaciente.setEmptySelectionAllowed(false);
 		fPaciente.setItems(pacientes);
 		fPaciente.setItemCaptionGenerator(Paciente::getNome);
 
-		fMedico.setEmptySelectionAllowed(false);
 		fMedico.setItems(medicos);
 		fMedico.setItemCaptionGenerator(Medico::getNome);
 
@@ -151,10 +149,11 @@ public class AgendaForm extends BaseForm {
 				getToolbarArea().setAdicionarListener(e -> novo());
 				getToolbarArea().setEditarListener(e -> editar());
 				getToolbarArea().setExcluirListener(e -> excluir());
-
+				
+				fData.addValueChangeListener(e -> pesquisar());
+				fPaciente.addValueChangeListener(e -> pesquisar());
+				fMedico.addValueChangeListener(e -> pesquisar());
 				getFilterArea().addFilters(fData, fPaciente, fMedico);
-				getFilterArea().setPesquisarListener(e -> pesquisar());
-				getFilterArea().setLimparListener(e -> limpar());
 			}
 		};
 
@@ -237,12 +236,5 @@ public class AgendaForm extends BaseForm {
 		if (!fMedico.isEmpty())
 			params.put("medico", fMedico.getValue());
 		updateGrid(params);
-	}
-
-	private void limpar() {
-		fData.clear();
-		fPaciente.clear();
-		fMedico.clear();
-		updateGrid();
 	}
 }

@@ -13177,23 +13177,19 @@ div.v-layout.v-horizontal.v-widget {
 	overflow: hidden;
 }
 
-.v-menubar-desk-menu {
-	display: block !important;
+.v-menubar-borderless .v-menubar-menuitem {
+	color: white !important;
 }
 
-.v-tabsheet-tabcontainer {
-	display: block !important;
+.v-button-borderless-colored {
+	color: white !important;
 }
 
-.v-horizontallayout-touch-menu {
-	display: none !important;
+.v-verticallayout-area-trabalho {
+	background-color: #e7ebf2;
 }
 
-@media (min-resolution: 2dppx) {
-	.v-slot-responsive {
-		width: 100%;
-		margin: auto;
-	}
+@media screen and (min-width: 320px) {
 	.v-menubar-desk-menu {
 		display: none !important;
 	}
@@ -13203,9 +13199,6 @@ div.v-layout.v-horizontal.v-widget {
 	.v-horizontallayout-touch-menu {
 		display: block !important;
 	}
-}
-
-@media screen and (min-width: 320px) {
 	.v-slot-responsive {
 		width: 100%;
 		margin: auto;
@@ -13218,11 +13211,23 @@ div.v-layout.v-horizontal.v-widget {
 	.m-small-field, .m-medium-field, .m-large-field, .m-xlarge-field {
 		width: 100% !important;
 	}
+	.v-slot-quiet .v-button-quiet .v-button-wrap .v-button-caption {
+		display: none !important;
+	}
 }
 
 @media screen and (min-width: 480px) {
+	.v-menubar-desk-menu {
+		display: none !important;
+	}
+	.v-tabsheet-tabcontainer {
+		display: none !important;
+	}
+	.v-horizontallayout-touch-menu {
+		display: block !important;
+	}
 	.v-slot-responsive {
-		width: 100%;
+		width: 80%;
 		margin: auto;
 	}
 	.v-window-subwindow {
@@ -13236,11 +13241,23 @@ div.v-layout.v-horizontal.v-widget {
 	.m-medium-field, .m-large-field, .m-xlarge-field {
 		width: 100% !important;
 	}
+	.v-slot-quiet .v-button-quiet .v-button-wrap .v-button-caption {
+		display: none !important;
+	}
 }
 
 @media screen and (min-width: 600px) {
+	.v-menubar-desk-menu {
+		display: none !important;
+	}
+	.v-tabsheet-tabcontainer {
+		display: none !important;
+	}
+	.v-horizontallayout-touch-menu {
+		display: block !important;
+	}
 	.v-slot-responsive {
-		width: 80%;
+		width: 75%;
 		margin: auto;
 	}
 	.v-window-subwindow {
@@ -13249,17 +13266,29 @@ div.v-layout.v-horizontal.v-widget {
 		margin: auto;
 	}
 	.m-small-field {
-		width: 50% !important;
+		width: 30% !important;
 	}
 	.m-medium-field {
-		width: 75% !important;
+		width: 60% !important;
 	}
 	.m-large-field, .m-xlarge-field {
 		width: 100% !important;
 	}
+	.v-slot-quiet .v-button-quiet .v-button-wrap .v-button-caption {
+		display: inline !important;
+	}
 }
 
 @media screen and (min-width: 801px) {
+	.v-menubar-desk-menu {
+		display: block !important;
+	}
+	.v-tabsheet-tabcontainer {
+		display: block !important;
+	}
+	.v-horizontallayout-touch-menu {
+		display: none !important;
+	}
 	.v-slot-responsive {
 		width: 50%;
 		margin: auto;
@@ -13281,11 +13310,23 @@ div.v-layout.v-horizontal.v-widget {
 	.m-xlarge-field {
 		width: 100% !important;
 	}
+	.v-slot-quiet .v-button-quiet .v-button-wrap .v-button-caption {
+		display: inline !important;
+	}
 }
 
 @media screen and (min-width: 1025px) {
+	.v-menubar-desk-menu {
+		display: block !important;
+	}
+	.v-tabsheet-tabcontainer {
+		display: block !important;
+	}
+	.v-horizontallayout-touch-menu {
+		display: none !important;
+	}
 	.v-slot-responsive {
-		width: 30%;
+		width: 45%;
 		margin: auto;
 	}
 	.v-window-subwindow {
@@ -13305,11 +13346,23 @@ div.v-layout.v-horizontal.v-widget {
 	.m-xlarge-field {
 		width: 100% !important;
 	}
+	.v-slot-quiet .v-button-quiet .v-button-wrap .v-button-caption {
+		display: inline !important;
+	}
 }
 
 @media screen and (min-width: 1281px) {
+	.v-menubar-desk-menu {
+		display: block !important;
+	}
+	.v-tabsheet-tabcontainer {
+		display: block !important;
+	}
+	.v-horizontallayout-touch-menu {
+		display: none !important;
+	}
 	.v-slot-responsive {
-		width: 30%;
+		width: 35%;
 		margin: auto;
 	}
 	.v-window-subwindow {
@@ -13318,15 +13371,18 @@ div.v-layout.v-horizontal.v-widget {
 		margin: auto;
 	}
 	.m-small-field {
-		width: 20% !important;
+		width: 15% !important;
 	}
 	.m-medium-field {
-		width: 40% !important;
+		width: 30% !important;
 	}
 	.m-large-field {
 		width: 60% !important;
 	}
 	.m-xlarge-field {
 		width: 100% !important;
+	}
+	.v-slot-quiet .v-button-quiet .v-button-wrap .v-button-caption {
+		display: inline !important;
 	}
 }

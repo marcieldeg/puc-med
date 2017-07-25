@@ -64,9 +64,8 @@ public class EspecialidadeForm extends BaseForm {
 				getToolbarArea().setEditarListener(e -> editar());
 				getToolbarArea().setExcluirListener(e -> excluir());
 
+				fNome.addValueChangeListener(e -> pesquisar());
 				getFilterArea().addFilters(fNome);
-				getFilterArea().setPesquisarListener(e -> pesquisar());
-				getFilterArea().setLimparListener(e -> limpar());
 			}
 		};
 
@@ -141,10 +140,5 @@ public class EspecialidadeForm extends BaseForm {
 		if (!fNome.isEmpty())
 			params.put("nome#like", fNome.getValue());
 		updateGrid(params);
-	}
-
-	private void limpar() {
-		fNome.clear();
-		updateGrid();
 	}
 }

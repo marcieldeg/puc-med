@@ -89,7 +89,6 @@ public class ReceituarioForm extends BaseForm {
 
 		List<Medicamento> medicamentos = medicamentoService.list();
 
-		fMedicamento.setEmptySelectionAllowed(false);
 		fMedicamento.setItems(medicamentos);
 		fMedicamento.setItemCaptionGenerator(Medicamento::getNomeComercial);
 
@@ -120,9 +119,8 @@ public class ReceituarioForm extends BaseForm {
 						});
 				browserWindowOpener.extend(botaoImprimir);
 
+				fMedicamento.addValueChangeListener(e -> pesquisar());
 				getFilterArea().addFilters(fMedicamento);
-				getFilterArea().setPesquisarListener(e -> pesquisar());
-				getFilterArea().setLimparListener(e -> limpar());
 			}
 		};
 
@@ -204,10 +202,5 @@ public class ReceituarioForm extends BaseForm {
 		if (!fMedicamento.isEmpty())
 			params.put("medicamento", fMedicamento.getValue());
 		updateGrid(params);
-	}
-
-	private void limpar() {
-		fMedicamento.clear();
-		updateGrid();
 	}
 }

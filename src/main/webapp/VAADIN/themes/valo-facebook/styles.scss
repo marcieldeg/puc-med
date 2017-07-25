@@ -6,24 +6,20 @@
 	@include valo;
 }
 
-/*****MENUS*****/
-.v-menubar-desk-menu {
-	display: block !important;
-}
-	
-.v-tabsheet-tabcontainer {
-	display: block !important;
-}
-	
-.v-horizontallayout-touch-menu {
-	display: none !important;
+.v-menubar-borderless .v-menubar-menuitem {
+	color: white !important;
 }
 
-@media (min-resolution: 2dppx){
-	.v-slot-responsive { 
-		width: 100%;
-		margin: auto;
-	}
+.v-button-borderless-colored {
+	color: white !important;
+}
+
+.v-verticallayout-area-trabalho {
+	background-color: $v-app-background-color;
+}
+
+@media screen and (min-width: 320px) {
+	/* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
 	
 	/*****MENUS*****/
 	.v-menubar-desk-menu {
@@ -37,10 +33,7 @@
 	.v-horizontallayout-touch-menu {
 		display: block !important;
 	}
-}
-
-@media screen and (min-width: 320px) {
-	/* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
+	
 	.v-slot-responsive { 
 		width: 100%;
 		margin: auto;
@@ -55,12 +48,30 @@
 	.m-small-field, .m-medium-field, .m-large-field, .m-xlarge-field {
 		width: 100% !important;
 	}
+	
+	.v-slot-quiet .v-button-quiet .v-button-wrap .v-button-caption {
+		display: none !important;
+	}
 }
 
 @media screen and (min-width: 480px) {
 	/* smartphones, Android phones, landscape iPhone */
+	
+	/*****MENUS*****/
+	.v-menubar-desk-menu {
+		display: none !important;
+	}
+	
+	.v-tabsheet-tabcontainer {
+		display: none !important;
+	}	
+	
+	.v-horizontallayout-touch-menu {
+		display: block !important;
+	}
+	
 	.v-slot-responsive { 
-		width: 100%;
+		width: 80%;
 		margin: auto;
 	}
 	
@@ -77,12 +88,30 @@
 	.m-medium-field, .m-large-field, .m-xlarge-field {
 		width: 100% !important;
 	}
+	
+	.v-slot-quiet .v-button-quiet .v-button-wrap .v-button-caption {
+		display: none !important;
+	}
 }
 
 @media screen and (min-width: 600px) {
 	/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+	
+	/*****MENUS*****/
+	.v-menubar-desk-menu {
+		display: none !important;
+	}
+	
+	.v-tabsheet-tabcontainer {
+		display: none !important;
+	}	
+	
+	.v-horizontallayout-touch-menu {
+		display: block !important;
+	}
+	
 	.v-slot-responsive { 
-		width: 80%;
+		width: 75%;
 		margin: auto;
 	}
 	
@@ -93,20 +122,38 @@
 	}
 	
 	.m-small-field {
-		width: 50% !important;
+		width: 30% !important;
 	}
 	
 	.m-medium-field {
-		width: 75% !important;
+		width: 60% !important;
 	}
 	
 	.m-large-field, .m-xlarge-field {
 		width: 100% !important;
 	}
+	
+	.v-slot-quiet .v-button-quiet .v-button-wrap .v-button-caption {
+		display: inline !important;
+	}
 }
 
 @media screen and (min-width: 801px) {
 	/* tablet, landscape iPad, lo-res laptops ands desktops */
+	
+	/*****MENUS*****/
+	.v-menubar-desk-menu {
+		display: block !important;
+	}
+	
+	.v-tabsheet-tabcontainer {
+		display: block !important;
+	}	
+	
+	.v-horizontallayout-touch-menu {
+		display: none !important;
+	}
+	
 	.v-slot-responsive {
 		width: 50%;
 		margin: auto;
@@ -133,12 +180,30 @@
 	.m-xlarge-field {
 		width: 100% !important;
 	}
+	
+	.v-slot-quiet .v-button-quiet .v-button-wrap .v-button-caption {
+		display: inline !important;
+	}
 }
 
 @media screen and (min-width: 1025px) {
 	/* big landscape tablets, laptops, and desktops */
+	
+	/*****MENUS*****/
+	.v-menubar-desk-menu {
+		display: block !important;
+	}
+	
+	.v-tabsheet-tabcontainer {
+		display: block !important;
+	}	
+	
+	.v-horizontallayout-touch-menu {
+		display: none !important;
+	}
+	
 	.v-slot-responsive {
-		width: 30%;
+		width: 45%;
 		margin: auto;
 	}
 	
@@ -163,12 +228,30 @@
 	.m-xlarge-field {
 		width: 100% !important;
 	}
+	
+	.v-slot-quiet .v-button-quiet .v-button-wrap .v-button-caption {
+		display: inline !important;
+	}
 }
 
 @media screen and (min-width: 1281px) { 
 	/* hi-res laptops and desktops */
+	
+	/*****MENUS*****/
+	.v-menubar-desk-menu {
+		display: block !important;
+	}
+	
+	.v-tabsheet-tabcontainer {
+		display: block !important;
+	}	
+	
+	.v-horizontallayout-touch-menu {
+		display: none !important;
+	}
+	
 	.v-slot-responsive {
-		width: 30%;
+		width: 35%;
 		margin: auto;
 	}
 	
@@ -179,11 +262,11 @@
 	}
 	
 	.m-small-field {
-		width: 20% !important;
+		width: 15% !important;
 	}
 	
 	.m-medium-field {
-		width: 40% !important;
+		width: 30% !important;
 	}
 	
 	.m-large-field {
@@ -192,5 +275,9 @@
 	
 	.m-xlarge-field {
 		width: 100% !important;
+	}
+	
+	.v-slot-quiet .v-button-quiet .v-button-wrap .v-button-caption {
+		display: inline !important;
 	}
 }

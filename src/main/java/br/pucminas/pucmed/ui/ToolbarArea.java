@@ -13,7 +13,7 @@ import br.pucminas.pucmed.ui.extra.InternalButton;
 
 @SuppressWarnings("serial")
 public class ToolbarArea extends HorizontalLayout {
-	private final InternalButton botaoPesquisar = new InternalButton("Pesquisar");
+	private final InternalButton botaoPesquisar = new InternalButton("Pesquisa");
 	private final InternalButton botaoAdicionar = new InternalButton("Novo");
 	private final InternalButton botaoEditar = new InternalButton("Editar");
 	private final InternalButton botaoExcluir = new InternalButton("Excluir");
