@@ -7,6 +7,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import org.postgresql.util.PSQLException;
+import org.springframework.dao.DataIntegrityViolationException;
+
 import com.vaadin.data.Binder;
 import com.vaadin.data.ValidationResult;
 import com.vaadin.data.converter.LocalDateTimeToDateConverter;
@@ -150,7 +153,7 @@ public class AgendaForm extends BaseForm {
 				getToolbarArea().setAdicionarListener(e -> novo());
 				getToolbarArea().setEditarListener(e -> editar());
 				getToolbarArea().setExcluirListener(e -> excluir());
-				
+
 				fData.addValueChangeListener(e -> pesquisar());
 				fPaciente.addValueChangeListener(e -> pesquisar());
 				fMedico.addValueChangeListener(e -> pesquisar());
@@ -159,7 +162,7 @@ public class AgendaForm extends BaseForm {
 		};
 
 		id.setEnabled(false);
-		
+
 		id.addStyleName(Constants.SMALL_FIELD_STYLE);
 		data.addStyleName(Constants.SMALL_FIELD_STYLE);
 		paciente.addStyleName(Constants.MEDIUM_FIELD_STYLE);
@@ -191,8 +194,18 @@ public class AgendaForm extends BaseForm {
 		if (!grid.asSingleSelect().isEmpty()) {
 			MessageBox.showQuestion("Confirma a exclusão desse registro?", //
 					() -> {
-						service.delete(grid.asSingleSelect().getValue());
-						updateGrid();
+						try {
+							service.delete(grid.asSingleSelect().getValue());
+							updateGrid();
+						} catch (DataIntegrityViolationException ex) {
+							Throwable cause = ex.getMostSpecificCause();
+							String message = "";
+							if (cause instanceof PSQLException)
+								message = Utils.translateExceptionMessage((PSQLException) cause);
+							else
+								message = cause.getLocalizedMessage();
+							Notification.show(message, Type.ERROR);
+						}
 					});
 		}
 	}

@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.postgresql.util.PSQLException;
+import org.springframework.dao.DataIntegrityViolationException;
+
 import com.vaadin.data.Binder;
 import com.vaadin.data.converter.StringToLongConverter;
 import com.vaadin.data.validator.EmailValidator;
@@ -23,7 +26,10 @@ import br.pucminas.pucmed.ui.BaseForm;
 import br.pucminas.pucmed.ui.BodyEdit;
 import br.pucminas.pucmed.ui.BodyView;
 import br.pucminas.pucmed.ui.extra.MessageBox;
+import br.pucminas.pucmed.ui.extra.Notification;
+import br.pucminas.pucmed.ui.extra.Notification.Type;
 import br.pucminas.pucmed.utils.Constants;
+import br.pucminas.pucmed.utils.Utils;
 
 @SuppressWarnings("serial")
 public class LaboratorioForm extends BaseForm {
@@ -137,8 +143,18 @@ public class LaboratorioForm extends BaseForm {
 		if (!grid.asSingleSelect().isEmpty()) {
 			MessageBox.showQuestion("Confirma a exclusão desse registro?", //
 					() -> {
-						service.delete(grid.asSingleSelect().getValue());
-						updateGrid();
+						try {
+							service.delete(grid.asSingleSelect().getValue());
+							updateGrid();
+						} catch (DataIntegrityViolationException ex) {
+							Throwable cause = ex.getMostSpecificCause();
+							String message = "";
+							if (cause instanceof PSQLException)
+								message = Utils.translateExceptionMessage((PSQLException) cause);
+							else
+								message = cause.getLocalizedMessage();
+							Notification.show(message, Type.ERROR);
+						}
 					});
 		}
 	}

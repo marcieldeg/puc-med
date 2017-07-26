@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.postgresql.util.PSQLException;
+import org.springframework.dao.DataIntegrityViolationException;
+
 import com.vaadin.data.Binder;
 import com.vaadin.data.converter.LocalDateTimeToDateConverter;
 import com.vaadin.data.converter.StringToLongConverter;
@@ -172,7 +175,7 @@ public class ExameForm extends BaseForm {
 		tipoExame.setItems(tipoExameService.list());
 		tipoExame.setItemCaptionGenerator(TipoExame::getNome);
 		tipoExame.setEmptySelectionAllowed(false);
-		
+
 		id.addStyleName(Constants.SMALL_FIELD_STYLE);
 		tipoExame.addStyleName(Constants.MEDIUM_FIELD_STYLE);
 		dataRealizacao.addStyleName(Constants.MEDIUM_FIELD_STYLE);
@@ -219,8 +222,18 @@ public class ExameForm extends BaseForm {
 
 			MessageBox.showQuestion("Confirma a exclusão desse registro?", //
 					() -> {
-						service.delete(e);
-						updateGrid();
+						try {
+							service.delete(grid.asSingleSelect().getValue());
+							updateGrid();
+						} catch (DataIntegrityViolationException ex) {
+							Throwable cause = ex.getMostSpecificCause();
+							String message = "";
+							if (cause instanceof PSQLException)
+								message = Utils.translateExceptionMessage((PSQLException) cause);
+							else
+								message = cause.getLocalizedMessage();
+							Notification.show(message, Type.ERROR);
+						}
 					});
 		}
 	}
