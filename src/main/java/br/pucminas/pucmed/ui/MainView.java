@@ -78,8 +78,10 @@ public class MainView extends VerticalLayout implements View {
 		MenuItem grupoMenu = touchMenubar.addItem("Menu", null);
 		grupoMenu.setIcon(VaadinIcons.MENU);
 
-		grupoMenu.addItem("Serviços", null).setEnabled(false);
-		grupoMenu.addSeparator();
+		MenuItem i = grupoMenu.addItem("Serviços", null);
+		i.setEnabled(false);
+		i.setStyleName("menu-grupo");
+		//grupoMenu.addSeparator();
 		grupoMenu.addItem("Agendamento", e -> createTab(AgendaForm.class, AgendaForm.CAPTION))
 				.setIcon(VaadinIcons.NOTEBOOK);
 		grupoMenu.addItem("Atendimento", e -> createTab(AtendimentoForm.class, AtendimentoForm.CAPTION))
@@ -89,8 +91,10 @@ public class MainView extends VerticalLayout implements View {
 		grupoMenu.addItem("Exames", e -> createTab(ExameForm.class, ExameForm.CAPTION))
 				.setIcon(VaadinIcons.DOCTOR_BRIEFCASE);
 		grupoMenu.addSeparator();
-		grupoMenu.addItem("Pessoal", null).setEnabled(false);
-		grupoMenu.addSeparator();
+		i = grupoMenu.addItem("Pessoal", null);
+		i.setEnabled(false);
+		i.setStyleName("menu-grupo");
+		//grupoMenu.addSeparator();
 		grupoMenu.addItem("Recepcionistas", e -> createTab(RecepcionistaForm.class, RecepcionistaForm.CAPTION))
 				.setIcon(VaadinIcons.HEADSET);
 		grupoMenu.addItem("Laboratórios", e -> createTab(LaboratorioForm.class, LaboratorioForm.CAPTION))
@@ -99,8 +103,10 @@ public class MainView extends VerticalLayout implements View {
 		grupoMenu.addItem("Especialidades", e -> createTab(EspecialidadeForm.class, EspecialidadeForm.CAPTION))
 				.setIcon(VaadinIcons.DIPLOMA_SCROLL);
 		grupoMenu.addSeparator();
-		grupoMenu.addItem("Materiais", null).setEnabled(false);
-		grupoMenu.addSeparator();
+		i = grupoMenu.addItem("Materiais", null);
+		i.setEnabled(false);
+		i.setStyleName("menu-grupo");
+		//grupoMenu.addSeparator();
 		grupoMenu.addItem("Medicamentos", e -> createTab(MedicamentoForm.class, MedicamentoForm.CAPTION))
 				.setIcon(VaadinIcons.PILL);
 

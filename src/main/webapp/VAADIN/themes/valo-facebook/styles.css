@@ -870,6 +870,106 @@
 
 /**
  *
+ * @group table
+ */
+
+@-webkit-keyframes valo-grid-editor-footer-animate-in {
+		0% {
+		margin-top: -30px;
+	}
+	}
+
+@-moz-keyframes valo-grid-editor-footer-animate-in {
+		0% {
+		margin-top: -30px;
+	}
+	}
+
+@keyframes valo-grid-editor-footer-animate-in {
+		0% {
+		margin-top: -30px;
+	}
+	}
+
+@-webkit-keyframes valo-grid-editor-footer-animate-in-alt {
+		0% {
+		margin-bottom: -31px;
+	}
+		100% {
+		margin-bottom: -1px;
+	}
+	}
+
+@-moz-keyframes valo-grid-editor-footer-animate-in-alt {
+		0% {
+		margin-bottom: -31px;
+	}
+		100% {
+		margin-bottom: -1px;
+	}
+	}
+
+@keyframes valo-grid-editor-footer-animate-in-alt {
+		0% {
+		margin-bottom: -31px;
+	}
+		100% {
+		margin-bottom: -1px;
+	}
+	}
+
+/**
+ *
+ * @group table
+ */
+
+@-webkit-keyframes valo-grid-editor-footer-animate-in {
+		0% {
+		margin-top: -30px;
+	}
+	}
+
+@-moz-keyframes valo-grid-editor-footer-animate-in {
+		0% {
+		margin-top: -30px;
+	}
+	}
+
+@keyframes valo-grid-editor-footer-animate-in {
+		0% {
+		margin-top: -30px;
+	}
+	}
+
+@-webkit-keyframes valo-grid-editor-footer-animate-in-alt {
+		0% {
+		margin-bottom: -31px;
+	}
+		100% {
+		margin-bottom: -1px;
+	}
+	}
+
+@-moz-keyframes valo-grid-editor-footer-animate-in-alt {
+		0% {
+		margin-bottom: -31px;
+	}
+		100% {
+		margin-bottom: -1px;
+	}
+	}
+
+@keyframes valo-grid-editor-footer-animate-in-alt {
+		0% {
+		margin-bottom: -31px;
+	}
+		100% {
+		margin-bottom: -1px;
+	}
+	}
+
+/**
+ *
  *
  * @param {string} $primary-stylename (v-treetable) - 
  *
@@ -957,7 +1057,7 @@
  */
 
 .v-vaadin-version:after {
-	content: "8.0.7";
+	content: "8.1.0";
 }
 
 .v-widget {
@@ -2117,6 +2217,106 @@ div.v-layout.v-horizontal.v-widget {
 
 /**
  *
+ * @group table
+ */
+
+@-webkit-keyframes valo-grid-editor-footer-animate-in {
+		0% {
+		margin-top: -30px;
+	}
+	}
+
+@-moz-keyframes valo-grid-editor-footer-animate-in {
+		0% {
+		margin-top: -30px;
+	}
+	}
+
+@keyframes valo-grid-editor-footer-animate-in {
+		0% {
+		margin-top: -30px;
+	}
+	}
+
+@-webkit-keyframes valo-grid-editor-footer-animate-in-alt {
+		0% {
+		margin-bottom: -31px;
+	}
+		100% {
+		margin-bottom: -1px;
+	}
+	}
+
+@-moz-keyframes valo-grid-editor-footer-animate-in-alt {
+		0% {
+		margin-bottom: -31px;
+	}
+		100% {
+		margin-bottom: -1px;
+	}
+	}
+
+@keyframes valo-grid-editor-footer-animate-in-alt {
+		0% {
+		margin-bottom: -31px;
+	}
+		100% {
+		margin-bottom: -1px;
+	}
+	}
+
+/**
+ *
+ * @group table
+ */
+
+@-webkit-keyframes valo-grid-editor-footer-animate-in {
+		0% {
+		margin-top: -30px;
+	}
+	}
+
+@-moz-keyframes valo-grid-editor-footer-animate-in {
+		0% {
+		margin-top: -30px;
+	}
+	}
+
+@keyframes valo-grid-editor-footer-animate-in {
+		0% {
+		margin-top: -30px;
+	}
+	}
+
+@-webkit-keyframes valo-grid-editor-footer-animate-in-alt {
+		0% {
+		margin-bottom: -31px;
+	}
+		100% {
+		margin-bottom: -1px;
+	}
+	}
+
+@-moz-keyframes valo-grid-editor-footer-animate-in-alt {
+		0% {
+		margin-bottom: -31px;
+	}
+		100% {
+		margin-bottom: -1px;
+	}
+	}
+
+@keyframes valo-grid-editor-footer-animate-in-alt {
+		0% {
+		margin-bottom: -31px;
+	}
+		100% {
+		margin-bottom: -1px;
+	}
+	}
+
+/**
+ *
  *
  * @param {string} $primary-stylename (v-treetable) - 
  *
@@ -2359,31 +2559,6 @@ div.v-layout.v-horizontal.v-widget {
 	box-shadow: 0 0 1px 1px rgba(59, 89, 152, 0.5);
 }
 
-.valo-facebook button {
-	font: inherit;
-	font-weight: 400;
-	line-height: 1.55;
-}
-
-.valo-facebook a {
-	cursor: pointer;
-	color: #3b5998;
-	text-decoration: none;
-	font-weight: inherit;
-	-webkit-transition: color 140ms;
-	-moz-transition: color 140ms;
-	transition: color 140ms;
-}
-
-.valo-facebook a:hover {
-	color: #4c70ba;
-}
-
-.valo-facebook a.v-disabled {
-	opacity: 0.5;
-	filter: alpha(opacity=50) ;
-}
-
 .valo-facebook .v-disabled {
 	cursor: default !important;
 }
@@ -2397,6 +2572,13 @@ div.v-layout.v-horizontal.v-widget {
 	overflow: hidden;
 	opacity: 0.5;
 	filter: alpha(opacity=50) ;
+}
+
+.valo-facebook .v-draggable {
+	-moz-user-select: none !important;
+	-ms-user-select: none !important;
+	-webkit-user-select: none !important;
+	user-select: none !important;
 }
 
 .valo-facebook .v-tooltip {
@@ -2447,6 +2629,11 @@ div.v-layout.v-horizontal.v-widget {
 
 .valo-facebook .v-tooltip h1, .valo-facebook .v-tooltip h2, .valo-facebook .v-tooltip h3, .valo-facebook .v-tooltip h4 {
 	color: inherit;
+}
+
+.valo-facebook .v-tooltip pre.v-tooltip-pre {
+	font: inherit;
+	white-space: pre-wrap;
 }
 
 .valo-facebook .v-contextmenu {
@@ -3577,6 +3764,7 @@ div.v-layout.v-horizontal.v-widget {
 	width: 30px;
 	line-height: 1;
 	padding-top: 0.12em;
+	margin-left: 5px;
 }
 
 .valo-facebook .v-filterselect[class*="prompt"] > [class*="input"] {
@@ -4000,6 +4188,7 @@ div.v-layout.v-horizontal.v-widget {
 	width: 23px;
 	line-height: 1;
 	padding-top: 0.12em;
+	margin-left: 4px;
 }
 
 .valo-facebook .v-filterselect-tiny [class$="button"] {
@@ -4119,6 +4308,7 @@ div.v-layout.v-horizontal.v-widget {
 	width: 26px;
 	line-height: 1;
 	padding-top: 0.12em;
+	margin-left: 5px;
 }
 
 .valo-facebook .v-filterselect-compact [class$="button"], .valo-facebook .v-filterselect-small [class$="button"] {
@@ -4243,6 +4433,7 @@ div.v-layout.v-horizontal.v-widget {
 	width: 36px;
 	line-height: 1;
 	padding-top: 0.12em;
+	margin-left: 6px;
 }
 
 .valo-facebook .v-filterselect-large [class$="button"] {
@@ -4363,6 +4554,7 @@ div.v-layout.v-horizontal.v-widget {
 	width: 48px;
 	line-height: 1;
 	padding-top: 0.12em;
+	margin-left: 8px;
 }
 
 .valo-facebook .v-filterselect-huge [class$="button"] {
@@ -5017,6 +5209,10 @@ div.v-layout.v-horizontal.v-widget {
 	border-left: none;
 }
 
+.valo-facebook .v-grid-cell div.component-wrap {
+	width: 100%;
+}
+
 .valo-facebook .v-grid-row > td, .valo-facebook .v-grid-editor-cells > div {
 	border-left: 1px solid #d4d4d4;
 	border-bottom: 1px solid #d4d4d4;
@@ -5559,6 +5755,76 @@ div.v-layout.v-horizontal.v-widget {
 
 .valo-facebook .v-grid-scroller-horizontal::-webkit-scrollbar-thumb {
 	min-width: 30px;
+}
+
+.valo-facebook .v-grid-row-drag-badge {
+	background-color: red;
+	color: white;
+	display: block;
+	width: 30px;
+	height: 30px;
+	border-radius: 10px;
+	line-height: 30px;
+	text-align: center;
+	float: left;
+}
+
+.valo-facebook .v-grid-row-drag-top, .valo-facebook .v-grid-row-drag-bottom {
+	z-index: 100;
+}
+
+.valo-facebook .v-grid-row-drag-top:before, .valo-facebook .v-grid-row-drag-bottom:after {
+	content: "";
+	display: block;
+	position: absolute;
+	height: 2px;
+	width: 100%;
+	background: #3b5998;
+	pointer-events: none;
+	border: none;
+}
+
+.valo-facebook .v-grid-row-drag-bottom:after {
+	bottom: -1px;
+}
+
+.valo-facebook .v-grid-row-drag-top:before {
+	top: -1px;
+}
+
+.valo-facebook .v-grid-row-drag-top:first-child:before {
+	top: 0;
+}
+
+.valo-facebook .v-grid-row-drag-center:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 2px;
+	border: 2px solid #3b5998;
+	pointer-events: none;
+}
+
+.valo-facebook .v-grid-row-selected.v-grid-row-drag-center:after {
+	border-color: #2d4373;
+}
+
+.valo-facebook .v-grid-row-selected.v-grid-row-drag-top:before, .valo-facebook .v-grid-row-selected.v-grid-row-drag-bottom:after {
+	background: #2d4373;
+}
+
+.valo-facebook .v-grid-body-drag-top:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	pointer-events: none;
+	border: 2px solid #3b5998;
+	z-index: 100;
 }
 
 .valo-facebook .v-textfield {
@@ -8680,12 +8946,28 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .valo-facebook .v-link a {
+	cursor: pointer;
+	color: #3b5998;
+	text-decoration: none;
+	font-weight: inherit;
+	-webkit-transition: color 140ms;
+	-moz-transition: color 140ms;
+	transition: color 140ms;
 	cursor: inherit;
 	color: inherit;
 	text-decoration: inherit;
 	-webkit-transition: inherit;
 	-moz-transition: inherit;
 	transition: inherit;
+}
+
+.valo-facebook .v-link a:hover {
+	color: #4c70ba;
+}
+
+.valo-facebook .v-link a.v-disabled {
+	opacity: 0.5;
+	filter: alpha(opacity=50) ;
 }
 
 .valo-facebook .v-link .v-icon {
@@ -9189,6 +9471,2079 @@ div.v-layout.v-horizontal.v-widget {
 
 .v-ff .valo-facebook .v-tree-node-drag-top:before, .v-ff .valo-facebook .v-tree-node-drag-bottom:after {
 	line-height: 1px;
+}
+
+.valo-facebook .v-tree8 {
+	position: relative;
+}
+
+.valo-facebook .v-tree8-scroller {
+	position: absolute;
+	z-index: 1;
+	outline: none;
+	box-sizing: border-box;
+}
+
+.valo-facebook .v-tree8-scroller-horizontal {
+	left: 0;
+	right: 0;
+	bottom: 0;
+	overflow-y: hidden;
+	-ms-overflow-y: hidden;
+}
+
+.valo-facebook .v-tree8-scroller-vertical {
+	right: 0;
+	top: 0;
+	bottom: 0;
+	overflow-x: hidden;
+	-ms-overflow-x: hidden;
+}
+
+.valo-facebook .v-tree8-tablewrapper {
+	position: absolute;
+	overflow: hidden;
+	box-sizing: border-box;
+	z-index: 5;
+}
+
+.valo-facebook .v-tree8-tablewrapper > table {
+	border-spacing: 0;
+	table-layout: fixed;
+	width: inherit;
+}
+
+.valo-facebook .v-tree8-header-deco, .valo-facebook .v-tree8-footer-deco {
+	position: absolute;
+	right: 0;
+	box-sizing: border-box;
+}
+
+.valo-facebook .v-tree8-horizontal-scrollbar-deco {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	box-sizing: border-box;
+}
+
+.valo-facebook .v-tree8-header, .valo-facebook .v-tree8-body, .valo-facebook .v-tree8-footer {
+	position: absolute;
+	left: 0;
+	width: inherit;
+	z-index: 10;
+}
+
+.valo-facebook .v-tree8-header, .valo-facebook .v-tree8-header-deco {
+	top: 0;
+}
+
+.valo-facebook .v-tree8-footer, .valo-facebook .v-tree8-footer-deco {
+	bottom: 0;
+}
+
+.valo-facebook .v-tree8-body {
+	-ms-touch-action: none;
+	touch-action: none;
+	z-index: 0;
+	top: 0;
+}
+
+.valo-facebook .v-tree8-body .v-tree8-row {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.valo-facebook .v-tree8-row {
+	display: block;
+}
+
+.valo-facebook .v-tree8-row  > td, .valo-facebook .v-tree8-row  > th {
+	background-color: white;
+}
+
+.valo-facebook .v-tree8-row {
+	width: inherit;
+}
+
+.valo-facebook .v-tree8-cell {
+	display: block;
+	float: left;
+	padding: 2px;
+	white-space: nowrap;
+	box-sizing: border-box;
+	overflow: hidden;
+	font-size: 14px;
+}
+
+.valo-facebook .v-tree8-cell.frozen {
+	position: relative;
+	z-index: 1;
+}
+
+.valo-facebook .v-tree8-spacer {
+	position: absolute;
+	display: block;
+	background-color: white;
+}
+
+.valo-facebook .v-tree8-spacer  > td {
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.valo-facebook .v-tree8 {
+	outline: none;
+}
+
+.valo-facebook .v-tree8-scroller-vertical, .valo-facebook .v-tree8-scroller-horizontal {
+	border: 1px solid #d4d4d4;
+}
+
+.valo-facebook .v-tree8-scroller-vertical {
+	border-left: none;
+}
+
+.valo-facebook .v-tree8-scroller-horizontal {
+	border-top: none;
+}
+
+.valo-facebook .v-tree8-tablewrapper {
+	border: 1px solid #d4d4d4;
+}
+
+.valo-facebook .v-tree8 .header-drag-table {
+	border-spacing: 0;
+	position: relative;
+	table-layout: fixed;
+	width: inherit;
+}
+
+.valo-facebook .v-tree8 .header-drag-table .v-tree8-header {
+	position: absolute;
+}
+
+.valo-facebook .v-tree8 .header-drag-table .v-tree8-header  > .v-tree8-cell {
+	border: 1px solid #d4d4d4;
+	margin-top: -10px;
+	opacity: 0.9;
+	filter: alpha(opacity=90);
+	z-index: 30000;
+}
+
+.valo-facebook .v-tree8 .header-drag-table .v-tree8-header  > .v-tree8-drop-marker {
+	background-color: #3b5998;
+	position: absolute;
+	width: 3px;
+}
+
+.valo-facebook .v-tree8-sidebar.v-contextmenu {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border-radius: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: #fafafa;
+	border: 1px solid #d4d4d4;
+	padding: 0;
+	z-index: 5;
+}
+
+.valo-facebook .v-tree8-sidebar.v-contextmenu.v-tree8-sidebar-popup {
+	right: auto;
+}
+
+.valo-facebook .v-tree8-sidebar.v-contextmenu .v-tree8-sidebar-button {
+	background: transparent;
+	border: none;
+	color: inherit;
+	cursor: pointer;
+	outline: none;
+	padding: 0 4px;
+	text-align: right;
+	line-height: 1;
+}
+
+.valo-facebook .v-tree8-sidebar.v-contextmenu .v-tree8-sidebar-button[disabled] {
+	cursor: default;
+}
+
+.valo-facebook .v-tree8-sidebar.v-contextmenu .v-tree8-sidebar-button::-moz-focus-inner {
+	border: 0;
+}
+
+.valo-facebook .v-tree8-sidebar.v-contextmenu .v-tree8-sidebar-button:after {
+	content: "\f0c9";
+	display: block;
+	font-family: ThemeIcons, sans-serif;
+	font-size: 12px;
+}
+
+.valo-facebook .v-tree8-sidebar.v-contextmenu.closed {
+	border-radius: 0;
+}
+
+.valo-facebook .v-tree8-sidebar.v-contextmenu.open .v-tree8-sidebar-button {
+	width: 100%;
+}
+
+.valo-facebook .v-tree8-sidebar.v-contextmenu.open .v-tree8-sidebar-button:after {
+	content: "\f0c9";
+	font-size: 12px;
+	line-height: 1;
+}
+
+.v-ie .valo-facebook .v-tree8-sidebar.v-contextmenu.open .v-tree8-sidebar-button {
+	vertical-align: middle;
+}
+
+.valo-facebook .v-tree8-sidebar.v-contextmenu .v-tree8-sidebar-content {
+	padding: 4px 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.valo-facebook .v-tree8-sidebar.v-contextmenu .v-tree8-sidebar-content .gwt-MenuBar .gwt-MenuItem .column-hiding-toggle {
+	text-shadow: none;
+}
+
+.valo-facebook .v-tree8-cell {
+	background-color: white;
+	padding: 0 15px;
+	line-height: 30px;
+	text-overflow: ellipsis;
+}
+
+.valo-facebook .v-tree8-cell  > * {
+	line-height: 1.55;
+	vertical-align: middle;
+}
+
+.valo-facebook .v-tree8-cell  > div {
+	display: inline-block;
+}
+
+.valo-facebook .v-tree8-cell.frozen {
+	-webkit-box-shadow: 1px 0 2px rgba(0, 0, 0, 0.1);
+	box-shadow: 1px 0 2px rgba(0, 0, 0, 0.1);
+	border-right: 1px solid #d4d4d4;
+}
+
+.valo-facebook .v-tree8-cell.frozen  + th, .valo-facebook .v-tree8-cell.frozen  + td {
+	border-left: none;
+}
+
+.valo-facebook .v-tree8-cell div.component-wrap {
+	width: 100%;
+}
+
+.valo-facebook .v-tree8-row > td, .valo-facebook .v-tree8-editor-cells > div {
+	border-left: 1px solid #d4d4d4;
+	border-bottom: 1px solid #d4d4d4;
+}
+
+.valo-facebook .v-tree8-row > td:first-child, .valo-facebook .v-tree8-editor-cells > div:first-child {
+	border-left: none;
+}
+
+.valo-facebook .v-tree8-editor-cells.frozen > div {
+	-webkit-box-shadow: 1px 0 2px rgba(0, 0, 0, 0.1);
+	box-shadow: 1px 0 2px rgba(0, 0, 0, 0.1);
+	border-right: 1px solid #d4d4d4;
+	border-left: none;
+}
+
+.valo-facebook .v-tree8-row-stripe > td {
+	background-color: #f5f5f5;
+}
+
+.valo-facebook .v-tree8-row-selected > td {
+	background: #3b5998;
+}
+
+.valo-facebook .v-tree8-row-focused > td {
+	
+}
+
+.valo-facebook .v-tree8-header th {
+	position: relative;
+	background-color: #fafafa;
+	font-size: 12px;
+	font-weight: inherit;
+	border-left: 1px solid #d4d4d4;
+	border-bottom: 1px solid #d4d4d4;
+	
+	text-align: left;
+}
+
+.valo-facebook .v-tree8-header th:first-child {
+	border-left: none;
+}
+
+.valo-facebook .v-tree8-header .sort-asc, .valo-facebook .v-tree8-header .sort-desc {
+	padding-right: 29px;
+}
+
+.valo-facebook .v-tree8-header .sort-asc:after, .valo-facebook .v-tree8-header .sort-desc:after {
+	font-family: ThemeIcons, sans-serif;
+	content: "\f0de" " " attr(sort-order);
+	position: absolute;
+	right: 15px;
+	font-size: 10px;
+}
+
+.valo-facebook .v-tree8-header .sort-desc:after {
+	content: "\f0dd" " " attr(sort-order);
+}
+
+.valo-facebook .v-tree8-column-resize-handle {
+	position: absolute;
+	width: 30px;
+	right: -15px;
+	top: 0px;
+	bottom: 0px;
+	cursor: col-resize;
+	z-index: 10;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.valo-facebook .v-tree8-column-resize-simple-indicator {
+	position: absolute;
+	width: 3px;
+	top: 0px;
+	left: 15px;
+	z-index: 9001;
+	background: #fff;
+	box-shadow: 0px 0px 5px #000;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.valo-facebook .v-tree8-footer td {
+	background-color: #fafafa;
+	font-size: 12px;
+	font-weight: inherit;
+	border-left: 1px solid #d4d4d4;
+	border-top: 1px solid #d4d4d4;
+	border-bottom: none;
+	
+}
+
+.valo-facebook .v-tree8-footer td:first-child {
+	border-left: none;
+}
+
+.valo-facebook .v-tree8-header .v-tree8-cell, .valo-facebook .v-tree8-footer .v-tree8-cell {
+	overflow: visible;
+}
+
+.valo-facebook .v-tree8-column-header-content, .valo-facebook .v-tree8-column-footer-content {
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-height: 30px;
+	vertical-align: baseline;
+}
+
+.valo-facebook .v-tree8-header-deco {
+	border-top: 1px solid #d4d4d4;
+	border-right: 1px solid #d4d4d4;
+	background-color: #fafafa;
+}
+
+.valo-facebook .v-tree8-footer-deco {
+	border-bottom: 1px solid #d4d4d4;
+	border-right: 1px solid #d4d4d4;
+	background-color: #fafafa;
+}
+
+.valo-facebook .v-tree8-horizontal-scrollbar-deco {
+	background-color: #fafafa;
+	border: 1px solid #d4d4d4;
+	border-top: none;
+}
+
+.valo-facebook .v-tree8-cell-focused {
+	position: relative;
+}
+
+.valo-facebook .v-tree8-cell-focused:before {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	border: 2px solid #3b5998;
+	display: none;
+	pointer-events: none;
+}
+
+.valo-facebook .v-tree8:focus .v-tree8-cell-focused:before {
+	display: block;
+}
+
+.valo-facebook .v-tree8.v-disabled:focus .v-tree8-cell-focused:before {
+	display: none;
+}
+
+.valo-facebook .v-tree8-editor {
+	position: absolute;
+	z-index: 20;
+	overflow: hidden;
+	left: 0;
+	right: 0;
+	border: 1px solid #d4d4d4;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	margin-top: -1px;
+	-webkit-box-shadow: 0 0 9px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 9px rgba(0, 0, 0, 0.2);
+}
+
+.valo-facebook .v-tree8-editor.unbuffered .v-tree8-editor-footer {
+	width: 100%;
+}
+
+.valo-facebook .v-tree8-editor-cells {
+	position: relative;
+	white-space: nowrap;
+}
+
+.valo-facebook .v-tree8-editor-cells.frozen {
+	z-index: 2;
+}
+
+.valo-facebook .v-tree8-editor-cells  > div {
+	display: inline-block;
+	box-sizing: border-box;
+	vertical-align: middle;
+	background: white;
+}
+
+.valo-facebook .v-tree8-editor-cells  > div:first-child {
+	border-left: none;
+}
+
+.valo-facebook .v-tree8-editor-cells  > div  > * {
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.valo-facebook .v-tree8-editor-cells  > div .v-filterselect {
+	padding-left: 0;
+}
+
+.valo-facebook .v-tree8-editor-cells  > div input[type="text"], .valo-facebook .v-tree8-editor-cells  > div input[type="text"].v-filterselect-input, .valo-facebook .v-tree8-editor-cells  > div input[type="password"] {
+	padding-left: 15px;
+}
+
+.valo-facebook .v-tree8-editor-cells  > div input[type="text"]:not(.v-filterselect-input), .valo-facebook .v-tree8-editor-cells  > div input[type="password"] {
+	padding-right: 7.5px;
+}
+
+.valo-facebook .v-tree8-editor-cells  > div input[type="checkbox"] {
+	margin-left: 15px;
+}
+
+.valo-facebook .v-tree8-editor-cells  > div .v-textfield, .valo-facebook .v-tree8-editor-cells  > div .v-datefield, .valo-facebook .v-tree8-editor-cells  > div .v-filterselect {
+	min-width: 100%;
+	max-width: 100%;
+	min-height: 100%;
+	max-height: 100%;
+}
+
+.valo-facebook .v-tree8-editor-cells  > div .v-select, .valo-facebook .v-tree8-editor-cells  > div .v-select-select {
+	min-width: 100%;
+	max-width: 100%;
+}
+
+.valo-facebook .v-tree8-editor-cells  > div.not-editable.v-tree8-cell {
+	float: none;
+}
+
+.valo-facebook .v-tree8-editor-cells .error::before {
+	position: absolute;
+	display: block;
+	height: 0;
+	width: 0;
+	content: "";
+	border-top: 5px solid red;
+	border-right: 5px solid transparent;
+}
+
+.valo-facebook .v-tree8-editor-cells .error, .valo-facebook .v-tree8-editor-cells .error > input {
+	background-color: #fee;
+}
+
+.valo-facebook .v-tree8-editor-footer {
+	display: table;
+	height: 30px;
+	border-top: 1px solid #d4d4d4;
+	margin-top: -1px;
+	background: white;
+	padding: 0 5px;
+}
+
+.valo-facebook .v-tree8-editor-footer  + .v-tree8-editor-cells > div {
+	border-bottom: none;
+	border-top: 1px solid #d4d4d4;
+}
+
+.valo-facebook .v-tree8-editor-footer:first-child {
+	border-top: none;
+	margin-top: 0;
+	border-bottom: 1px solid #d4d4d4;
+	margin-bottom: -1px;
+}
+
+.valo-facebook .v-tree8-editor-message, .valo-facebook .v-tree8-editor-buttons {
+	display: table-cell;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+.valo-facebook .v-tree8-editor-message {
+	width: 100%;
+	position: relative;
+}
+
+.valo-facebook .v-tree8-editor-message  > div {
+	position: absolute;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-height: 30px;
+	top: 0;
+}
+
+.valo-facebook .v-tree8-editor-save {
+	margin-right: 4px;
+}
+
+.valo-facebook .v-tree8-spacer {
+	padding-left: 1px;
+}
+
+.valo-facebook .v-tree8-spacer > td {
+	display: block;
+	padding: 0;
+	background-color: white;
+	border-top: 1px solid #eeeeee;
+	border-bottom: 1px solid #d4d4d4;
+}
+
+.valo-facebook .v-tree8-spacer.stripe > td {
+	background-color: #f5f5f5;
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #d4d4d4;
+}
+
+.valo-facebook .v-tree8-spacer-deco-container {
+	border-top: 1px solid transparent;
+	position: relative;
+	top: 0;
+	z-index: 5;
+}
+
+.valo-facebook .v-tree8-spacer-deco {
+	top: 0;
+	left: 0;
+	width: 2px;
+	background-color: #3b5998;
+	position: absolute;
+	height: 100%;
+	pointer-events: none;
+}
+
+.valo-facebook .v-tree8-cell > .v-progressbar {
+	width: 100%;
+}
+
+.valo-facebook .v-tree8 {
+	-webkit-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
+	background-color: #fafafa;
+}
+
+.valo-facebook .v-tree8.v-disabled {
+	opacity: 0.5;
+	filter: alpha(opacity=50) ;
+}
+
+.valo-facebook .v-tree8-header .v-tree8-cell {
+	background-color: #fafafa;
+	background-image: -webkit-linear-gradient(top, #fafafa 2%, #eaeaea 98%);
+	background-image: linear-gradient(to bottom,#fafafa 2%, #eaeaea 98%);
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.valo-facebook .v-tree8-header .v-tree8-cell.dragged {
+	opacity: 0.5;
+	filter: alpha(opacity=50) ;
+	-webkit-transition: opacity 0.3s ease-in-out;
+	-moz-transition: opacity 0.3s ease-in-out;
+	transition: opacity 0.3s ease-in-out;
+}
+
+.valo-facebook .v-tree8-header .v-tree8-cell.dragged-column-header {
+	margin-top: -15px;
+}
+
+.valo-facebook .v-tree8-footer .v-tree8-cell {
+	background-color: #fafafa;
+	background-image: -webkit-linear-gradient(top, #fafafa 2%, #eaeaea 98%);
+	background-image: linear-gradient(to bottom,#fafafa 2%, #eaeaea 98%);
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.valo-facebook .v-tree8-header-deco {
+	background-color: #fafafa;
+	background-image: -webkit-linear-gradient(top, #fafafa 2%, #eaeaea 98%);
+	background-image: linear-gradient(to bottom,#fafafa 2%, #eaeaea 98%);
+}
+
+.valo-facebook .v-tree8-footer-deco, .valo-facebook .v-tree8-horizontal-scrollbar-deco {
+	background-color: #fafafa;
+	background-image: -webkit-linear-gradient(top, #fafafa 2%, #eaeaea 98%);
+	background-image: linear-gradient(to bottom,#fafafa 2%, #eaeaea 98%);
+}
+
+.valo-facebook .v-tree8-row-selected  > .v-tree8-cell {
+	background-color: #3b5998;
+	background-image: -webkit-linear-gradient(top, #4263a4 2%, #2f4982 98%);
+	background-image: linear-gradient(to bottom,#4263a4 2%, #2f4982 98%);
+	color: #c9d1e1;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+	border-color: #364a74;
+}
+
+.valo-facebook .v-tree8-row-selected  > .v-tree8-cell-focused:before {
+	border-color: #718dc8;
+}
+
+.valo-facebook .v-tree8-editor {
+	-webkit-box-shadow: 0 0 1px 1px rgba(59, 89, 152, 0.5);
+	box-shadow: 0 0 1px 1px rgba(59, 89, 152, 0.5);
+	border-color: #3b5998;
+}
+
+.valo-facebook .v-tree8-editor-footer {
+	font-size: 12px;
+	padding: 0 5px;
+	background: #e7ebf2;
+	-webkit-animation: valo-grid-editor-footer-animate-in 200ms 120ms backwards;
+	-moz-animation: valo-grid-editor-footer-animate-in 200ms 120ms backwards;
+	animation: valo-grid-editor-footer-animate-in 200ms 120ms backwards;
+}
+
+.valo-facebook .v-tree8-editor-footer:first-child {
+	-webkit-animation: valo-grid-editor-footer-animate-in-alt 200ms 120ms backwards;
+	-moz-animation: valo-grid-editor-footer-animate-in-alt 200ms 120ms backwards;
+	animation: valo-grid-editor-footer-animate-in-alt 200ms 120ms backwards;
+}
+
+.valo-facebook .v-tree8-editor-cells {
+	z-index: 1;
+}
+
+.valo-facebook .v-tree8-editor-cells > div:before {
+	content: "";
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.valo-facebook .v-tree8-editor-cells > div.not-editable.v-tree8-cell {
+	float: none;
+}
+
+.valo-facebook .v-tree8-editor-cells > div .error::before {
+	border-top: 8px solid #ed473b;
+	border-right: 8px solid transparent;
+}
+
+.valo-facebook .v-tree8-editor-cells > div .error, .valo-facebook .v-tree8-editor-cells > div .error > input {
+	background-color: #fffbfb;
+}
+
+.valo-facebook .v-tree8-editor-cells > div .v-textfield, .valo-facebook .v-tree8-editor-cells > div .v-textfield-focus, .valo-facebook .v-tree8-editor-cells > div .v-datefield, .valo-facebook .v-tree8-editor-cells > div .v-datefield .v-textfield-focus, .valo-facebook .v-tree8-editor-cells > div .v-filterselect-input, .valo-facebook .v-tree8-editor-cells > div .v-filterselect-input:focus {
+	border: none;
+	border-radius: 0;
+	background: transparent;
+	-webkit-box-shadow: inset 0 1px 0 #f2f2f2;
+	box-shadow: inset 0 1px 0 #f2f2f2;
+}
+
+.valo-facebook .v-tree8-editor-cells > div input[type="text"].v-datefield-textfield {
+	padding-left: 36px;
+}
+
+.valo-facebook .v-tree8-editor-cells > div .v-textfield-focus, .valo-facebook .v-tree8-editor-cells > div .v-datefield .v-textfield-focus, .valo-facebook .v-tree8-editor-cells > div .v-filterselect-input:focus {
+	position: relative;
+}
+
+.valo-facebook .v-tree8-editor-cells > div .v-select {
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+.valo-facebook .v-tree8-editor-cells > div .v-checkbox {
+	margin: 0 8px 0 15px;
+}
+
+.valo-facebook .v-tree8-editor-cells > div .v-checkbox  > input[type="checkbox"] {
+	margin-left: 0;
+}
+
+.valo-facebook .v-tree8-editor-cells > div .v-checkbox  > label {
+	white-space: nowrap;
+}
+
+.valo-facebook .v-tree8-editor-message > div:before {
+	display: inline-block;
+	color: #ed473b;
+	font-weight: 600;
+	width: 15px;
+	text-align: center;
+	content: "!";
+}
+
+.valo-facebook .v-tree8-editor-save, .valo-facebook .v-tree8-editor-cancel {
+	cursor: pointer;
+	color: #3b5998;
+	text-decoration: none;
+	font-weight: inherit;
+	-webkit-transition: color 140ms;
+	-moz-transition: color 140ms;
+	transition: color 140ms;
+	font-weight: 500;
+	text-decoration: none;
+	border: none;
+	background: transparent;
+	padding: 5px 5px;
+	margin: 0;
+	outline: none;
+}
+
+.valo-facebook .v-tree8-editor-save:hover, .valo-facebook .v-tree8-editor-cancel:hover {
+	color: #4c70ba;
+}
+
+.valo-facebook .v-tree8-editor-save.v-disabled, .valo-facebook .v-tree8-editor-cancel.v-disabled {
+	opacity: 0.5;
+	filter: alpha(opacity=50) ;
+}
+
+.valo-facebook .v-tree8-spacer {
+	margin-top: -1px;
+}
+
+.valo-facebook .v-tree8-sidebar.v-contextmenu.open .v-tree8-sidebar-content {
+	margin: 0 0 2px;
+	padding: 4px 4px 2px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.valo-facebook .v-tree8-sidebar.v-contextmenu.closed {
+	background-color: #fafafa;
+	background-image: -webkit-linear-gradient(top, #fafafa 2%, #eaeaea 98%);
+	background-image: linear-gradient(to bottom,#fafafa 2%, #eaeaea 98%);
+}
+
+.valo-facebook .v-tree8-scroller::-webkit-scrollbar {
+	border: none;
+}
+
+.valo-facebook .v-tree8-scroller::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	border: 4px solid transparent;
+	background: rgba(0, 0, 0, 0.3);
+	-webkit-background-clip: content-box;
+	background-clip: content-box;
+}
+
+.valo-facebook .v-tree8-scroller-vertical::-webkit-scrollbar-thumb {
+	min-height: 30px;
+}
+
+.valo-facebook .v-tree8-scroller-horizontal::-webkit-scrollbar-thumb {
+	min-width: 30px;
+}
+
+.valo-facebook .v-tree8-row-drag-badge {
+	background-color: red;
+	color: white;
+	display: block;
+	width: 30px;
+	height: 30px;
+	border-radius: 10px;
+	line-height: 30px;
+	text-align: center;
+	float: left;
+}
+
+.valo-facebook .v-tree8-row-drag-top, .valo-facebook .v-tree8-row-drag-bottom {
+	z-index: 100;
+}
+
+.valo-facebook .v-tree8-row-drag-top:before, .valo-facebook .v-tree8-row-drag-bottom:after {
+	content: "";
+	display: block;
+	position: absolute;
+	height: 2px;
+	width: 100%;
+	background: #3b5998;
+	pointer-events: none;
+	border: none;
+}
+
+.valo-facebook .v-tree8-row-drag-bottom:after {
+	bottom: -1px;
+}
+
+.valo-facebook .v-tree8-row-drag-top:before {
+	top: -1px;
+}
+
+.valo-facebook .v-tree8-row-drag-top:first-child:before {
+	top: 0;
+}
+
+.valo-facebook .v-tree8-row-drag-center:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 2px;
+	border: 2px solid #3b5998;
+	pointer-events: none;
+}
+
+.valo-facebook .v-tree8-row-selected.v-tree8-row-drag-center:after {
+	border-color: #2d4373;
+}
+
+.valo-facebook .v-tree8-row-selected.v-tree8-row-drag-top:before, .valo-facebook .v-tree8-row-selected.v-tree8-row-drag-bottom:after {
+	background: #2d4373;
+}
+
+.valo-facebook .v-tree8-body-drag-top:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	pointer-events: none;
+	border: 2px solid #3b5998;
+	z-index: 100;
+}
+
+.valo-facebook .v-tree8-expander {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.valo-facebook .v-tree8-expander::before {
+	display: inline-block;
+	width: 1.5em;
+	text-align: center;
+	content: "";
+}
+
+.valo-facebook .v-tree8-expander.expanded::before {
+	content: "\f0d7";
+	font-family: ThemeIcons;
+}
+
+.valo-facebook .v-tree8-expander.collapsed::before {
+	content: "\f0da";
+	font-family: ThemeIcons;
+}
+
+.valo-facebook .v-tree8-expander.collapse-disabled::before {
+	opacity: 0.5;
+	filter: alpha(opacity=50) ;
+	cursor: default;
+}
+
+.valo-facebook .v-tree8-node.depth-0 {
+	padding-left: 0em;
+}
+
+.valo-facebook .v-tree8-node.depth-1 {
+	padding-left: 1em;
+}
+
+.valo-facebook .v-tree8-node.depth-2 {
+	padding-left: 2em;
+}
+
+.valo-facebook .v-tree8-node.depth-3 {
+	padding-left: 3em;
+}
+
+.valo-facebook .v-tree8-node.depth-4 {
+	padding-left: 4em;
+}
+
+.valo-facebook .v-tree8-node.depth-5 {
+	padding-left: 5em;
+}
+
+.valo-facebook .v-tree8-node.depth-6 {
+	padding-left: 6em;
+}
+
+.valo-facebook .v-tree8-node.depth-7 {
+	padding-left: 7em;
+}
+
+.valo-facebook .v-tree8-node.depth-8 {
+	padding-left: 8em;
+}
+
+.valo-facebook .v-tree8-node.depth-9 {
+	padding-left: 9em;
+}
+
+.valo-facebook .v-tree8-node.depth-10 {
+	padding-left: 10em;
+}
+
+.valo-facebook .v-tree8-node.depth-11 {
+	padding-left: 11em;
+}
+
+.valo-facebook .v-tree8-node.depth-12 {
+	padding-left: 12em;
+}
+
+.valo-facebook .v-tree8-node.depth-13 {
+	padding-left: 13em;
+}
+
+.valo-facebook .v-tree8-node.depth-14 {
+	padding-left: 14em;
+}
+
+.valo-facebook .v-tree8-node.depth-15 {
+	padding-left: 15em;
+}
+
+.valo-facebook .v-tree8-cell-content {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.valo-facebook .v-tree8-row-focused::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	border: 2px solid #3b5998;
+	display: none;
+	pointer-events: none;
+}
+
+.valo-facebook .v-tree8-cell-focused {
+	position: static;
+}
+
+.valo-facebook .v-tree8-cell-focused::before {
+	display: none;
+}
+
+.valo-facebook .v-tree8:focus .v-tree8-row-focused::before {
+	display: block;
+}
+
+.valo-facebook .v-tree8.v-disabled:focus .v-tree8-row-focused::before {
+	display: none;
+}
+
+.valo-facebook .v-tree8:focus .v-tree8-cell-focused::before {
+	display: none;
+}
+
+.valo-facebook .v-tree8 {
+	background-color: transparent;
+}
+
+.valo-facebook .v-tree8-row > td {
+	background-color: transparent;
+	border: 0;
+	line-height: 28px;
+}
+
+.valo-facebook .v-tree8-row > td  > * {
+	vertical-align: baseline;
+}
+
+.valo-facebook .v-tree8-tablewrapper {
+	background-color: transparent;
+	border: none;
+}
+
+.valo-facebook .v-tree8-row::before {
+	content: "";
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	border-radius: 3px;
+	pointer-events: none;
+	border-width: 1px;
+}
+
+.valo-facebook .v-tree8-cell {
+	position: relative;
+}
+
+.valo-facebook .v-tree8-row-selected  > .v-tree8-cell {
+	background: transparent;
+}
+
+.valo-facebook .v-tree8-row-selected::before {
+	display: block;
+	background-color: #3b5998;
+	background-image: -webkit-linear-gradient(top, #4263a4 2%, #2f4982 98%);
+	background-image: linear-gradient(to bottom,#4263a4 2%, #2f4982 98%);
+}
+
+.valo-facebook .v-tree8:focus .v-tree8-row-selected.v-tree8-row-focused::before {
+	border-color: transparent;
+	box-shadow: inset 0 0 0 1px #c9d1e1;
+}
+
+.valo-facebook .v-treegrid {
+	position: relative;
+}
+
+.valo-facebook .v-treegrid-scroller {
+	position: absolute;
+	z-index: 1;
+	outline: none;
+	box-sizing: border-box;
+}
+
+.valo-facebook .v-treegrid-scroller-horizontal {
+	left: 0;
+	right: 0;
+	bottom: 0;
+	overflow-y: hidden;
+	-ms-overflow-y: hidden;
+}
+
+.valo-facebook .v-treegrid-scroller-vertical {
+	right: 0;
+	top: 0;
+	bottom: 0;
+	overflow-x: hidden;
+	-ms-overflow-x: hidden;
+}
+
+.valo-facebook .v-treegrid-tablewrapper {
+	position: absolute;
+	overflow: hidden;
+	box-sizing: border-box;
+	z-index: 5;
+}
+
+.valo-facebook .v-treegrid-tablewrapper > table {
+	border-spacing: 0;
+	table-layout: fixed;
+	width: inherit;
+}
+
+.valo-facebook .v-treegrid-header-deco, .valo-facebook .v-treegrid-footer-deco {
+	position: absolute;
+	right: 0;
+	box-sizing: border-box;
+}
+
+.valo-facebook .v-treegrid-horizontal-scrollbar-deco {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	box-sizing: border-box;
+}
+
+.valo-facebook .v-treegrid-header, .valo-facebook .v-treegrid-body, .valo-facebook .v-treegrid-footer {
+	position: absolute;
+	left: 0;
+	width: inherit;
+	z-index: 10;
+}
+
+.valo-facebook .v-treegrid-header, .valo-facebook .v-treegrid-header-deco {
+	top: 0;
+}
+
+.valo-facebook .v-treegrid-footer, .valo-facebook .v-treegrid-footer-deco {
+	bottom: 0;
+}
+
+.valo-facebook .v-treegrid-body {
+	-ms-touch-action: none;
+	touch-action: none;
+	z-index: 0;
+	top: 0;
+}
+
+.valo-facebook .v-treegrid-body .v-treegrid-row {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.valo-facebook .v-treegrid-row {
+	display: block;
+}
+
+.valo-facebook .v-treegrid-row  > td, .valo-facebook .v-treegrid-row  > th {
+	background-color: white;
+}
+
+.valo-facebook .v-treegrid-row {
+	width: inherit;
+}
+
+.valo-facebook .v-treegrid-cell {
+	display: block;
+	float: left;
+	padding: 2px;
+	white-space: nowrap;
+	box-sizing: border-box;
+	overflow: hidden;
+	font-size: 14px;
+}
+
+.valo-facebook .v-treegrid-cell.frozen {
+	position: relative;
+	z-index: 1;
+}
+
+.valo-facebook .v-treegrid-spacer {
+	position: absolute;
+	display: block;
+	background-color: white;
+}
+
+.valo-facebook .v-treegrid-spacer  > td {
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.valo-facebook .v-treegrid {
+	outline: none;
+}
+
+.valo-facebook .v-treegrid-scroller-vertical, .valo-facebook .v-treegrid-scroller-horizontal {
+	border: 1px solid #d4d4d4;
+}
+
+.valo-facebook .v-treegrid-scroller-vertical {
+	border-left: none;
+}
+
+.valo-facebook .v-treegrid-scroller-horizontal {
+	border-top: none;
+}
+
+.valo-facebook .v-treegrid-tablewrapper {
+	border: 1px solid #d4d4d4;
+}
+
+.valo-facebook .v-treegrid .header-drag-table {
+	border-spacing: 0;
+	position: relative;
+	table-layout: fixed;
+	width: inherit;
+}
+
+.valo-facebook .v-treegrid .header-drag-table .v-treegrid-header {
+	position: absolute;
+}
+
+.valo-facebook .v-treegrid .header-drag-table .v-treegrid-header  > .v-treegrid-cell {
+	border: 1px solid #d4d4d4;
+	margin-top: -10px;
+	opacity: 0.9;
+	filter: alpha(opacity=90);
+	z-index: 30000;
+}
+
+.valo-facebook .v-treegrid .header-drag-table .v-treegrid-header  > .v-treegrid-drop-marker {
+	background-color: #3b5998;
+	position: absolute;
+	width: 3px;
+}
+
+.valo-facebook .v-treegrid-sidebar.v-contextmenu {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border-radius: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: #fafafa;
+	border: 1px solid #d4d4d4;
+	padding: 0;
+	z-index: 5;
+}
+
+.valo-facebook .v-treegrid-sidebar.v-contextmenu.v-treegrid-sidebar-popup {
+	right: auto;
+}
+
+.valo-facebook .v-treegrid-sidebar.v-contextmenu .v-treegrid-sidebar-button {
+	background: transparent;
+	border: none;
+	color: inherit;
+	cursor: pointer;
+	outline: none;
+	padding: 0 4px;
+	text-align: right;
+	line-height: 1;
+}
+
+.valo-facebook .v-treegrid-sidebar.v-contextmenu .v-treegrid-sidebar-button[disabled] {
+	cursor: default;
+}
+
+.valo-facebook .v-treegrid-sidebar.v-contextmenu .v-treegrid-sidebar-button::-moz-focus-inner {
+	border: 0;
+}
+
+.valo-facebook .v-treegrid-sidebar.v-contextmenu .v-treegrid-sidebar-button:after {
+	content: "\f0c9";
+	display: block;
+	font-family: ThemeIcons, sans-serif;
+	font-size: 12px;
+}
+
+.valo-facebook .v-treegrid-sidebar.v-contextmenu.closed {
+	border-radius: 0;
+}
+
+.valo-facebook .v-treegrid-sidebar.v-contextmenu.open .v-treegrid-sidebar-button {
+	width: 100%;
+}
+
+.valo-facebook .v-treegrid-sidebar.v-contextmenu.open .v-treegrid-sidebar-button:after {
+	content: "\f0c9";
+	font-size: 12px;
+	line-height: 1;
+}
+
+.v-ie .valo-facebook .v-treegrid-sidebar.v-contextmenu.open .v-treegrid-sidebar-button {
+	vertical-align: middle;
+}
+
+.valo-facebook .v-treegrid-sidebar.v-contextmenu .v-treegrid-sidebar-content {
+	padding: 4px 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.valo-facebook .v-treegrid-sidebar.v-contextmenu .v-treegrid-sidebar-content .gwt-MenuBar .gwt-MenuItem .column-hiding-toggle {
+	text-shadow: none;
+}
+
+.valo-facebook .v-treegrid-cell {
+	background-color: white;
+	padding: 0 15px;
+	line-height: 30px;
+	text-overflow: ellipsis;
+}
+
+.valo-facebook .v-treegrid-cell  > * {
+	line-height: 1.55;
+	vertical-align: middle;
+}
+
+.valo-facebook .v-treegrid-cell  > div {
+	display: inline-block;
+}
+
+.valo-facebook .v-treegrid-cell.frozen {
+	-webkit-box-shadow: 1px 0 2px rgba(0, 0, 0, 0.1);
+	box-shadow: 1px 0 2px rgba(0, 0, 0, 0.1);
+	border-right: 1px solid #d4d4d4;
+}
+
+.valo-facebook .v-treegrid-cell.frozen  + th, .valo-facebook .v-treegrid-cell.frozen  + td {
+	border-left: none;
+}
+
+.valo-facebook .v-treegrid-cell div.component-wrap {
+	width: 100%;
+}
+
+.valo-facebook .v-treegrid-row > td, .valo-facebook .v-treegrid-editor-cells > div {
+	border-left: 1px solid #d4d4d4;
+	border-bottom: 1px solid #d4d4d4;
+}
+
+.valo-facebook .v-treegrid-row > td:first-child, .valo-facebook .v-treegrid-editor-cells > div:first-child {
+	border-left: none;
+}
+
+.valo-facebook .v-treegrid-editor-cells.frozen > div {
+	-webkit-box-shadow: 1px 0 2px rgba(0, 0, 0, 0.1);
+	box-shadow: 1px 0 2px rgba(0, 0, 0, 0.1);
+	border-right: 1px solid #d4d4d4;
+	border-left: none;
+}
+
+.valo-facebook .v-treegrid-row-stripe > td {
+	background-color: #f5f5f5;
+}
+
+.valo-facebook .v-treegrid-row-selected > td {
+	background: #3b5998;
+}
+
+.valo-facebook .v-treegrid-row-focused > td {
+	
+}
+
+.valo-facebook .v-treegrid-header th {
+	position: relative;
+	background-color: #fafafa;
+	font-size: 12px;
+	font-weight: inherit;
+	border-left: 1px solid #d4d4d4;
+	border-bottom: 1px solid #d4d4d4;
+	
+	text-align: left;
+}
+
+.valo-facebook .v-treegrid-header th:first-child {
+	border-left: none;
+}
+
+.valo-facebook .v-treegrid-header .sort-asc, .valo-facebook .v-treegrid-header .sort-desc {
+	padding-right: 29px;
+}
+
+.valo-facebook .v-treegrid-header .sort-asc:after, .valo-facebook .v-treegrid-header .sort-desc:after {
+	font-family: ThemeIcons, sans-serif;
+	content: "\f0de" " " attr(sort-order);
+	position: absolute;
+	right: 15px;
+	font-size: 10px;
+}
+
+.valo-facebook .v-treegrid-header .sort-desc:after {
+	content: "\f0dd" " " attr(sort-order);
+}
+
+.valo-facebook .v-treegrid-column-resize-handle {
+	position: absolute;
+	width: 30px;
+	right: -15px;
+	top: 0px;
+	bottom: 0px;
+	cursor: col-resize;
+	z-index: 10;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.valo-facebook .v-treegrid-column-resize-simple-indicator {
+	position: absolute;
+	width: 3px;
+	top: 0px;
+	left: 15px;
+	z-index: 9001;
+	background: #fff;
+	box-shadow: 0px 0px 5px #000;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.valo-facebook .v-treegrid-footer td {
+	background-color: #fafafa;
+	font-size: 12px;
+	font-weight: inherit;
+	border-left: 1px solid #d4d4d4;
+	border-top: 1px solid #d4d4d4;
+	border-bottom: none;
+	
+}
+
+.valo-facebook .v-treegrid-footer td:first-child {
+	border-left: none;
+}
+
+.valo-facebook .v-treegrid-header .v-treegrid-cell, .valo-facebook .v-treegrid-footer .v-treegrid-cell {
+	overflow: visible;
+}
+
+.valo-facebook .v-treegrid-column-header-content, .valo-facebook .v-treegrid-column-footer-content {
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-height: 30px;
+	vertical-align: baseline;
+}
+
+.valo-facebook .v-treegrid-header-deco {
+	border-top: 1px solid #d4d4d4;
+	border-right: 1px solid #d4d4d4;
+	background-color: #fafafa;
+}
+
+.valo-facebook .v-treegrid-footer-deco {
+	border-bottom: 1px solid #d4d4d4;
+	border-right: 1px solid #d4d4d4;
+	background-color: #fafafa;
+}
+
+.valo-facebook .v-treegrid-horizontal-scrollbar-deco {
+	background-color: #fafafa;
+	border: 1px solid #d4d4d4;
+	border-top: none;
+}
+
+.valo-facebook .v-treegrid-cell-focused {
+	position: relative;
+}
+
+.valo-facebook .v-treegrid-cell-focused:before {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	border: 2px solid #3b5998;
+	display: none;
+	pointer-events: none;
+}
+
+.valo-facebook .v-treegrid:focus .v-treegrid-cell-focused:before {
+	display: block;
+}
+
+.valo-facebook .v-treegrid.v-disabled:focus .v-treegrid-cell-focused:before {
+	display: none;
+}
+
+.valo-facebook .v-treegrid-editor {
+	position: absolute;
+	z-index: 20;
+	overflow: hidden;
+	left: 0;
+	right: 0;
+	border: 1px solid #d4d4d4;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	margin-top: -1px;
+	-webkit-box-shadow: 0 0 9px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 9px rgba(0, 0, 0, 0.2);
+}
+
+.valo-facebook .v-treegrid-editor.unbuffered .v-treegrid-editor-footer {
+	width: 100%;
+}
+
+.valo-facebook .v-treegrid-editor-cells {
+	position: relative;
+	white-space: nowrap;
+}
+
+.valo-facebook .v-treegrid-editor-cells.frozen {
+	z-index: 2;
+}
+
+.valo-facebook .v-treegrid-editor-cells  > div {
+	display: inline-block;
+	box-sizing: border-box;
+	vertical-align: middle;
+	background: white;
+}
+
+.valo-facebook .v-treegrid-editor-cells  > div:first-child {
+	border-left: none;
+}
+
+.valo-facebook .v-treegrid-editor-cells  > div  > * {
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.valo-facebook .v-treegrid-editor-cells  > div .v-filterselect {
+	padding-left: 0;
+}
+
+.valo-facebook .v-treegrid-editor-cells  > div input[type="text"], .valo-facebook .v-treegrid-editor-cells  > div input[type="text"].v-filterselect-input, .valo-facebook .v-treegrid-editor-cells  > div input[type="password"] {
+	padding-left: 15px;
+}
+
+.valo-facebook .v-treegrid-editor-cells  > div input[type="text"]:not(.v-filterselect-input), .valo-facebook .v-treegrid-editor-cells  > div input[type="password"] {
+	padding-right: 7.5px;
+}
+
+.valo-facebook .v-treegrid-editor-cells  > div input[type="checkbox"] {
+	margin-left: 15px;
+}
+
+.valo-facebook .v-treegrid-editor-cells  > div .v-textfield, .valo-facebook .v-treegrid-editor-cells  > div .v-datefield, .valo-facebook .v-treegrid-editor-cells  > div .v-filterselect {
+	min-width: 100%;
+	max-width: 100%;
+	min-height: 100%;
+	max-height: 100%;
+}
+
+.valo-facebook .v-treegrid-editor-cells  > div .v-select, .valo-facebook .v-treegrid-editor-cells  > div .v-select-select {
+	min-width: 100%;
+	max-width: 100%;
+}
+
+.valo-facebook .v-treegrid-editor-cells  > div.not-editable.v-treegrid-cell {
+	float: none;
+}
+
+.valo-facebook .v-treegrid-editor-cells .error::before {
+	position: absolute;
+	display: block;
+	height: 0;
+	width: 0;
+	content: "";
+	border-top: 5px solid red;
+	border-right: 5px solid transparent;
+}
+
+.valo-facebook .v-treegrid-editor-cells .error, .valo-facebook .v-treegrid-editor-cells .error > input {
+	background-color: #fee;
+}
+
+.valo-facebook .v-treegrid-editor-footer {
+	display: table;
+	height: 30px;
+	border-top: 1px solid #d4d4d4;
+	margin-top: -1px;
+	background: white;
+	padding: 0 5px;
+}
+
+.valo-facebook .v-treegrid-editor-footer  + .v-treegrid-editor-cells > div {
+	border-bottom: none;
+	border-top: 1px solid #d4d4d4;
+}
+
+.valo-facebook .v-treegrid-editor-footer:first-child {
+	border-top: none;
+	margin-top: 0;
+	border-bottom: 1px solid #d4d4d4;
+	margin-bottom: -1px;
+}
+
+.valo-facebook .v-treegrid-editor-message, .valo-facebook .v-treegrid-editor-buttons {
+	display: table-cell;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+.valo-facebook .v-treegrid-editor-message {
+	width: 100%;
+	position: relative;
+}
+
+.valo-facebook .v-treegrid-editor-message  > div {
+	position: absolute;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-height: 30px;
+	top: 0;
+}
+
+.valo-facebook .v-treegrid-editor-save {
+	margin-right: 4px;
+}
+
+.valo-facebook .v-treegrid-spacer {
+	padding-left: 1px;
+}
+
+.valo-facebook .v-treegrid-spacer > td {
+	display: block;
+	padding: 0;
+	background-color: white;
+	border-top: 1px solid #eeeeee;
+	border-bottom: 1px solid #d4d4d4;
+}
+
+.valo-facebook .v-treegrid-spacer.stripe > td {
+	background-color: #f5f5f5;
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #d4d4d4;
+}
+
+.valo-facebook .v-treegrid-spacer-deco-container {
+	border-top: 1px solid transparent;
+	position: relative;
+	top: 0;
+	z-index: 5;
+}
+
+.valo-facebook .v-treegrid-spacer-deco {
+	top: 0;
+	left: 0;
+	width: 2px;
+	background-color: #3b5998;
+	position: absolute;
+	height: 100%;
+	pointer-events: none;
+}
+
+.valo-facebook .v-treegrid-cell > .v-progressbar {
+	width: 100%;
+}
+
+.valo-facebook .v-treegrid {
+	-webkit-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
+	background-color: #fafafa;
+}
+
+.valo-facebook .v-treegrid.v-disabled {
+	opacity: 0.5;
+	filter: alpha(opacity=50) ;
+}
+
+.valo-facebook .v-treegrid-header .v-treegrid-cell {
+	background-color: #fafafa;
+	background-image: -webkit-linear-gradient(top, #fafafa 2%, #eaeaea 98%);
+	background-image: linear-gradient(to bottom,#fafafa 2%, #eaeaea 98%);
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.valo-facebook .v-treegrid-header .v-treegrid-cell.dragged {
+	opacity: 0.5;
+	filter: alpha(opacity=50) ;
+	-webkit-transition: opacity 0.3s ease-in-out;
+	-moz-transition: opacity 0.3s ease-in-out;
+	transition: opacity 0.3s ease-in-out;
+}
+
+.valo-facebook .v-treegrid-header .v-treegrid-cell.dragged-column-header {
+	margin-top: -15px;
+}
+
+.valo-facebook .v-treegrid-footer .v-treegrid-cell {
+	background-color: #fafafa;
+	background-image: -webkit-linear-gradient(top, #fafafa 2%, #eaeaea 98%);
+	background-image: linear-gradient(to bottom,#fafafa 2%, #eaeaea 98%);
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.valo-facebook .v-treegrid-header-deco {
+	background-color: #fafafa;
+	background-image: -webkit-linear-gradient(top, #fafafa 2%, #eaeaea 98%);
+	background-image: linear-gradient(to bottom,#fafafa 2%, #eaeaea 98%);
+}
+
+.valo-facebook .v-treegrid-footer-deco, .valo-facebook .v-treegrid-horizontal-scrollbar-deco {
+	background-color: #fafafa;
+	background-image: -webkit-linear-gradient(top, #fafafa 2%, #eaeaea 98%);
+	background-image: linear-gradient(to bottom,#fafafa 2%, #eaeaea 98%);
+}
+
+.valo-facebook .v-treegrid-row-selected  > .v-treegrid-cell {
+	background-color: #3b5998;
+	background-image: -webkit-linear-gradient(top, #4263a4 2%, #2f4982 98%);
+	background-image: linear-gradient(to bottom,#4263a4 2%, #2f4982 98%);
+	color: #c9d1e1;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+	border-color: #364a74;
+}
+
+.valo-facebook .v-treegrid-row-selected  > .v-treegrid-cell-focused:before {
+	border-color: #718dc8;
+}
+
+.valo-facebook .v-treegrid-editor {
+	-webkit-box-shadow: 0 0 1px 1px rgba(59, 89, 152, 0.5);
+	box-shadow: 0 0 1px 1px rgba(59, 89, 152, 0.5);
+	border-color: #3b5998;
+}
+
+.valo-facebook .v-treegrid-editor-footer {
+	font-size: 12px;
+	padding: 0 5px;
+	background: #e7ebf2;
+	-webkit-animation: valo-grid-editor-footer-animate-in 200ms 120ms backwards;
+	-moz-animation: valo-grid-editor-footer-animate-in 200ms 120ms backwards;
+	animation: valo-grid-editor-footer-animate-in 200ms 120ms backwards;
+}
+
+.valo-facebook .v-treegrid-editor-footer:first-child {
+	-webkit-animation: valo-grid-editor-footer-animate-in-alt 200ms 120ms backwards;
+	-moz-animation: valo-grid-editor-footer-animate-in-alt 200ms 120ms backwards;
+	animation: valo-grid-editor-footer-animate-in-alt 200ms 120ms backwards;
+}
+
+.valo-facebook .v-treegrid-editor-cells {
+	z-index: 1;
+}
+
+.valo-facebook .v-treegrid-editor-cells > div:before {
+	content: "";
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.valo-facebook .v-treegrid-editor-cells > div.not-editable.v-treegrid-cell {
+	float: none;
+}
+
+.valo-facebook .v-treegrid-editor-cells > div .error::before {
+	border-top: 8px solid #ed473b;
+	border-right: 8px solid transparent;
+}
+
+.valo-facebook .v-treegrid-editor-cells > div .error, .valo-facebook .v-treegrid-editor-cells > div .error > input {
+	background-color: #fffbfb;
+}
+
+.valo-facebook .v-treegrid-editor-cells > div .v-textfield, .valo-facebook .v-treegrid-editor-cells > div .v-textfield-focus, .valo-facebook .v-treegrid-editor-cells > div .v-datefield, .valo-facebook .v-treegrid-editor-cells > div .v-datefield .v-textfield-focus, .valo-facebook .v-treegrid-editor-cells > div .v-filterselect-input, .valo-facebook .v-treegrid-editor-cells > div .v-filterselect-input:focus {
+	border: none;
+	border-radius: 0;
+	background: transparent;
+	-webkit-box-shadow: inset 0 1px 0 #f2f2f2;
+	box-shadow: inset 0 1px 0 #f2f2f2;
+}
+
+.valo-facebook .v-treegrid-editor-cells > div input[type="text"].v-datefield-textfield {
+	padding-left: 36px;
+}
+
+.valo-facebook .v-treegrid-editor-cells > div .v-textfield-focus, .valo-facebook .v-treegrid-editor-cells > div .v-datefield .v-textfield-focus, .valo-facebook .v-treegrid-editor-cells > div .v-filterselect-input:focus {
+	position: relative;
+}
+
+.valo-facebook .v-treegrid-editor-cells > div .v-select {
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+.valo-facebook .v-treegrid-editor-cells > div .v-checkbox {
+	margin: 0 8px 0 15px;
+}
+
+.valo-facebook .v-treegrid-editor-cells > div .v-checkbox  > input[type="checkbox"] {
+	margin-left: 0;
+}
+
+.valo-facebook .v-treegrid-editor-cells > div .v-checkbox  > label {
+	white-space: nowrap;
+}
+
+.valo-facebook .v-treegrid-editor-message > div:before {
+	display: inline-block;
+	color: #ed473b;
+	font-weight: 600;
+	width: 15px;
+	text-align: center;
+	content: "!";
+}
+
+.valo-facebook .v-treegrid-editor-save, .valo-facebook .v-treegrid-editor-cancel {
+	cursor: pointer;
+	color: #3b5998;
+	text-decoration: none;
+	font-weight: inherit;
+	-webkit-transition: color 140ms;
+	-moz-transition: color 140ms;
+	transition: color 140ms;
+	font-weight: 500;
+	text-decoration: none;
+	border: none;
+	background: transparent;
+	padding: 5px 5px;
+	margin: 0;
+	outline: none;
+}
+
+.valo-facebook .v-treegrid-editor-save:hover, .valo-facebook .v-treegrid-editor-cancel:hover {
+	color: #4c70ba;
+}
+
+.valo-facebook .v-treegrid-editor-save.v-disabled, .valo-facebook .v-treegrid-editor-cancel.v-disabled {
+	opacity: 0.5;
+	filter: alpha(opacity=50) ;
+}
+
+.valo-facebook .v-treegrid-spacer {
+	margin-top: -1px;
+}
+
+.valo-facebook .v-treegrid-sidebar.v-contextmenu.open .v-treegrid-sidebar-content {
+	margin: 0 0 2px;
+	padding: 4px 4px 2px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.valo-facebook .v-treegrid-sidebar.v-contextmenu.closed {
+	background-color: #fafafa;
+	background-image: -webkit-linear-gradient(top, #fafafa 2%, #eaeaea 98%);
+	background-image: linear-gradient(to bottom,#fafafa 2%, #eaeaea 98%);
+}
+
+.valo-facebook .v-treegrid-scroller::-webkit-scrollbar {
+	border: none;
+}
+
+.valo-facebook .v-treegrid-scroller::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	border: 4px solid transparent;
+	background: rgba(0, 0, 0, 0.3);
+	-webkit-background-clip: content-box;
+	background-clip: content-box;
+}
+
+.valo-facebook .v-treegrid-scroller-vertical::-webkit-scrollbar-thumb {
+	min-height: 30px;
+}
+
+.valo-facebook .v-treegrid-scroller-horizontal::-webkit-scrollbar-thumb {
+	min-width: 30px;
+}
+
+.valo-facebook .v-treegrid-row-drag-badge {
+	background-color: red;
+	color: white;
+	display: block;
+	width: 30px;
+	height: 30px;
+	border-radius: 10px;
+	line-height: 30px;
+	text-align: center;
+	float: left;
+}
+
+.valo-facebook .v-treegrid-row-drag-top, .valo-facebook .v-treegrid-row-drag-bottom {
+	z-index: 100;
+}
+
+.valo-facebook .v-treegrid-row-drag-top:before, .valo-facebook .v-treegrid-row-drag-bottom:after {
+	content: "";
+	display: block;
+	position: absolute;
+	height: 2px;
+	width: 100%;
+	background: #3b5998;
+	pointer-events: none;
+	border: none;
+}
+
+.valo-facebook .v-treegrid-row-drag-bottom:after {
+	bottom: -1px;
+}
+
+.valo-facebook .v-treegrid-row-drag-top:before {
+	top: -1px;
+}
+
+.valo-facebook .v-treegrid-row-drag-top:first-child:before {
+	top: 0;
+}
+
+.valo-facebook .v-treegrid-row-drag-center:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 2px;
+	border: 2px solid #3b5998;
+	pointer-events: none;
+}
+
+.valo-facebook .v-treegrid-row-selected.v-treegrid-row-drag-center:after {
+	border-color: #2d4373;
+}
+
+.valo-facebook .v-treegrid-row-selected.v-treegrid-row-drag-top:before, .valo-facebook .v-treegrid-row-selected.v-treegrid-row-drag-bottom:after {
+	background: #2d4373;
+}
+
+.valo-facebook .v-treegrid-body-drag-top:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	pointer-events: none;
+	border: 2px solid #3b5998;
+	z-index: 100;
+}
+
+.valo-facebook .v-treegrid-expander {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.valo-facebook .v-treegrid-expander::before {
+	display: inline-block;
+	width: 1.5em;
+	text-align: center;
+	content: "";
+}
+
+.valo-facebook .v-treegrid-expander.expanded::before {
+	content: "\f0d7";
+	font-family: ThemeIcons;
+}
+
+.valo-facebook .v-treegrid-expander.collapsed::before {
+	content: "\f0da";
+	font-family: ThemeIcons;
+}
+
+.valo-facebook .v-treegrid-expander.collapse-disabled::before {
+	opacity: 0.5;
+	filter: alpha(opacity=50) ;
+	cursor: default;
+}
+
+.valo-facebook .v-treegrid-node.depth-0 {
+	padding-left: 0em;
+}
+
+.valo-facebook .v-treegrid-node.depth-1 {
+	padding-left: 1em;
+}
+
+.valo-facebook .v-treegrid-node.depth-2 {
+	padding-left: 2em;
+}
+
+.valo-facebook .v-treegrid-node.depth-3 {
+	padding-left: 3em;
+}
+
+.valo-facebook .v-treegrid-node.depth-4 {
+	padding-left: 4em;
+}
+
+.valo-facebook .v-treegrid-node.depth-5 {
+	padding-left: 5em;
+}
+
+.valo-facebook .v-treegrid-node.depth-6 {
+	padding-left: 6em;
+}
+
+.valo-facebook .v-treegrid-node.depth-7 {
+	padding-left: 7em;
+}
+
+.valo-facebook .v-treegrid-node.depth-8 {
+	padding-left: 8em;
+}
+
+.valo-facebook .v-treegrid-node.depth-9 {
+	padding-left: 9em;
+}
+
+.valo-facebook .v-treegrid-node.depth-10 {
+	padding-left: 10em;
+}
+
+.valo-facebook .v-treegrid-node.depth-11 {
+	padding-left: 11em;
+}
+
+.valo-facebook .v-treegrid-node.depth-12 {
+	padding-left: 12em;
+}
+
+.valo-facebook .v-treegrid-node.depth-13 {
+	padding-left: 13em;
+}
+
+.valo-facebook .v-treegrid-node.depth-14 {
+	padding-left: 14em;
+}
+
+.valo-facebook .v-treegrid-node.depth-15 {
+	padding-left: 15em;
+}
+
+.valo-facebook .v-treegrid-cell-content {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.valo-facebook .v-treegrid-row-focused::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	border: 2px solid #3b5998;
+	display: none;
+	pointer-events: none;
+}
+
+.valo-facebook .v-treegrid-cell-focused {
+	position: static;
+}
+
+.valo-facebook .v-treegrid-cell-focused::before {
+	display: none;
+}
+
+.valo-facebook .v-treegrid:focus .v-treegrid-row-focused::before {
+	display: block;
+}
+
+.valo-facebook .v-treegrid.v-disabled:focus .v-treegrid-row-focused::before {
+	display: none;
+}
+
+.valo-facebook .v-treegrid:focus .v-treegrid-cell-focused::before {
+	display: none;
 }
 
 .valo-facebook .v-table {
@@ -11848,6 +14203,12 @@ div.v-layout.v-horizontal.v-widget {
 	content: none;
 }
 
+.valo-facebook button {
+	font: inherit;
+	font-weight: 400;
+	line-height: 1.55;
+}
+
 .valo-facebook .v-nativebutton {
 	-webkit-touch-callout: none;
 }
@@ -13196,21 +15557,41 @@ div.v-layout.v-horizontal.v-widget {
 .v-panel-caption-panel-form {
 	font-weight: bold !important;
 	background-color: #3b5998 !important;
+	display: block;
+}
+
+.v-menubar-desk-menu {
+	display: none !important;
+}
+
+.v-tabsheet-tabcontainer {
+	display: none !important;
+}
+
+.v-horizontallayout-touch-menu {
+	display: block !important;
+}
+
+.v-menubar-menuitem-menu-grupo {
+	font-weight: bold !important;
+}
+
+@media screen and (min-width: 768px) {
+	.v-menubar-desk-menu {
+		display: block !important;
+	}
+	.v-tabsheet-tabcontainer {
+		display: block !important;
+	}
+	.v-horizontallayout-touch-menu {
+		display: none !important;
+	}
+	.v-panel-caption-panel-form {
+		display: none;
+	}
 }
 
 @media screen and (min-width: 320px) {
-	.v-menubar-desk-menu {
-		display: none !important;
-	}
-	.v-tabsheet-tabcontainer {
-		display: none !important;
-	}
-	.v-horizontallayout-touch-menu {
-		display: block !important;
-	}
-	.v-panel-caption-panel-form {
-		display: block;
-	}
 	.v-slot-responsive {
 		width: 100%;
 		margin: auto;
@@ -13229,18 +15610,6 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 @media screen and (min-width: 480px) {
-	.v-menubar-desk-menu {
-		display: none !important;
-	}
-	.v-tabsheet-tabcontainer {
-		display: none !important;
-	}
-	.v-horizontallayout-touch-menu {
-		display: block !important;
-	}
-	.v-panel-caption-panel-form {
-		display: block;
-	}
 	.v-slot-responsive {
 		width: 80%;
 		margin: auto;
@@ -13262,18 +15631,6 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 @media screen and (min-width: 600px) {
-	.v-menubar-desk-menu {
-		display: none !important;
-	}
-	.v-tabsheet-tabcontainer {
-		display: none !important;
-	}
-	.v-horizontallayout-touch-menu {
-		display: block !important;
-	}
-	.v-panel-caption-panel-form {
-		display: block;
-	}
 	.v-slot-responsive {
 		width: 75%;
 		margin: auto;
@@ -13298,18 +15655,6 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 @media screen and (min-width: 801px) {
-	.v-menubar-desk-menu {
-		display: block !important;
-	}
-	.v-tabsheet-tabcontainer {
-		display: block !important;
-	}
-	.v-horizontallayout-touch-menu {
-		display: none !important;
-	}
-	.v-panel-caption-panel-form {
-		display: none;
-	}
 	.v-slot-responsive {
 		width: 50%;
 		margin: auto;
@@ -13337,18 +15682,6 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 @media screen and (min-width: 1025px) {
-	.v-menubar-desk-menu {
-		display: block !important;
-	}
-	.v-tabsheet-tabcontainer {
-		display: block !important;
-	}
-	.v-horizontallayout-touch-menu {
-		display: none !important;
-	}
-	.v-panel-caption-panel-form {
-		display: none;
-	}
 	.v-slot-responsive {
 		width: 45%;
 		margin: auto;
@@ -13376,18 +15709,6 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 @media screen and (min-width: 1281px) {
-	.v-menubar-desk-menu {
-		display: block !important;
-	}
-	.v-tabsheet-tabcontainer {
-		display: block !important;
-	}
-	.v-horizontallayout-touch-menu {
-		display: none !important;
-	}
-	.v-panel-caption-panel-form {
-		display: none;
-	}
 	.v-slot-responsive {
 		width: 35%;
 		margin: auto;

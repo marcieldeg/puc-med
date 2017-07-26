@@ -25,27 +25,46 @@
 .v-panel-caption-panel-form {
 	font-weight: bold !important;
 	background-color: $v-focus-color !important;
+	display: block;
+}
+
+/*****MENUS*****/
+.v-menubar-desk-menu {
+	display: none !important;
+}
+	
+.v-tabsheet-tabcontainer {
+	display: none !important;
+}	
+	
+.v-horizontallayout-touch-menu {
+	display: block !important;
+}
+
+.v-menubar-menuitem-menu-grupo {
+	font-weight: bold !important;
+}
+
+@media screen and (min-width: 768px) {
+	.v-menubar-desk-menu {
+		display: block !important;
+	}
+		
+	.v-tabsheet-tabcontainer {
+		display: block !important;
+	}	
+		
+	.v-horizontallayout-touch-menu {
+		display: none !important;
+	}
+	
+	.v-panel-caption-panel-form {
+		display: none;
+	}
 }
 
 @media screen and (min-width: 320px) {
 	/* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
-	
-	/*****MENUS*****/
-	.v-menubar-desk-menu {
-		display: none !important;
-	}
-	
-	.v-tabsheet-tabcontainer {
-		display: none !important;
-	}	
-	
-	.v-horizontallayout-touch-menu {
-		display: block !important;
-	}
-	
-	.v-panel-caption-panel-form {
-		display: block;
-	}
 	
 	.v-slot-responsive { 
 		width: 100%;
@@ -69,23 +88,6 @@
 
 @media screen and (min-width: 480px) {
 	/* smartphones, Android phones, landscape iPhone */
-	
-	/*****MENUS*****/
-	.v-menubar-desk-menu {
-		display: none !important;
-	}
-	
-	.v-tabsheet-tabcontainer {
-		display: none !important;
-	}	
-	
-	.v-horizontallayout-touch-menu {
-		display: block !important;
-	}
-	
-	.v-panel-caption-panel-form {
-		display: block;
-	}
 	
 	.v-slot-responsive { 
 		width: 80%;
@@ -113,23 +115,6 @@
 
 @media screen and (min-width: 600px) {
 	/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
-	
-	/*****MENUS*****/
-	.v-menubar-desk-menu {
-		display: none !important;
-	}
-	
-	.v-tabsheet-tabcontainer {
-		display: none !important;
-	}	
-	
-	.v-horizontallayout-touch-menu {
-		display: block !important;
-	}
-	
-	.v-panel-caption-panel-form {
-		display: block;
-	}
 	
 	.v-slot-responsive { 
 		width: 75%;
@@ -161,23 +146,6 @@
 
 @media screen and (min-width: 801px) {
 	/* tablet, landscape iPad, lo-res laptops ands desktops */
-	
-	/*****MENUS*****/
-	.v-menubar-desk-menu {
-		display: block !important;
-	}
-	
-	.v-tabsheet-tabcontainer {
-		display: block !important;
-	}	
-	
-	.v-horizontallayout-touch-menu {
-		display: none !important;
-	}
-	
-	.v-panel-caption-panel-form {
-		display: none;
-	}
 	
 	.v-slot-responsive {
 		width: 50%;
@@ -214,23 +182,6 @@
 @media screen and (min-width: 1025px) {
 	/* big landscape tablets, laptops, and desktops */
 	
-	/*****MENUS*****/
-	.v-menubar-desk-menu {
-		display: block !important;
-	}
-	
-	.v-tabsheet-tabcontainer {
-		display: block !important;
-	}	
-	
-	.v-horizontallayout-touch-menu {
-		display: none !important;
-	}
-	
-	.v-panel-caption-panel-form {
-		display: none;
-	}
-	
 	.v-slot-responsive {
 		width: 45%;
 		margin: auto;
@@ -265,23 +216,6 @@
 
 @media screen and (min-width: 1281px) { 
 	/* hi-res laptops and desktops */
-	
-	/*****MENUS*****/
-	.v-menubar-desk-menu {
-		display: block !important;
-	}
-	
-	.v-tabsheet-tabcontainer {
-		display: block !important;
-	}	
-	
-	.v-horizontallayout-touch-menu {
-		display: none !important;
-	}
-	
-	.v-panel-caption-panel-form {
-		display: none;
-	}
 	
 	.v-slot-responsive {
 		width: 35%;
