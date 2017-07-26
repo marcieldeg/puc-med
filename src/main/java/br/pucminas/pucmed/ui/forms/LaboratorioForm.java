@@ -35,7 +35,7 @@ public class LaboratorioForm extends BaseForm {
 	private TextField id = new TextField("Código");
 	private TextField nome = new TextField("Nome");
 	private TextField email = new TextField("E-mail");
-	private TextField login = new TextField("Login");
+	private TextField login = new TextField("Usuário");
 	private PasswordField senha = new PasswordField("Senha");
 	private ComboBox<Status> status = new ComboBox<>("Status");
 

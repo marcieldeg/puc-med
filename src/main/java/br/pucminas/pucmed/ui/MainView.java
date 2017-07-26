@@ -193,18 +193,20 @@ public class MainView extends VerticalLayout implements View {
 		return null;
 	}
 
+	private <T extends Component> T addForm(Class<T> formClass) {
+		try {
+			T c = formClass.newInstance();
+			forms.add(c);
+			return c;
+		} catch (InstantiationException | IllegalAccessException e) {
+			throw new RuntimeException("Not a valid layout");
+		}
+	}
+
 	private <T extends Component> void createTab(Class<T> formClass, String name) {
 		T c = getForm(formClass);
-		if (c == null) {
-			try {
-				c = formClass.newInstance();
-			} catch (InstantiationException | IllegalAccessException e) {
-				throw new RuntimeException("Not a valid layout");
-			}
-			forms.add(c);
-		}
-
-		// TODO: verificar se aba está aberta
+		if (c == null)
+			c = addForm(formClass);
 
 		Tab tab = tabSheet.addTab(c, name);
 		tab.setClosable(true);
@@ -216,7 +218,6 @@ public class MainView extends VerticalLayout implements View {
 		layout.removeComponent(welcome);
 		VaadinSession.getCurrent().close();
 		Page.getCurrent().reload();
-		// getUI().getNavigator().navigateTo(LoginView.NAME);
 	}
 
 	@Override

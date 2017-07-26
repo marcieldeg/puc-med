@@ -17,6 +17,15 @@
 .v-verticallayout-area-trabalho {
 	background-color: $v-app-background-color;
 }
+	
+.v-panel-panel-form {
+	background-color: $v-app-background-color !important;
+}
+	
+.v-panel-caption-panel-form {
+	font-weight: bold !important;
+	background-color: $v-focus-color !important;
+}
 
 @media screen and (min-width: 320px) {
 	/* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
@@ -32,6 +41,10 @@
 	
 	.v-horizontallayout-touch-menu {
 		display: block !important;
+	}
+	
+	.v-panel-caption-panel-form {
+		display: block;
 	}
 	
 	.v-slot-responsive { 
@@ -68,6 +81,10 @@
 	
 	.v-horizontallayout-touch-menu {
 		display: block !important;
+	}
+	
+	.v-panel-caption-panel-form {
+		display: block;
 	}
 	
 	.v-slot-responsive { 
@@ -108,6 +125,10 @@
 	
 	.v-horizontallayout-touch-menu {
 		display: block !important;
+	}
+	
+	.v-panel-caption-panel-form {
+		display: block;
 	}
 	
 	.v-slot-responsive { 
@@ -152,6 +173,10 @@
 	
 	.v-horizontallayout-touch-menu {
 		display: none !important;
+	}
+	
+	.v-panel-caption-panel-form {
+		display: none;
 	}
 	
 	.v-slot-responsive {
@@ -202,6 +227,10 @@
 		display: none !important;
 	}
 	
+	.v-panel-caption-panel-form {
+		display: none;
+	}
+	
 	.v-slot-responsive {
 		width: 45%;
 		margin: auto;
@@ -248,6 +277,10 @@
 	
 	.v-horizontallayout-touch-menu {
 		display: none !important;
+	}
+	
+	.v-panel-caption-panel-form {
+		display: none;
 	}
 	
 	.v-slot-responsive {

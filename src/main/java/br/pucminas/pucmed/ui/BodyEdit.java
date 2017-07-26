@@ -28,8 +28,10 @@ public abstract class BodyEdit extends VerticalLayout {
 		panel.setSizeFull();
 		panel.setStyleName(ValoTheme.PANEL_BORDERLESS);
 		salvar.setIcon(VaadinIcons.CHECK);
+		salvar.setStyleName(ValoTheme.BUTTON_PRIMARY);
 		cancelar.setIcon(VaadinIcons.CLOSE);
-		buttons.setSpacing(false);
+		cancelar.setStyleName(ValoTheme.BUTTON_DANGER);
+		// buttons.setSpacing(false);
 		buttons.setStyleName(ValoTheme.LAYOUT_HORIZONTAL_WRAPPING);
 		buttons.addComponents(salvar, cancelar);
 		addComponents(panel, buttons);
