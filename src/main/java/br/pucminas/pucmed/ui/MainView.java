@@ -75,9 +75,8 @@ public class MainView extends VerticalLayout implements View {
 		touchMenu.addStyleName("touch-menu");
 
 		touchMenubar.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
-		MenuItem grupoMenu = touchMenubar.addItem("", null);
+		MenuItem grupoMenu = touchMenubar.addItem("Menu", null);
 		grupoMenu.setIcon(VaadinIcons.MENU);
-		grupoMenu.setStyleName(ValoTheme.MENU_PART + ' ' + ValoTheme.MENU_PART_LARGE_ICONS);
 
 		grupoMenu.addItem("Serviços", null).setEnabled(false);
 		grupoMenu.addSeparator();

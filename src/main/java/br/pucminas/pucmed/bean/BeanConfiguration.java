@@ -24,6 +24,15 @@ public class BeanConfiguration {
 
 	@Value("${spring.datasource.password}")
 	private String password;
+	
+	@Value("${hibernate.dialect}")
+	private String hibernateDialect;
+	
+	@Value("${hibernate.show_sql}")
+	private String hibernateShowSql;
+	
+	@Value("${hibernate.hbm2ddl.auto}")
+	private String hibernateHbm2ddlAuto;
 
 	@Bean
 	public DataSource dataSource() {
@@ -42,9 +51,9 @@ public class BeanConfiguration {
 		sessionFactoryBean.setDataSource(dataSource());
 		sessionFactoryBean.setPackagesToScan("br.pucminas.pucmed.service", "br.pucminas.pucmed.model");
 		Properties hibernateProperties = new Properties();
-		hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-		hibernateProperties.put("hibernate.show_sql", "true");
-		hibernateProperties.put("hibernate.hbm2ddl.auto", "update");
+		hibernateProperties.put("hibernate.dialect", hibernateDialect);
+		hibernateProperties.put("hibernate.show_sql", hibernateShowSql);
+		hibernateProperties.put("hibernate.hbm2ddl.auto", hibernateHbm2ddlAuto);
 		hibernateProperties.put("hibernate.hbm2ddl.import_files", "initial_data.sql");
 		hibernateProperties.put("hibernate.enable_lazy_load_no_trans", "true");
 		sessionFactoryBean.setHibernateProperties(hibernateProperties);

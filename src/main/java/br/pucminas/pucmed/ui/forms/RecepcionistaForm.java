@@ -61,6 +61,7 @@ public class RecepcionistaForm extends BaseForm {
 		});
 
 		grid.setSizeFull();
+		grid.setFrozenColumnCount(1);
 
 		binder.forField(id)//
 				.withConverter(new StringToLongConverter("Código Inválido"))//

@@ -109,7 +109,7 @@ public class PacienteForm extends BaseForm {
 		});
 
 		grid.setSizeFull();
-		grid.setFrozenColumnCount(2);
+		grid.setFrozenColumnCount(1);
 
 		binder.forField(id)//
 				.withConverter(new StringToLongConverter("Código Inválido"))//

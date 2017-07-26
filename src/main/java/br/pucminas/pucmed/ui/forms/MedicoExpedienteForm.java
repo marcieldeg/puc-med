@@ -60,6 +60,7 @@ public class MedicoExpedienteForm extends BaseForm {
 		});
 
 		grid.setSizeFull();
+		grid.setFrozenColumnCount(1);
 
 		binder.forField(id)//
 				.withConverter(new StringToLongConverter("Código Inválido"))//

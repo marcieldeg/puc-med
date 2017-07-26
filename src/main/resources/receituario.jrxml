@@ -6,16 +6,18 @@
 	<subDataset name="Posologia" uuid="63965de3-c909-41cd-963b-4cb5e716fc5c">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="PUC-MED"/>
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="id" class="java.lang.Long" evaluationTime="Early"/>
 		<queryString>
 			<![CDATA[select row_number() over() as item,
        medicamento.nomeComercial,
           receituario.quantidade
-       || case medicamento.embalagem when 0 then ' Caixa' when 1 then 'Frasco' end
+       || case medicamento.embalagem when 0 then ' caixa' when 1 then ' frasco' end
        || case receituario.quantidade when 1 then '' else 's' end as embalagem,
        receituario.posologia
   from receituario,
        medicamento
  where receituario.id_medicamento = medicamento.id
+  and receituario.id_atendimento = $P{id}
 order by receituario.id]]>
 		</queryString>
 		<field name="item" class="java.lang.Long"/>
@@ -25,7 +27,8 @@ order by receituario.id]]>
 	</subDataset>
 	<parameter name="id" class="java.lang.Long"/>
 	<queryString>
-		<![CDATA[select paciente.nome as nome_paciente,
+		<![CDATA[select atendimento.id,
+       paciente.nome as nome_paciente,
        case paciente.sexo when 0 then 'M' when 1 then 'F' end as sexo,
           date_part('year',age(now(), paciente.dataNascimento)) || 'a, '
        || date_part('month',age(now(), paciente.dataNascimento)) || 'm, '
@@ -116,7 +119,10 @@ order by receituario.id]]>
 			<componentElement>
 				<reportElement x="2" y="20" width="550" height="50" uuid="fee1eabc-26bb-4323-9a3b-ca5808e1977a"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
-					<datasetRun subDataset="Posologia" uuid="0f815f39-236e-48c3-b83d-9676d438d1cb">
+					<datasetRun subDataset="Posologia" uuid="225640c4-2254-4872-811d-ce23f90aa355">
+						<datasetParameter name="id">
+							<datasetParameterExpression><![CDATA[$P{id}]]></datasetParameterExpression>
+						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
 					<jr:listContents height="50" width="550">
