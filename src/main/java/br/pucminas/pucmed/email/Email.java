@@ -39,7 +39,7 @@ public class Email {
 					email.setAuthenticator(new DefaultAuthenticator(config.getEmailUsername(), config.getEmailPassword()));
 					email.setSSLOnConnect(true);
 					email.setSubject("PUC-MED - Recuperação de senha");
-					email.setMsg("Login: " + usuario.getLogin() + ", Senha: " + usuario.getSenha());
+					email.setMsg("Login: " + usuario.getLogin() + "\nSenha: " + usuario.getSenha());
 					email.send();
 					log.info("E-mail enviado para \"" + address + "\".");
 				} catch (Exception e) {

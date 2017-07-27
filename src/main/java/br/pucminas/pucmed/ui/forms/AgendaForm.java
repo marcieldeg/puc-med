@@ -72,7 +72,7 @@ public class AgendaForm extends BaseForm {
 					SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 					return format.format(o.getData());
 				})//
-				.setWidth(Constants.LARGE_FIELD)//
+				.setWidth(Constants.MEDIUM_FIELD)//
 				.setCaption("Data");
 		grid.addColumn(o -> o.getPaciente().getNome())//
 				.setWidth(Constants.LARGE_FIELD)//
