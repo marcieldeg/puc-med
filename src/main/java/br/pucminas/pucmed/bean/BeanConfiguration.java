@@ -11,7 +11,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
+import lombok.Getter;
+
 @Configuration
+@Getter
 public class BeanConfiguration {
 	@Value("${spring.datasource.driver-class-name}")
 	private String driver;
@@ -33,6 +36,21 @@ public class BeanConfiguration {
 	
 	@Value("${hibernate.hbm2ddl.auto}")
 	private String hibernateHbm2ddlAuto;
+	
+	@Value("${email.address}")
+	private String emailAddress;
+	
+	@Value("${email.username}")
+	private String emailUsername;
+	
+	@Value("${email.password}")
+	private String emailPassword;
+	
+	@Value("${email.host-name}")
+	private String emailHostName;
+	
+	@Value("${email.port}")
+	private Integer emailPort;
 
 	@Bean
 	public DataSource dataSource() {
