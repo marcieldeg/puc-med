@@ -14,14 +14,18 @@ import org.postgresql.util.PSQLException;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.vaadin.data.Binder;
+import com.vaadin.data.ValidationResult;
+import com.vaadin.data.ValueContext;
 import com.vaadin.data.converter.LocalDateToDateConverter;
 import com.vaadin.data.converter.StringToLongConverter;
+import com.vaadin.data.validator.AbstractValidator;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.TextField;
 
+import br.com.caelum.stella.validation.CPFValidator;
 import br.pucminas.pucmed.bean.BeanGetter;
 import br.pucminas.pucmed.model.Estado;
 import br.pucminas.pucmed.model.Paciente;
@@ -132,6 +136,14 @@ public class PacienteForm extends BaseForm {
 				.bind("dataNascimento");
 		binder.forField(cpf)//
 				.asRequired("O campo é obrigatório")//
+				.withValidator(new AbstractValidator<String>("CPF Inválido") {
+					private final CPFValidator cpfValidator = new CPFValidator();
+
+					@Override
+					public ValidationResult apply(String value, ValueContext context) {
+						return toResult(value, cpfValidator.invalidMessagesFor(value).isEmpty());
+					}
+				})//
 				.bind("cpf");
 		binder.forField(endereco)//
 				.asRequired("O campo é obrigatório")//
@@ -192,6 +204,7 @@ public class PacienteForm extends BaseForm {
 		sexo.addStyleName(Constants.SMALL_FIELD_STYLE);
 		dataNascimento.addStyleName(Constants.SMALL_FIELD_STYLE);
 		cpf.addStyleName(Constants.MEDIUM_FIELD_STYLE);
+		cpf.setMaxLength(11);
 		endereco.addStyleName(Constants.LARGE_FIELD_STYLE);
 		numero.addStyleName(Constants.SMALL_FIELD_STYLE);
 		complemento.addStyleName(Constants.LARGE_FIELD_STYLE);

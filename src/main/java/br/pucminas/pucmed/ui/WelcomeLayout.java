@@ -20,13 +20,15 @@ import br.pucminas.pucmed.model.Medico;
 import br.pucminas.pucmed.model.Recepcionista;
 import br.pucminas.pucmed.model.Usuario;
 import br.pucminas.pucmed.service.AgendaService;
+import br.pucminas.pucmed.service.ExameService;
 import br.pucminas.pucmed.utils.Constants;
 
 @SuppressWarnings("serial")
 public class WelcomeLayout extends VerticalLayout {
 	private final Grid<Agenda> gridMedico = new Grid<>();
 
-	private final AgendaService service = BeanGetter.getService(AgendaService.class);
+	private final AgendaService agendaService = BeanGetter.getService(AgendaService.class);
+	private final ExameService exameService = BeanGetter.getService(ExameService.class);
 
 	private Usuario usuario;
 
@@ -39,16 +41,35 @@ public class WelcomeLayout extends VerticalLayout {
 		} else if (usuario instanceof Medico) {
 			createMedicoView();
 		} else if (usuario instanceof Laboratorio) {
-			createRecepcionistaView();
+			createLaboratorioView();
 		}
 	}
 
 	private void createRecepcionistaView() {
-		addComponent(new Label("Bem vindo, " + usuario.getNome()));
+		addComponent(new Label("Bem vindo, " + usuario.getNome() + "."));
+	}
+
+	private void createLaboratorioView() {
+		Map<String, Object> params = new HashMap<>();
+		params.put("dataRealizacao#isnull", null);
+		int examesCount = exameService.list(params).size();
+		
+		String message = "";
+		if (examesCount == 0)
+			message = "Não existem exames a serem realizados.";
+		else if (examesCount == 1)
+			message = "Há 1 exame a ser realizado.";
+		else
+			message = String.format("Há %d exames a serem realizados.", examesCount);
+		
+		addComponent(new Label("Bem vindo, " + usuario.getNome() + "."));
+		Label examesLabel = new Label(message);
+		addComponent(examesLabel);
+		setExpandRatio(examesLabel, 1);
 	}
 
 	private void createMedicoView() {
-		addComponent(new Label("Bem vindo, Dr. " + usuario.getNome()));
+		addComponent(new Label("Bem vindo, Dr. " + usuario.getNome() + "."));
 		addComponent(new Label("Agenda de hoje:"));
 
 		updateGridMedicos();
@@ -77,6 +98,6 @@ public class WelcomeLayout extends VerticalLayout {
 		params.put("medico", (Medico) usuario);
 		params.put("data#ge", DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH));
 		params.put("data#lt", DateUtils.truncate(DateUtils.addDays(new Date(), 1), Calendar.DAY_OF_MONTH));
-		gridMedico.setItems(service.list(params));
+		gridMedico.setItems(agendaService.list(params));
 	}
 }

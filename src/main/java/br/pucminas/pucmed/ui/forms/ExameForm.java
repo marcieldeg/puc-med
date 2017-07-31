@@ -3,6 +3,8 @@ package br.pucminas.pucmed.ui.forms;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,6 +65,7 @@ public class ExameForm extends BaseForm {
 	private ComboBox<Paciente> fPaciente = new ComboBox<>("Paciente");
 	private ComboBox<TipoExame> fTipoExame = new ComboBox<>("Tipo de Exame");
 	private DateField fDataRealizacao = new DateField("Data de Realização");
+	private ComboBox<Situacao> fStatus = new ComboBox<>("Situação", EnumSet.allOf(Situacao.class));
 
 	private boolean abertoDoMenu = false;
 
@@ -70,15 +73,18 @@ public class ExameForm extends BaseForm {
 
 	public ExameForm() {
 		this(null);
-		abertoDoMenu = true;
 	}
 
 	public ExameForm(Atendimento atendimento) {
 		super(CAPTION);
 
 		this.atendimento = atendimento;
+		abertoDoMenu = this.atendimento == null;
 
-		updateGrid();
+		if (abertoDoMenu)
+			fStatus.setSelectedItem(Situacao.NAO_REALIZADOS);
+		else
+			updateGrid();
 		grid.removeAllColumns();
 		grid.addColumn("id").setWidth(Constants.SMALL_FIELD);
 		grid.addColumn(//
@@ -105,7 +111,7 @@ public class ExameForm extends BaseForm {
 		grid.addSelectionListener(e -> {
 			Optional<Exame> exame = e.getFirstSelectedItem();
 			getBodyView().getToolbarArea().setEditarEnabled(exame.isPresent());
-			getBodyView().getToolbarArea().setExcluirEnabled(exame.isPresent() && atendimento != null);
+			getBodyView().getToolbarArea().setExcluirEnabled(exame.isPresent() && !abertoDoMenu);
 			getBodyView().getToolbarArea().getCustomButton("Imprimir")
 					.setEnabled(exame.isPresent() && exame.get().getDataRealizacao() != null);
 		});
@@ -128,7 +134,7 @@ public class ExameForm extends BaseForm {
 		fTipoExame.setItems(tipoExameService.list());
 		fTipoExame.setItemCaptionGenerator(TipoExame::getNome);
 
-		if (atendimento == null) {
+		if (abertoDoMenu) {
 			fPaciente.setItems(pacienteService.list());
 			fPaciente.setItemCaptionGenerator(Paciente::getNome);
 		}
@@ -159,15 +165,17 @@ public class ExameForm extends BaseForm {
 						});
 				browserWindowOpener.extend(botaoImprimir);
 
-				fPaciente.addValueChangeListener(e -> pesquisar());
 				fTipoExame.addValueChangeListener(e -> pesquisar());
 				fDataRealizacao.addValueChangeListener(e -> pesquisar());
-				if (atendimento == null) {
+				fStatus.addValueChangeListener(e -> pesquisar());
+
+				if (abertoDoMenu) {
+					fPaciente.addValueChangeListener(e -> pesquisar());
 					getToolbarArea().setAdicionarEnabled(false);
 					getToolbarArea().setExcluirEnabled(false);
 					getFilterArea().addFilters(fPaciente);
 				}
-				getFilterArea().addFilters(fTipoExame, fDataRealizacao);
+				getFilterArea().addFilters(fTipoExame, fDataRealizacao, fStatus);
 			}
 		};
 
@@ -202,7 +210,7 @@ public class ExameForm extends BaseForm {
 			atendimento = e.getAtendimento();
 
 			if (e.getDataRealizacao() != null) {
-				getBodyEdit().showMessage("Esse exame já foi realizado e não pode ser alterado", Type.ERROR);
+				Notification.show("Esse exame já foi realizado e não pode ser alterado", Type.ERROR);
 				return;
 			}
 
@@ -216,7 +224,7 @@ public class ExameForm extends BaseForm {
 			Exame e = grid.asSingleSelect().getValue();
 
 			if (e.getDataRealizacao() != null) {
-				getBodyEdit().showMessage("Esse exame já foi realizado e não pode ser excluído", Type.ERROR);
+				Notification.show("Esse exame já foi realizado e não pode ser excluído", Type.ERROR);
 				return;
 			}
 
@@ -281,13 +289,24 @@ public class ExameForm extends BaseForm {
 
 	private void pesquisar() {
 		Map<String, Object> params = new HashMap<>();
-		if (!fTipoExame.isEmpty()) {
+		if (!fTipoExame.isEmpty())
 			params.put("tipoExame", fTipoExame.getValue());
-		}
+
 		if (!fDataRealizacao.isEmpty()) {
 			params.put("dataRealizacao#ge", Utils.convertLocalDateToDate(fDataRealizacao.getValue()));
 			params.put("dataRealizacao#lt", Utils.convertLocalDateToDate(fDataRealizacao.getValue().plusDays(1)));
 		}
+
+		if (!fStatus.isEmpty())
+			switch (fStatus.getValue()) {
+			case NAO_REALIZADOS:
+				params.put("dataRealizacao#isnull", null);
+				break;
+			case REALIZADOS:
+				params.put("dataRealizacao#isnotnull", null);
+				break;
+			}
+
 		updateGrid(params);
 	}
 
@@ -297,5 +316,21 @@ public class ExameForm extends BaseForm {
 		dataRealizacao.setEnabled(abertoDoMenu);
 		resultado.setEnabled(abertoDoMenu);
 		super.edit();
+	}
+
+	private static enum Situacao {
+		REALIZADOS, NAO_REALIZADOS;
+
+		@Override
+		public String toString() {
+			switch (this) {
+			case NAO_REALIZADOS:
+				return "Não Realizados";
+			case REALIZADOS:
+				return "Realizados";
+			default:
+				return "";
+			}
+		}
 	}
 }

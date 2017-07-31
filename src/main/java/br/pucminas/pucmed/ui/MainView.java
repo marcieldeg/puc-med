@@ -228,8 +228,10 @@ public class MainView extends VerticalLayout implements View {
 
 	@Override
 	public void enter(ViewChangeEvent event) {
-		if (!UserSession.exists())
+		if (!UserSession.exists()) {
 			getUI().getNavigator().navigateTo(LoginView.NAME);
+			return;
+		}
 
 		refreshMenuPermissions();
 		welcome = new WelcomeLayout();

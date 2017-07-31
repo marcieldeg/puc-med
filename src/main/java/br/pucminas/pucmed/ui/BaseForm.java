@@ -16,6 +16,7 @@ public abstract class BaseForm extends Panel {
 	protected void edit() {
 		if (bodyEdit == null)
 			throw new RuntimeException("Body not set.");
+		bodyEdit.hideMessage();
 		setContent(bodyEdit);
 	}
 
