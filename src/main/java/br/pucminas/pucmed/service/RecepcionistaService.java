@@ -10,7 +10,7 @@ import br.pucminas.pucmed.model.Recepcionista;
 import br.pucminas.pucmed.model.Usuario;
 
 @Service
-public class RecepcionistaService extends BaseService<Recepcionista> {
+public class RecepcionistaService extends UsuarioBaseService<Recepcionista> {
 	public RecepcionistaService() {
 		super(Recepcionista.class);
 	}

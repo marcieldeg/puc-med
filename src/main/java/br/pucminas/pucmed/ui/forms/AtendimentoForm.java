@@ -36,8 +36,8 @@ import br.pucminas.pucmed.ui.BodyEdit;
 import br.pucminas.pucmed.ui.BodyView;
 import br.pucminas.pucmed.ui.extra.MessageBox;
 import br.pucminas.pucmed.ui.extra.Notification;
-import br.pucminas.pucmed.ui.extra.SubWindow;
 import br.pucminas.pucmed.ui.extra.Notification.Type;
+import br.pucminas.pucmed.ui.extra.SubWindow;
 import br.pucminas.pucmed.utils.Constants;
 import br.pucminas.pucmed.utils.Utils;
 
@@ -246,13 +246,23 @@ public class AtendimentoForm extends BaseForm {
 	private void salvar() {
 		Atendimento atendimento = new Atendimento();
 		if (binder.writeBeanIfValid(atendimento)) {
-			if (atendimento.getId() == null) {
-				service.insert(atendimento);
-			} else {
-				service.update(atendimento);
+			try {
+				if (atendimento.getId() == null) {
+					service.insert(atendimento);
+				} else {
+					service.update(atendimento);
+				}
+				updateGrid();
+				view();
+			} catch (DataIntegrityViolationException ex) {
+				Throwable cause = ex.getMostSpecificCause();
+				String message = "";
+				if (cause instanceof PSQLException)
+					message = Utils.translateExceptionMessage((PSQLException) cause);
+				else
+					message = cause.getLocalizedMessage();
+				getBodyEdit().showMessage(message, Type.ERROR);
 			}
-			updateGrid();
-			view();
 		} else {
 			binder.validate();
 		}

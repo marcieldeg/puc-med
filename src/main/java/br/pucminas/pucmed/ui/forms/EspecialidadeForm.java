@@ -77,7 +77,7 @@ public class EspecialidadeForm extends BaseForm {
 		};
 
 		id.setEnabled(false);
-		
+
 		id.addStyleName(Constants.SMALL_FIELD_STYLE);
 		nome.addStyleName(Constants.LARGE_FIELD_STYLE);
 
@@ -141,12 +141,22 @@ public class EspecialidadeForm extends BaseForm {
 	private void salvar() {
 		Especialidade especialidade = new Especialidade();
 		if (binder.writeBeanIfValid(especialidade)) {
-			if (especialidade.getId() == null)
-				service.insert(especialidade);
-			else
-				service.update(especialidade);
-			updateGrid();
-			view();
+			try {
+				if (especialidade.getId() == null)
+					service.insert(especialidade);
+				else
+					service.update(especialidade);
+				updateGrid();
+				view();
+			} catch (DataIntegrityViolationException ex) {
+				Throwable cause = ex.getMostSpecificCause();
+				String message = "";
+				if (cause instanceof PSQLException)
+					message = Utils.translateExceptionMessage((PSQLException) cause);
+				else
+					message = cause.getLocalizedMessage();
+				getBodyEdit().showMessage(message, Type.ERROR);
+			}
 		} else {
 			binder.validate();
 		}

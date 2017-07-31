@@ -113,7 +113,7 @@ public class AgendaForm extends BaseForm {
 					try {
 						turno = Turno.fromDate(s.getData());
 					} catch (IndexOutOfBoundsException e) {
-						Notification.show("Horário indisponível para agendamento", Type.ERROR);
+						getBodyEdit().showMessage("Horário indisponível para agendamento", Type.ERROR);
 						return ValidationResult.error("Horário indisponível para agendamento");
 					}
 
@@ -125,7 +125,7 @@ public class AgendaForm extends BaseForm {
 						}
 					}
 
-					Notification.show("Esse médico não atende no horário informado", Type.ERROR);
+					getBodyEdit().showMessage("Esse médico não atende no horário informado", Type.ERROR);
 					return ValidationResult.error("Esse médico não atende no horário informado");
 				});
 
@@ -228,12 +228,22 @@ public class AgendaForm extends BaseForm {
 	private void salvar() {
 		Agenda agenda = new Agenda();
 		if (binder.writeBeanIfValid(agenda)) {
-			if (agenda.getId() == null)
-				service.insert(agenda);
-			else
-				service.update(agenda);
-			updateGrid();
-			view();
+			try {
+				if (agenda.getId() == null)
+					service.insert(agenda);
+				else
+					service.update(agenda);
+				updateGrid();
+				view();
+			} catch (DataIntegrityViolationException ex) {
+				Throwable cause = ex.getMostSpecificCause();
+				String message = "";
+				if (cause instanceof PSQLException)
+					message = Utils.translateExceptionMessage((PSQLException) cause);
+				else
+					message = cause.getLocalizedMessage();
+				getBodyEdit().showMessage(message, Type.ERROR);
+			}
 		} else {
 			binder.validate();
 		}

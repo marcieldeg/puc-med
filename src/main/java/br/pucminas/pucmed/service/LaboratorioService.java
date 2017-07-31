@@ -10,7 +10,7 @@ import br.pucminas.pucmed.model.Laboratorio;
 import br.pucminas.pucmed.model.Usuario;
 
 @Service
-public class LaboratorioService extends BaseService<Laboratorio> {
+public class LaboratorioService extends UsuarioBaseService<Laboratorio> {	
 	public LaboratorioService() {
 		super(Laboratorio.class);
 	}

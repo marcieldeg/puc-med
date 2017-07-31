@@ -179,13 +179,23 @@ public class RecepcionistaForm extends BaseForm {
 	private void salvar() {
 		Recepcionista recepcionista = new Recepcionista();
 		if (binder.writeBeanIfValid(recepcionista)) {
-			if (recepcionista.getId() == null) {
-				service.insert(recepcionista);
-			} else {
-				service.update(recepcionista);
+			try {
+				if (recepcionista.getId() == null) {
+					service.insert(recepcionista);
+				} else {
+					service.update(recepcionista);
+				}
+				updateGrid();
+				view();
+			} catch (DataIntegrityViolationException ex) {
+				Throwable cause = ex.getMostSpecificCause();
+				String message = "";
+				if (cause instanceof PSQLException)
+					message = Utils.translateExceptionMessage((PSQLException) cause);
+				else
+					message = cause.getLocalizedMessage();
+				getBodyEdit().showMessage(message, Type.ERROR);
 			}
-			updateGrid();
-			view();
 		} else {
 			binder.validate();
 		}

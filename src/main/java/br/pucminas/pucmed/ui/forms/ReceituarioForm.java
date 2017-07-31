@@ -201,14 +201,24 @@ public class ReceituarioForm extends BaseForm {
 	private void salvar() {
 		Receituario receituario = new Receituario();
 		if (binder.writeBeanIfValid(receituario)) {
-			if (receituario.getId() == null) {
-				receituario.setAtendimento(atendimento);
-				service.insert(receituario);
-			} else {
-				service.update(receituario);
+			try {
+				if (receituario.getId() == null) {
+					receituario.setAtendimento(atendimento);
+					service.insert(receituario);
+				} else {
+					service.update(receituario);
+				}
+				updateGrid();
+				view();
+			} catch (DataIntegrityViolationException ex) {
+				Throwable cause = ex.getMostSpecificCause();
+				String message = "";
+				if (cause instanceof PSQLException)
+					message = Utils.translateExceptionMessage((PSQLException) cause);
+				else
+					message = cause.getLocalizedMessage();
+				getBodyEdit().showMessage(message, Type.ERROR);
 			}
-			updateGrid();
-			view();
 		} else {
 			binder.validate();
 		}

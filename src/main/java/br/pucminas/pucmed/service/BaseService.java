@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,18 +42,33 @@ public abstract class BaseService<T extends BaseModel> {
 
 	@Transactional(rollbackFor = Exception.class)
 	public T insert(T entity) {
+		preInsert(entity);
 		hibernateTemplate.save(entity);
 		return entity;
 	}
 
 	@Transactional(rollbackFor = Exception.class)
 	public T update(T entity) {
+		preUpdate(entity);
 		hibernateTemplate.update(entity);
 		return entity;
 	}
 
 	@Transactional(rollbackFor = Exception.class)
 	public void delete(T entity) {
+		preDelete(entity);
 		hibernateTemplate.delete(entity);
+	}
+
+	public void preInsert(T entity) throws DataIntegrityViolationException {
+
+	}
+
+	public void preUpdate(T entity) throws DataIntegrityViolationException {
+
+	}
+
+	public void preDelete(T entity) throws DataIntegrityViolationException {
+
 	}
 }

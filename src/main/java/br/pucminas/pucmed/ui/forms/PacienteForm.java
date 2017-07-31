@@ -263,13 +263,23 @@ public class PacienteForm extends BaseForm {
 	private void salvar() {
 		Paciente paciente = new Paciente();
 		if (binder.writeBeanIfValid(paciente)) {
-			if (paciente.getId() == null) {
-				service.insert(paciente);
-			} else {
-				service.update(paciente);
+			try {
+				if (paciente.getId() == null) {
+					service.insert(paciente);
+				} else {
+					service.update(paciente);
+				}
+				updateGrid();
+				view();
+			} catch (DataIntegrityViolationException ex) {
+				Throwable cause = ex.getMostSpecificCause();
+				String message = "";
+				if (cause instanceof PSQLException)
+					message = Utils.translateExceptionMessage((PSQLException) cause);
+				else
+					message = cause.getLocalizedMessage();
+				getBodyEdit().showMessage(message, Type.ERROR);
 			}
-			updateGrid();
-			view();
 		} else {
 			binder.validate();
 		}

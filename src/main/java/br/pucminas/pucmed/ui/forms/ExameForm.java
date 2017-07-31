@@ -202,7 +202,7 @@ public class ExameForm extends BaseForm {
 			atendimento = e.getAtendimento();
 
 			if (e.getDataRealizacao() != null) {
-				Notification.show("Esse exame já foi realizado e não pode ser alterado", Type.ERROR);
+				getBodyEdit().showMessage("Esse exame já foi realizado e não pode ser alterado", Type.ERROR);
 				return;
 			}
 
@@ -216,7 +216,7 @@ public class ExameForm extends BaseForm {
 			Exame e = grid.asSingleSelect().getValue();
 
 			if (e.getDataRealizacao() != null) {
-				Notification.show("Esse exame já foi realizado e não pode ser excluído", Type.ERROR);
+				getBodyEdit().showMessage("Esse exame já foi realizado e não pode ser excluído", Type.ERROR);
 				return;
 			}
 
@@ -258,12 +258,22 @@ public class ExameForm extends BaseForm {
 		Exame exame = new Exame();
 		exame.setAtendimento(atendimento);
 		if (binder.writeBeanIfValid(exame)) {
-			if (exame.getId() == null) {
-				service.insert(exame);
-			} else
-				service.update(exame);
-			updateGrid();
-			view();
+			try {
+				if (exame.getId() == null) {
+					service.insert(exame);
+				} else
+					service.update(exame);
+				updateGrid();
+				view();
+			} catch (DataIntegrityViolationException ex) {
+				Throwable cause = ex.getMostSpecificCause();
+				String message = "";
+				if (cause instanceof PSQLException)
+					message = Utils.translateExceptionMessage((PSQLException) cause);
+				else
+					message = cause.getLocalizedMessage();
+				getBodyEdit().showMessage(message, Type.ERROR);
+			}
 		} else {
 			binder.validate();
 		}

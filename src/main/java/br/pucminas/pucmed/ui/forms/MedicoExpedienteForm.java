@@ -100,7 +100,7 @@ public class MedicoExpedienteForm extends BaseForm {
 		diaSemana.setEmptySelectionAllowed(false);
 		turno.setItems(EnumSet.allOf(Turno.class));
 		turno.setEmptySelectionAllowed(false);
-		
+
 		id.addStyleName(Constants.SMALL_FIELD_STYLE);
 		diaSemana.addStyleName(Constants.MEDIUM_FIELD_STYLE);
 		turno.addStyleName(Constants.MEDIUM_FIELD_STYLE);
@@ -166,12 +166,22 @@ public class MedicoExpedienteForm extends BaseForm {
 		MedicoExpediente medicoExpediente = new MedicoExpediente();
 		medicoExpediente.setMedico(medico);
 		if (binder.writeBeanIfValid(medicoExpediente)) {
-			if (medicoExpediente.getId() == null)
-				service.insert(medicoExpediente);
-			else
-				service.update(medicoExpediente);
-			updateGrid();
-			view();
+			try {
+				if (medicoExpediente.getId() == null)
+					service.insert(medicoExpediente);
+				else
+					service.update(medicoExpediente);
+				updateGrid();
+				view();
+			} catch (DataIntegrityViolationException ex) {
+				Throwable cause = ex.getMostSpecificCause();
+				String message = "";
+				if (cause instanceof PSQLException)
+					message = Utils.translateExceptionMessage((PSQLException) cause);
+				else
+					message = cause.getLocalizedMessage();
+				getBodyEdit().showMessage(message, Type.ERROR);
+			}
 		} else {
 			binder.validate();
 		}

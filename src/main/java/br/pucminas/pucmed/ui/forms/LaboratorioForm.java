@@ -108,7 +108,7 @@ public class LaboratorioForm extends BaseForm {
 		id.setEnabled(false);
 		status.setEmptySelectionAllowed(false);
 		status.setItems(EnumSet.allOf(Status.class));
-		
+
 		id.addStyleName(Constants.SMALL_FIELD_STYLE);
 		nome.addStyleName(Constants.LARGE_FIELD_STYLE);
 		email.addStyleName(Constants.LARGE_FIELD_STYLE);
@@ -179,13 +179,23 @@ public class LaboratorioForm extends BaseForm {
 	private void salvar() {
 		Laboratorio Laboratorio = new Laboratorio();
 		if (binder.writeBeanIfValid(Laboratorio)) {
-			if (Laboratorio.getId() == null) {
-				service.insert(Laboratorio);
-			} else {
-				service.update(Laboratorio);
+			try {
+				if (Laboratorio.getId() == null) {
+					service.insert(Laboratorio);
+				} else {
+					service.update(Laboratorio);
+				}
+				updateGrid();
+				view();
+			} catch (DataIntegrityViolationException ex) {
+				Throwable cause = ex.getMostSpecificCause();
+				String message = "";
+				if (cause instanceof PSQLException)
+					message = Utils.translateExceptionMessage((PSQLException) cause);
+				else
+					message = cause.getLocalizedMessage();
+				getBodyEdit().showMessage(message, Type.ERROR);
 			}
-			updateGrid();
-			view();
 		} else {
 			binder.validate();
 		}

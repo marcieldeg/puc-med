@@ -33,8 +33,8 @@ import br.pucminas.pucmed.ui.BodyEdit;
 import br.pucminas.pucmed.ui.BodyView;
 import br.pucminas.pucmed.ui.extra.MessageBox;
 import br.pucminas.pucmed.ui.extra.Notification;
-import br.pucminas.pucmed.ui.extra.SubWindow;
 import br.pucminas.pucmed.ui.extra.Notification.Type;
+import br.pucminas.pucmed.ui.extra.SubWindow;
 import br.pucminas.pucmed.utils.Constants;
 import br.pucminas.pucmed.utils.Utils;
 
@@ -226,13 +226,23 @@ public class MedicoForm extends BaseForm {
 	private void salvar() {
 		Medico medico = new Medico();
 		if (binder.writeBeanIfValid(medico)) {
-			if (medico.getId() == null) {
-				service.insert(medico);
-			} else {
-				service.update(medico);
+			try {
+				if (medico.getId() == null) {
+					service.insert(medico);
+				} else {
+					service.update(medico);
+				}
+				updateGrid();
+				view();
+			} catch (DataIntegrityViolationException ex) {
+				Throwable cause = ex.getMostSpecificCause();
+				String message = "";
+				if (cause instanceof PSQLException)
+					message = Utils.translateExceptionMessage((PSQLException) cause);
+				else
+					message = cause.getLocalizedMessage();
+				getBodyEdit().showMessage(message, Type.ERROR);
 			}
-			updateGrid();
-			view();
 		} else {
 			binder.validate();
 		}

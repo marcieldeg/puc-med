@@ -90,7 +90,7 @@ public class MedicamentoForm extends BaseForm {
 				getToolbarArea().setAdicionarListener(e -> novo());
 				getToolbarArea().setEditarListener(e -> editar());
 				getToolbarArea().setExcluirListener(e -> excluir());
-				
+
 				fNomeComercial.addValueChangeListener(e -> pesquisar());
 				fNomeGenerico.addValueChangeListener(e -> pesquisar());
 				fFabricante.addValueChangeListener(e -> pesquisar());
@@ -168,12 +168,22 @@ public class MedicamentoForm extends BaseForm {
 	private void salvar() {
 		Medicamento medicamento = new Medicamento();
 		if (binder.writeBeanIfValid(medicamento)) {
-			if (medicamento.getId() == null)
-				service.insert(medicamento);
-			else
-				service.update(medicamento);
-			updateGrid();
-			view();
+			try {
+				if (medicamento.getId() == null)
+					service.insert(medicamento);
+				else
+					service.update(medicamento);
+				updateGrid();
+				view();
+			} catch (DataIntegrityViolationException ex) {
+				Throwable cause = ex.getMostSpecificCause();
+				String message = "";
+				if (cause instanceof PSQLException)
+					message = Utils.translateExceptionMessage((PSQLException) cause);
+				else
+					message = cause.getLocalizedMessage();
+				getBodyEdit().showMessage(message, Type.ERROR);
+			}
 		} else {
 			binder.validate();
 		}
