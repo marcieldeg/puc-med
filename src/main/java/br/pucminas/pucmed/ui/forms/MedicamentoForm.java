@@ -52,10 +52,19 @@ public class MedicamentoForm extends BaseForm {
 
 		updateGrid();
 		grid.removeAllColumns();
-		grid.addColumn("id").setWidth(Constants.SMALL_FIELD);
-		grid.addColumn("nomeComercial").setWidth(Constants.LARGE_FIELD);
-		grid.addColumn("nomeGenerico").setWidth(Constants.LARGE_FIELD).setCaption("Nome Genérico");
-		grid.addColumn("fabricante").setWidth(Constants.MEDIUM_FIELD);
+		grid.addColumn("id")//
+				.setMinimumWidth(Constants.XSMALL_FIELD)//
+				.setMaximumWidth(Constants.SMALL_FIELD);
+		grid.addColumn("nomeComercial")//
+				.setMinimumWidth(Constants.MEDIUM_FIELD)//
+				.setMaximumWidth(Constants.LARGE_FIELD);
+		grid.addColumn("nomeGenerico")//
+				.setMinimumWidth(Constants.MEDIUM_FIELD)//
+				.setMaximumWidth(Constants.LARGE_FIELD)//
+				.setCaption("Nome Genérico");
+		grid.addColumn("fabricante")//
+				.setMinimumWidth(Constants.MEDIUM_FIELD)//
+				.setMaximumWidth(Constants.LARGE_FIELD);
 		grid.addColumn("embalagem").setWidth(Constants.MEDIUM_FIELD);
 
 		grid.addSelectionListener(e -> {

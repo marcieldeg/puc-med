@@ -82,10 +82,12 @@ public class ExameForm extends BaseForm {
 
 		if (abertoDoMenu)
 			fStatus.setSelectedItem(Situacao.NAO_REALIZADOS);
-		
+
 		updateGrid();
 		grid.removeAllColumns();
-		grid.addColumn("id").setWidth(Constants.SMALL_FIELD);
+		grid.addColumn("id")//
+				.setMinimumWidth(Constants.XSMALL_FIELD)//
+				.setMaximumWidth(Constants.SMALL_FIELD);
 		grid.addColumn(//
 				o -> {
 					SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -105,7 +107,9 @@ public class ExameForm extends BaseForm {
 				})//
 				.setWidth(Constants.MEDIUM_FIELD)//
 				.setCaption("Data de Realização");
-		grid.addColumn("resultado").setWidth(Constants.XLARGE_FIELD);
+		grid.addColumn("resultado")//
+				.setMinimumWidth(Constants.LARGE_FIELD)//
+				.setMaximumWidth(Constants.XLARGE_FIELD);
 
 		grid.addSelectionListener(e -> {
 			Optional<Exame> exame = e.getFirstSelectedItem();

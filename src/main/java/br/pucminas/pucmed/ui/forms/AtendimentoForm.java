@@ -69,9 +69,12 @@ public class AtendimentoForm extends BaseForm {
 
 		updateGrid();
 		grid.removeAllColumns();
-		grid.addColumn("id").setWidth(Constants.SMALL_FIELD);
+		grid.addColumn("id")//
+				.setMinimumWidth(Constants.XSMALL_FIELD)//
+				.setMaximumWidth(Constants.SMALL_FIELD);
 		grid.addColumn(o -> o.getPaciente() == null ? null : o.getPaciente().getNome())//
-				.setWidth(Constants.LARGE_FIELD)//
+				.setMinimumWidth(Constants.MEDIUM_FIELD)//
+				.setMaximumWidth(Constants.LARGE_FIELD)//
 				.setCaption("Paciente");
 		grid.addColumn(//
 				o -> {
@@ -82,10 +85,17 @@ public class AtendimentoForm extends BaseForm {
 				})//
 				.setWidth(Constants.MEDIUM_FIELD)//
 				.setCaption("Data");
-		grid.addColumn("descricao").setWidth(Constants.LARGE_FIELD).setCaption("Descrição");
-		grid.addColumn("diagnostico").setWidth(Constants.LARGE_FIELD).setCaption("Diagnóstico");
+		grid.addColumn("descricao")//
+				.setMinimumWidth(Constants.MEDIUM_FIELD)//
+				.setMaximumWidth(Constants.LARGE_FIELD)//
+				.setCaption("Descrição");
+		grid.addColumn("diagnostico")//
+				.setMinimumWidth(Constants.MEDIUM_FIELD)//
+				.setMaximumWidth(Constants.XLARGE_FIELD)//
+				.setCaption("Diagnóstico");
 		grid.addColumn(o -> o.getMedico() == null ? null : o.getMedico().getNome())//
-				.setWidth(Constants.LARGE_FIELD)//
+				.setMinimumWidth(Constants.MEDIUM_FIELD)//
+				.setMaximumWidth(Constants.LARGE_FIELD)//
 				.setCaption("Médico");
 
 		grid.addSelectionListener(e -> {

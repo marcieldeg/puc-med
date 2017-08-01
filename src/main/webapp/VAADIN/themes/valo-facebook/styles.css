@@ -15538,7 +15538,7 @@ div.v-layout.v-horizontal.v-widget {
 	overflow: hidden;
 }
 
-.v-menubar-borderless .v-menubar-menuitem {
+.v-menubar-touch-menu .v-menubar-menuitem {
 	color: white !important;
 }
 
@@ -15551,6 +15551,10 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .v-panel-panel-form {
+	background-color: #e7ebf2 !important;
+}
+
+.v-tabsheet-tabcontainer {
 	background-color: #e7ebf2 !important;
 }
 
@@ -15593,7 +15597,7 @@ div.v-layout.v-horizontal.v-widget {
 
 @media screen and (min-width: 320px) {
 	.v-slot-responsive {
-		width: 100%;
+		width: 100% !important;
 		margin: auto;
 	}
 	.v-window-subwindow {
@@ -15611,7 +15615,7 @@ div.v-layout.v-horizontal.v-widget {
 
 @media screen and (min-width: 480px) {
 	.v-slot-responsive {
-		width: 80%;
+		width: 80% !important;
 		margin: auto;
 	}
 	.v-window-subwindow {
@@ -15632,7 +15636,7 @@ div.v-layout.v-horizontal.v-widget {
 
 @media screen and (min-width: 600px) {
 	.v-slot-responsive {
-		width: 75%;
+		width: 300px !important;
 		margin: auto;
 	}
 	.v-window-subwindow {
@@ -15656,7 +15660,7 @@ div.v-layout.v-horizontal.v-widget {
 
 @media screen and (min-width: 801px) {
 	.v-slot-responsive {
-		width: 50%;
+		width: 300px !important;
 		margin: auto;
 	}
 	.v-window-subwindow {
@@ -15683,7 +15687,7 @@ div.v-layout.v-horizontal.v-widget {
 
 @media screen and (min-width: 1025px) {
 	.v-slot-responsive {
-		width: 45%;
+		width: 300px !important;
 		margin: auto;
 	}
 	.v-window-subwindow {
@@ -15710,7 +15714,7 @@ div.v-layout.v-horizontal.v-widget {
 
 @media screen and (min-width: 1281px) {
 	.v-slot-responsive {
-		width: 35%;
+		width: 300px !important;
 		margin: auto;
 	}
 	.v-window-subwindow {

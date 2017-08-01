@@ -64,12 +64,19 @@ public class ReceituarioForm extends BaseForm {
 
 		updateGrid();
 		grid.removeAllColumns();
-		grid.addColumn("id").setWidth(Constants.SMALL_FIELD);
+		grid.addColumn("id")//
+				.setMinimumWidth(Constants.XSMALL_FIELD)//
+				.setMaximumWidth(Constants.SMALL_FIELD);
 		grid.addColumn(o -> o.getMedicamento() == null ? null : o.getMedicamento().getNomeComercial())//
-				.setWidth(Constants.MEDIUM_FIELD)//
+				.setMinimumWidth(Constants.SMALL_FIELD)//
+				.setMaximumWidth(Constants.MEDIUM_FIELD)//
 				.setCaption("Medicamento");
-		grid.addColumn("quantidade").setWidth(Constants.SMALL_FIELD);
-		grid.addColumn("posologia").setWidth(Constants.LARGE_FIELD);
+		grid.addColumn("quantidade")//
+				.setMinimumWidth(Constants.XSMALL_FIELD)//
+				.setMaximumWidth(Constants.SMALL_FIELD);
+		grid.addColumn("posologia")//
+				.setMinimumWidth(Constants.MEDIUM_FIELD)//
+				.setMaximumWidth(Constants.LARGE_FIELD);
 
 		grid.addSelectionListener(e -> {
 			Optional<Receituario> receituario = e.getFirstSelectedItem();

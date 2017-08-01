@@ -7,10 +7,11 @@ import java.util.List;
 public class Constants {
 	public static final String APPLICATION_TITLE = "PUC-MED";
 
-	public static final int SMALL_FIELD = 80;
+	public static final int XSMALL_FIELD = 40;
+	public static final int SMALL_FIELD = XSMALL_FIELD * 2;
 	public static final int MEDIUM_FIELD = SMALL_FIELD * 2;
-	public static final int LARGE_FIELD = SMALL_FIELD * 4;
-	public static final int XLARGE_FIELD = SMALL_FIELD * 8;
+	public static final int LARGE_FIELD = MEDIUM_FIELD * 2;
+	public static final int XLARGE_FIELD = LARGE_FIELD * 2;
 
 	public static final String SMALL_FIELD_STYLE = "m-small-field";
 	public static final String MEDIUM_FIELD_STYLE = "m-medium-field";

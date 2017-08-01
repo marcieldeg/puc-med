@@ -60,6 +60,7 @@ public class MainView extends VerticalLayout implements View {
 		layout.addStyleName("area-trabalho");
 		tabSheet.addTab(layout, "Área de Trabalho");
 		tabSheet.setHeight(100.0f, Unit.PERCENTAGE);
+		tabSheet.addStyleName(ValoTheme.TABSHEET_PADDED_TABBAR);
 		tabSheet.addStyleName(ValoTheme.TABSHEET_FRAMED);
 
 		addComponent(tabSheet);
@@ -75,6 +76,7 @@ public class MainView extends VerticalLayout implements View {
 		touchMenu.addStyleName("touch-menu");
 
 		touchMenubar.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
+		touchMenubar.addStyleName("touch-menu");
 		MenuItem grupoMenu = touchMenubar.addItem("Menu", null);
 		grupoMenu.setIcon(VaadinIcons.MENU);
 
@@ -119,6 +121,7 @@ public class MainView extends VerticalLayout implements View {
 		touchMenu.setComponentAlignment(title, Alignment.MIDDLE_CENTER);
 
 		MenuBar menuSair = new MenuBar();
+		menuSair.addStyleName("touch-menu");
 		menuSair.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
 		menuSair.addItem("Sair", e -> logOff()).setIcon(VaadinIcons.EXIT);
 		touchMenu.addComponent(menuSair);
@@ -130,6 +133,7 @@ public class MainView extends VerticalLayout implements View {
 
 	private Component createMenu() {
 		menubar.setWidth("100%");
+		menubar.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
 		menubar.addStyleName("desk-menu");
 
 		MenuItem grupoMenu = menubar.addItem("Serviços", null);

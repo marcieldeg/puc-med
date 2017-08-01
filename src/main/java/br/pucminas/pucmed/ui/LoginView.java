@@ -3,6 +3,7 @@ package br.pucminas.pucmed.ui;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringView;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CssLayout;
@@ -34,7 +35,7 @@ public class LoginView extends VerticalLayout implements View {
 	private final PasswordField senha = new PasswordField("Senha:");
 
 	private final Button entrar = new Button("Entrar", e -> entrarClick(e));
-	private final Button recuperarSenha = new Button("Esqueci minha senha", e -> recuperarSenhaClick(e));
+	private final Button recuperarSenha = new Button("Esqueceu sua senha? Clique aqui.", e -> recuperarSenhaClick(e));
 
 	private final Window window = new RecuperarSenhaWindow();
 
@@ -54,14 +55,13 @@ public class LoginView extends VerticalLayout implements View {
 		senha.setWidth(100f, Unit.PERCENTAGE);
 		formLayout.addComponent(senha);
 
-		HorizontalLayout horizontalLayout = new HorizontalLayout();
-
-		entrar.addStyleName(ValoTheme.BUTTON_PRIMARY);
+		entrar.setStyleName(ValoTheme.BUTTON_PRIMARY);
 		entrar.setDisableOnClick(true);
 
-		recuperarSenha.addStyleName(ValoTheme.BUTTON_LINK);
+		recuperarSenha.setStyleName(ValoTheme.BUTTON_LINK);
 
-		horizontalLayout.addComponents(entrar, recuperarSenha);
+		HorizontalLayout horizontalLayout = new HorizontalLayout();
+		horizontalLayout.addComponentsAndExpand(entrar);
 		horizontalLayout.setResponsive(true);
 		formLayout.addComponent(horizontalLayout);
 
@@ -69,6 +69,8 @@ public class LoginView extends VerticalLayout implements View {
 
 		addComponent(panel);
 		setResponsive(true);
+		addComponent(recuperarSenha);
+		setComponentAlignment(recuperarSenha, Alignment.TOP_CENTER);
 
 		usuario.focus();
 	}

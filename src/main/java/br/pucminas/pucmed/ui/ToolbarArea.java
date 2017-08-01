@@ -7,7 +7,6 @@ import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.themes.ValoTheme;
 
 import br.pucminas.pucmed.ui.extra.InternalButton;
 
@@ -23,7 +22,6 @@ public class ToolbarArea extends HorizontalLayout {
 	public ToolbarArea() {
 		super();
 		setSpacing(false);
-		setStyleName(ValoTheme.LAYOUT_HORIZONTAL_WRAPPING);
 		botaoPesquisar.setIcon(VaadinIcons.SEARCH);
 		botaoAdicionar.setIcon(VaadinIcons.PLUS);
 		botaoEditar.setIcon(VaadinIcons.EDIT);

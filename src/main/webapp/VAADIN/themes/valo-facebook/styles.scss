@@ -6,7 +6,7 @@
 	@include valo;
 }
 
-.v-menubar-borderless .v-menubar-menuitem {
+.v-menubar-touch-menu .v-menubar-menuitem {
 	color: white !important;
 }
 
@@ -19,6 +19,10 @@
 }
 	
 .v-panel-panel-form {
+	background-color: $v-app-background-color !important;
+}
+
+.v-tabsheet-tabcontainer {
 	background-color: $v-app-background-color !important;
 }
 	
@@ -65,9 +69,8 @@
 
 @media screen and (min-width: 320px) {
 	/* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
-	
-	.v-slot-responsive { 
-		width: 100%;
+	.v-slot-responsive {
+		width: 100% !important;
 		margin: auto;
 	}
 	
@@ -88,9 +91,8 @@
 
 @media screen and (min-width: 480px) {
 	/* smartphones, Android phones, landscape iPhone */
-	
-	.v-slot-responsive { 
-		width: 80%;
+	.v-slot-responsive {
+		width: 80% !important;
 		margin: auto;
 	}
 	
@@ -115,9 +117,8 @@
 
 @media screen and (min-width: 600px) {
 	/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
-	
-	.v-slot-responsive { 
-		width: 75%;
+	.v-slot-responsive {
+		width: 300px !important;
 		margin: auto;
 	}
 	
@@ -146,9 +147,8 @@
 
 @media screen and (min-width: 801px) {
 	/* tablet, landscape iPad, lo-res laptops ands desktops */
-	
 	.v-slot-responsive {
-		width: 50%;
+		width: 300px !important;
 		margin: auto;
 	}
 	
@@ -181,9 +181,8 @@
 
 @media screen and (min-width: 1025px) {
 	/* big landscape tablets, laptops, and desktops */
-	
 	.v-slot-responsive {
-		width: 45%;
+		width: 300px !important;
 		margin: auto;
 	}
 	
@@ -216,9 +215,8 @@
 
 @media screen and (min-width: 1281px) { 
 	/* hi-res laptops and desktops */
-	
 	.v-slot-responsive {
-		width: 35%;
+		width: 300px !important;
 		margin: auto;
 	}
 	

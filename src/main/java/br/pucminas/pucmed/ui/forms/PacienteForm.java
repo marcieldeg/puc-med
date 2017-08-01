@@ -74,10 +74,15 @@ public class PacienteForm extends BaseForm {
 
 		updateGrid();
 		grid.removeAllColumns();
-		grid.addColumn("id").setWidth(Constants.SMALL_FIELD);
-		grid.addColumn("nome").setWidth(Constants.LARGE_FIELD);
+		grid.addColumn("id")//
+				.setMinimumWidth(Constants.XSMALL_FIELD)//
+				.setMaximumWidth(Constants.SMALL_FIELD);
+		grid.addColumn("nome")//
+				.setMinimumWidth(Constants.MEDIUM_FIELD)//
+				.setMaximumWidth(Constants.LARGE_FIELD);
 		grid.addColumn(o -> o.getSexo().getValue())//
-				.setWidth(Constants.SMALL_FIELD)//
+				.setMinimumWidth(Constants.XSMALL_FIELD)//
+				.setMaximumWidth(Constants.SMALL_FIELD)//
 				.setCaption("Sexo");
 		grid.addColumn(//
 				o -> {
@@ -97,20 +102,48 @@ public class PacienteForm extends BaseForm {
 							o.getDataNascimento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
 							LocalDate.now(ZoneId.systemDefault()));
 				})//
-				.setWidth(Constants.SMALL_FIELD)//
+				.setMinimumWidth(Constants.XSMALL_FIELD)//
+				.setMaximumWidth(Constants.SMALL_FIELD)//
 				.setCaption("Idade");
-		grid.addColumn("cpf").setWidth(Constants.MEDIUM_FIELD).setCaption("CPF");
-		grid.addColumn("endereco").setWidth(Constants.LARGE_FIELD).setCaption("Endereço");
-		grid.addColumn("numero").setWidth(Constants.SMALL_FIELD).setCaption("Nº");
-		grid.addColumn("complemento").setWidth(Constants.MEDIUM_FIELD).setCaption("Complemento");
-		grid.addColumn("bairro").setWidth(Constants.MEDIUM_FIELD).setCaption("Bairro");
-		grid.addColumn("cidade").setWidth(Constants.MEDIUM_FIELD).setCaption("Cidade");
+		grid.addColumn("cpf")//
+				.setMinimumWidth(Constants.SMALL_FIELD)//
+				.setMaximumWidth(Constants.MEDIUM_FIELD)//
+				.setCaption("CPF");
+		grid.addColumn("endereco")//
+				.setMinimumWidth(Constants.MEDIUM_FIELD)//
+				.setMaximumWidth(Constants.LARGE_FIELD)//
+				.setCaption("Endereço");
+		grid.addColumn("numero")//
+				.setMinimumWidth(Constants.XSMALL_FIELD)//
+				.setMaximumWidth(Constants.SMALL_FIELD)//
+				.setCaption("Nº");
+		grid.addColumn("complemento")//
+				.setMinimumWidth(Constants.SMALL_FIELD)//
+				.setMaximumWidth(Constants.MEDIUM_FIELD)//
+				.setCaption("Complemento");
+		grid.addColumn("bairro")//
+				.setMinimumWidth(Constants.SMALL_FIELD)//
+				.setMaximumWidth(Constants.MEDIUM_FIELD)//
+				.setCaption("Bairro");
+		grid.addColumn("cidade")//
+				.setMinimumWidth(Constants.SMALL_FIELD)//
+				.setMaximumWidth(Constants.MEDIUM_FIELD)//
+				.setCaption("Cidade");
 		grid.addColumn(o -> o.getEstado() == null ? null : o.getEstado().getNome())//
-				.setWidth(Constants.LARGE_FIELD)//
+				.setMinimumWidth(Constants.MEDIUM_FIELD)//
+				.setMaximumWidth(Constants.LARGE_FIELD)//
 				.setCaption("Estado");
-		grid.addColumn("cep").setWidth(Constants.SMALL_FIELD).setCaption("CEP");
-		grid.addColumn("email").setWidth(Constants.LARGE_FIELD).setCaption("E-mail");
-		grid.addColumn("telefone").setWidth(Constants.MEDIUM_FIELD).setCaption("Telefone");
+		grid.addColumn("cep")//
+				.setWidth(Constants.SMALL_FIELD)//
+				.setCaption("CEP");
+		grid.addColumn("email")//
+				.setMinimumWidth(Constants.MEDIUM_FIELD)//
+				.setMaximumWidth(Constants.LARGE_FIELD)//
+				.setCaption("E-mail");
+		grid.addColumn("telefone")//
+				.setMinimumWidth(Constants.SMALL_FIELD)//
+				.setMaximumWidth(Constants.MEDIUM_FIELD)//
+				.setCaption("Telefone");
 
 		grid.addSelectionListener(e -> {
 			Optional<Paciente> paciente = e.getFirstSelectedItem();

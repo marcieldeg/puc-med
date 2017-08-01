@@ -26,7 +26,7 @@ import br.pucminas.pucmed.utils.Constants;
 @SuppressWarnings("serial")
 public class WelcomeLayout extends VerticalLayout {
 	private final Grid<Agenda> gridMedico = new Grid<>();
-
+	
 	private final AgendaService agendaService = BeanGetter.getService(AgendaService.class);
 	private final ExameService exameService = BeanGetter.getService(ExameService.class);
 

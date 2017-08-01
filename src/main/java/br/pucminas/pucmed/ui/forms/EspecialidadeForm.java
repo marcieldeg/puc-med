@@ -44,8 +44,12 @@ public class EspecialidadeForm extends BaseForm {
 
 		updateGrid();
 		grid.setColumns("id", "nome");
-		grid.getColumn("id").setWidth(Constants.SMALL_FIELD);
-		grid.getColumn("nome").setWidth(Constants.LARGE_FIELD);
+		grid.getColumn("id")//
+				.setMinimumWidth(Constants.XSMALL_FIELD)//
+				.setMaximumWidth(Constants.SMALL_FIELD);
+		grid.getColumn("nome")//
+				.setMinimumWidth(Constants.MEDIUM_FIELD)//
+				.setMaximumWidth(Constants.LARGE_FIELD);
 
 		grid.addSelectionListener(e -> {
 			Optional<Especialidade> especialidade = e.getFirstSelectedItem();

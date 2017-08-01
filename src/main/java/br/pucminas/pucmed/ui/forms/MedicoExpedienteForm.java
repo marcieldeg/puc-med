@@ -55,9 +55,16 @@ public class MedicoExpedienteForm extends BaseForm {
 
 		updateGrid();
 		grid.setColumns("id", "diaSemana", "turno");
-		grid.getColumn("id").setWidth(Constants.SMALL_FIELD);
-		grid.getColumn("diaSemana").setWidth(Constants.LARGE_FIELD).setCaption("Dia da Semana");
-		grid.getColumn("turno").setWidth(Constants.LARGE_FIELD);
+		grid.getColumn("id")//
+				.setMinimumWidth(Constants.XSMALL_FIELD)//
+				.setMaximumWidth(Constants.SMALL_FIELD);
+		grid.getColumn("diaSemana")//
+				.setMinimumWidth(Constants.MEDIUM_FIELD)//
+				.setMaximumWidth(Constants.LARGE_FIELD)//
+				.setCaption("Dia da Semana");
+		grid.getColumn("turno")//
+				.setMinimumWidth(Constants.MEDIUM_FIELD)//
+				.setMaximumWidth(Constants.LARGE_FIELD);
 
 		grid.addSelectionListener(e -> {
 			Optional<MedicoExpediente> medicoExpediente = e.getFirstSelectedItem();

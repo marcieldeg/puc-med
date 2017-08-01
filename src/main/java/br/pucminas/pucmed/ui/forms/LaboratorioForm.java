@@ -55,10 +55,19 @@ public class LaboratorioForm extends BaseForm {
 
 		updateGrid();
 		grid.removeAllColumns();
-		grid.addColumn("id").setWidth(Constants.SMALL_FIELD);
-		grid.addColumn("nome").setWidth(Constants.LARGE_FIELD);
-		grid.addColumn("email").setWidth(Constants.LARGE_FIELD).setCaption("E-mail");
-		grid.addColumn("login").setWidth(Constants.MEDIUM_FIELD);
+		grid.addColumn("id")//
+				.setMinimumWidth(Constants.XSMALL_FIELD)//
+				.setMaximumWidth(Constants.SMALL_FIELD);
+		grid.addColumn("nome")//
+				.setMinimumWidth(Constants.MEDIUM_FIELD)//
+				.setMaximumWidth(Constants.LARGE_FIELD);
+		grid.addColumn("email")//
+				.setMinimumWidth(Constants.MEDIUM_FIELD)//
+				.setMaximumWidth(Constants.LARGE_FIELD)//
+				.setCaption("E-mail");
+		grid.addColumn("login")//
+				.setMinimumWidth(Constants.MEDIUM_FIELD)//
+				.setMaximumWidth(Constants.LARGE_FIELD);
 
 		grid.addSelectionListener(e -> {
 			Optional<Laboratorio> Laboratorio = e.getFirstSelectedItem();
