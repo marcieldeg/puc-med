@@ -1,6 +1,7 @@
 package br.pucminas.pucmed.ui.forms;
 
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,7 +99,7 @@ public class AgendaForm extends BaseForm {
 				.withConverter(new StringToLongConverter("Código Inválido"))//
 				.bind("id");
 		binder.forField(data)//
-				.withConverter(new LocalDateTimeToDateConverter(Constants.ZONE_OFFSET))//
+				.withConverter(new LocalDateTimeToDateConverter(ZoneId.systemDefault()))//
 				.asRequired("O campo é obrigatório")//
 				.bind("data");
 		binder.forField(paciente)//

@@ -3,6 +3,7 @@ package br.pucminas.pucmed.ui.forms;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
@@ -129,7 +130,7 @@ public class ExameForm extends BaseForm {
 				.asRequired("O campo é obrigatório")//
 				.bind("tipoExame");
 		binder.forField(dataRealizacao)//
-				.withConverter(new LocalDateTimeToDateConverter(Constants.ZONE_OFFSET))//
+				.withConverter(new LocalDateTimeToDateConverter(ZoneId.systemDefault()))//
 				.bind("dataRealizacao");
 		binder.forField(resultado)//
 				.bind("resultado");

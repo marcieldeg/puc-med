@@ -2,17 +2,20 @@ package br.pucminas.pucmed.utils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 import org.postgresql.util.PSQLException;
 
 public class Utils {
+	private static final ZoneId zoneId = ZoneId.systemDefault();
+
 	public static Date convertLocalDateToDate(LocalDate localDate) {
-		return Date.from(localDate.atStartOfDay().toInstant(Constants.ZONE_OFFSET));
+		return Date.from(localDate.atStartOfDay(zoneId).toInstant());
 	}
 
 	public static Date convertLocalDateTimeToDate(LocalDateTime localDateTime) {
-		return Date.from(localDateTime.toInstant(Constants.ZONE_OFFSET));
+		return Date.from(localDateTime.atZone(zoneId).toInstant());
 	}
 
 	public static String translateExceptionMessage(PSQLException exception) {
